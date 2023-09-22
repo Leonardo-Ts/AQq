@@ -1,0 +1,93 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoOficina}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Oficinas
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li>Oficinas</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoOficina}" />
+			<ui:param name="listaDe" value="Oficina" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarBotonAgregarRegistro" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoOficina}" />
+			<ui:param name="descripcion" value="Oficinas" />
+
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoOficina}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{catalogoOficina.columnas}" />
+			<ui:param name="listaDe" value="Oficinas" />
+			<ui:param name="mostrarBotonEditarRegistro" value="true" />
+			<ui:param name="mostrarBotonEliminarRegistro" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:define name="contenidoAdicional">
+				<p:column style="text-align: center" headerText="Mapa">
+					<h:commandLink styleClass="botonEditarEliminar"
+						action="#{componente.doAccionRegistroMapa}">
+						<f:param name="id" value="#{riv}" />
+						<h:graphicImage url="/diseno/imagenes/acciones/icono16Mapa.png" />
+					</h:commandLink>
+				</p:column>
+			</ui:define>
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunPanel.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoOficina}" />
+			<ui:param name="mostrarCbmEstado" value="true" />
+			<ui:param name="listaDe" value="Oficina" />
+			<ui:param name="validador" value="Oficina" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarBotonAceptar" value="true" />
+			<ui:param name="mostrarBotonCerrar" value="true" />
+			<ui:define name="contenidoAdicional">
+
+				<p:outputLabel for="cl" value="Clave" />
+				<p:inputText onkeyup="permitirSoloNumeros(this);" id="cl"
+					value="#{componente.objetoABM.clave}" />
+
+				<p:outputLabel for="cn" value="Nombre" />
+				<p:inputText id="cn" value="#{componente.objetoABM.descripcion}" />
+
+				<p:outputLabel for="cg" value="Gerente" />
+				<p:inputText id="cg" value="#{componente.objetoABM.gerente}" />
+
+				<p:outputLabel for="cgc" value="Coordinador" />
+				<p:inputText id="cgc"
+					value="#{componente.objetoABM.coordinadorSiniestros}" />
+
+				<p:outputLabel for="cdi" value="Dirección" />
+				<p:inputText id="cdi" value="#{componente.objetoABM.direccion}" />
+
+				<p:outputLabel for="cte" value="Teléfono" />
+				<p:inputText onkeyup="permitirSoloNumeros(this);" id="cte"
+					value="#{componente.objetoABM.telefono}" />
+
+				<p:outputLabel for="cf" value="Fax" />
+				<p:inputText onkeyup="permitirSoloNumeros(this);" id="cf"
+					value="#{componente.objetoABM.fax}" />
+
+				<p:outputLabel for="next" value="Nextel" />
+				<p:inputText id="next" value="#{componente.objetoABM.nextel}" />
+
+				<p:outputLabel for="cem" value="Email" />
+				<p:inputText id="cem" value="#{componente.objetoABM.email}" />
+
+			</ui:define>
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

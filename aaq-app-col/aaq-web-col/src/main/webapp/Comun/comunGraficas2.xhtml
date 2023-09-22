@@ -1,0 +1,45 @@
+	<ui:component  xmlns="http://www.w3.org/1999/xhtml"  
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"  
+	xmlns:p="http://primefaces.org/ui">  
+	
+	<h:form id="forma_grafica2">	
+	<div class="forma_mitad" align="center"  style="margin-right: 15px">
+		<p:outputPanel id ="graficaPastel2" autoUpdate="true">
+			<h:body>  
+					<p:chart  id="piePastel2" type="pie" responsive="true" model="#{componente.pieModel}" style="width:600px;height:600px"/>  
+			</h:body>  
+		</p:outputPanel>
+	</div>
+	<div class="forma_mitad" align="center"  >
+		<p:outputPanel id ="graficaBarra2" autoUpdate="true">
+			<h:body>  
+					<p:chart  id="barBarra2" type="bar" responsive="true" model="#{componente.horizontalBarModel}"  style="width:600px;height:300px"  />  
+					<h:outputScript>
+			         function chartExtender() {
+			             this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+			             this.cfg.axesDefaults = {
+					     axesDefaults: {
+					        tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+					        tickOptions: {
+					          angle: -30,
+					          fontSize: '10pt',
+					          textColor : '#91278F'
+					        }
+					    },
+					    axes: {
+					      xaxis: {
+					       min: 0,
+                        	max: 23,
+					        renderer: $.jqplot.CategoryAxisRenderer
+					      }
+					    }
+					   };
+			         }
+     </h:outputScript>
+			</h:body>  
+		</p:outputPanel>
+	</div>
+	</h:form>
+
+</ui:component>  

@@ -1,0 +1,178 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionReporteMobil}" />
+
+
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Reportes Móviles 
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li>Monitoreo de Reportes Móviles</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+	
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/soundmanager/soundmanager2-nodebug-jsmin.js"></script>
+		<script>
+			soundManager.url = '#{facesContext.externalContext.requestContextPath}/diseno/flash/soundmanager/';
+			soundManager.flashVersion = 9;
+			soundManager.useFlashBlock = false;
+		</script>
+		
+			<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanAplicacionReporteMobil}" />
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:define name="contenidoAdicional">
+				<p:commandButton ajax="false" value="Crear Reporte"
+					action="#{componente.crearReporte}" />
+			</ui:define>
+		</ui:decorate>
+		
+		<div class="forma_un_tercio">
+				<h:form>
+					<p:panel header="Bajar Reportes" styleClass="panelesV">
+							<h:panelGrid columns="3" columnClasses="tercio,tercio,tercio"
+					styleClass="tabla_captura">
+					<h:commandLink id="ExportXML" title="Listado XML"
+						action="#{beanAplicacionReporteMobil.doAccionReporte}">
+						<f:param name="id" value="xml" />
+						<h:graphicImage url="/diseno/imagenes/reportes/iconExportXml.png" alt="XML"/>
+					</h:commandLink>
+					<h:commandLink id="ExportExcel" title="Listado Excel"
+						action="#{beanAplicacionReporteMobil.doAccionReporte}">
+						<f:param name="id" value="excel" />
+						<f:param name="descripcion" value="#{descripcion}" />
+						<h:graphicImage
+							url="/diseno/imagenes/reportes/iconExportExcel.png" alt="Excel"/>
+					</h:commandLink>
+					<h:commandLink id="ExportPDF" title="Listado PDF"
+						action="#{beanAplicacionReporteMobil.doAccionReporte}">
+						<f:param name="id" value="pdf" />
+						<h:graphicImage url="/diseno/imagenes/reportes/iconExportPdf.png" alt="PDF"/>
+					</h:commandLink>
+					<ui:insert name="contenidoAdicional" />
+				</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+
+		<div class="forma_completa">
+			<ui:decorate template="/Comun/comunTabla.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionReporteMobil}" />
+				<ui:param name="listaObjetos" value="#{componente.listado}" />
+				<ui:param name="listaColumnas" value="#{reporteMovil.columnas}" />
+				<ui:param name="listaDe"
+					value="Reportes de Aplicativo Mobil Emergencia Móvil" />
+				<ui:param name="listaAutoActualizable" value="true" />
+				<ui:param name="listaAutoActualizableIntervalo" value="30" />
+				<ui:define name="contenidoPrevio">
+					<p:column style="text-align:center" headerText="Estatus"
+						styleClass="#{objeto.agenteEspecialCSS}">
+						<h:graphicImage url="#{objeto.agenteEspecialImagen}" width="48"
+							height="48" rendered="#{objeto.tieneAgenteEspecial}" />
+						<h:graphicImage url="#{objeto.icono}" />
+						<br />
+						<h:outputText value="#{objeto.agenteEspecialLeyenda}"
+							rendered="#{objeto.tieneAgenteEspecial}"
+							style="font-weight:bold;" />
+					</p:column>
+				</ui:define>
+				<ui:define name="contenidoAdicional">
+					<p:column style="text-align:center" headerText="Ver"
+						styleClass="#{objeto.agenteEspecialCSS}">
+						<p:commandLink
+							oncomplete="PF('panel_mapa').show();inicializarMapa();cargarListaPuntosActualizacionAutomatica(); cargarListaPuntosActualizacionManual();localizarPunto(#{objeto.id})"
+							update=":forma_panel:contenido_panel, tabla, :formaMapa:marcadoresActualizacionAutomatica, :formaMapa:marcadoresActualizacionManual"
+							actionListener="#{componente.doAccionRegistroEditar}">
+							<h:graphicImage value="/diseno/imagenes/acciones/icono16Ver.png" />
+							<f:param name="id" value="#{riv}" />
+						</p:commandLink>
+					</p:column>
+				</ui:define>
+
+				<ui:define name="contenidoPie">
+					<p:outputPanel id="panel_sonido"
+						rendered="#{componente.tieneReportesNuevos}">
+						<script>
+							soundManager
+									.onready(function() {
+
+										soundManager
+												.createSound(
+														{
+															id : 'mySound',
+															url : '#{facesContext.externalContext.requestContextPath}/diseno/sonidos/chime.mp3',
+															autoLoad : true,
+															autoPlay : true,
+															volume : 50
+														}).play();
+									});
+						</script>
+					</p:outputPanel>
+
+				</ui:define>
+
+			</ui:decorate>
+		</div>
+
+		<p:dialog closeOnEscape="true" closable="true" modal="false"
+			widgetVar="panel_mapa" width="1024" minHeight="700"
+			header="Visualizacion del Reporte">
+
+			<div style="width: 300px; float: left">
+				<h:form id="forma_panel">
+					<p:outputPanel id="contenido_panel">
+						<p:panel header="Detalle del Reporte" rendered="#{!empty beanAplicacionReporteMobil.objetoABM}"
+						styleClass="panelesV">
+							<h:panelGrid columns="2" styleClass="tabla_captura"
+								columnClasses="cuarto,tres_cuartos">
+								<p:outputLabel for="ticket" value="Ticket" />
+								<h:outputText id="ticket"
+									value="#{beanAplicacionReporteMobil.objetoABM.id}" />
+
+								<p:outputLabel for="fecha" value="Fecha" />
+								<h:outputText id="fecha"
+									value="#{beanAplicacionReporteMobil.objetoABM.fecha}" />
+
+								<p:outputLabel for="pol" value="Poliza" />
+								<h:outputText id="pol"
+									value="#{beanAplicacionReporteMobil.objetoABM.poliza}" />
+
+								<p:outputLabel for="inciso" value="Certificado" />
+								<h:outputText id="inciso"
+									value="#{beanAplicacionReporteMobil.objetoABM.inciso}" />
+
+								<p:outputLabel for="endoso" value="Endoso" />
+								<h:outputText id="endoso"
+									value="#{beanAplicacionReporteMobil.objetoABM.endoso}" />
+
+								<p:outputLabel for="Reporta" value="Reporta" />
+								<h:outputText id="Reporta"
+									value="#{beanAplicacionReporteMobil.objetoABM.nombreReporta}" />
+
+								<p:outputLabel for="TelContacto" value="Telefono Contacto" />
+								<h:outputText id="TelContacto"
+									value="#{beanAplicacionReporteMobil.objetoABM.telefonoContacto}" />
+							</h:panelGrid>
+						</p:panel>
+
+					</p:outputPanel>
+				</h:form>
+			</div>
+			<div style="width: 680px; float: left">
+				<ui:decorate template="/Comun/comunMapa.xhtml">
+					<ui:param name="componente" value="#{beanAplicacionReporteMobil}" />
+					<ui:param name="metodo" value="imagenSatelital" />
+				</ui:decorate>
+			</div>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

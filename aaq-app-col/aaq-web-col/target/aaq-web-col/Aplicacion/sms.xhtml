@@ -1,0 +1,160 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionSMS}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Notificaciones
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones – Notificaciones</a></li>
+		<li>Envío de Notificaciones</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<h:form id="forma">
+			<div class="forma_mitad">
+				<p:panel header="Datos de Envío" styleClass="panelesV">
+					<h:panelGrid columns="2" styleClass="tabla_captura"
+						columnClasses="cuarto,tres_cuartos">
+						
+						<p:outputLabel for="seleccion_notificacion" value="Tipo de notificación" />
+						<h:selectOneMenu id="seleccion_notificacion" value="#{beanAplicacionSMS.txtOpcion}"  >
+							<f:selectItem itemValue="0" itemLabel="-- Requerido --" />
+							<f:selectItem itemValue="1" itemLabel="SMS" />
+							<f:selectItem itemValue="2" itemLabel="Push" />
+							<f:selectItem itemValue="3" itemLabel="Correo" />
+							<p:ajax event="valueChange" update="panelGCorreo, panelMensaje, panelSMS"  />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="estado" value="Departamento:"  />
+						<h:selectOneMenu id="estadoFrecuencia" 
+							value="#{beanAplicacionSMS.idEstado}" 
+							title="Lista de Departamentos" styleClass="combo"
+							rendered="#{!beanAplicacionSMS.permisoTodosEstados and !beanAplicacionSMS.permisoTodosBases}">	
+						
+							<f:selectItems value="#{beanAplicacionSMS.listaEstadosFrecuenciaTerm}"
+								var="estado" itemValue="#{estado.id}"
+								itemLabel="#{estado.nombre}" />
+								
+							<p:ajax event="valueChange" listener="#{beanAplicacionSMS.onSelectEdoListener}"
+								update="baseFrecuencia, seleccion_terminal_freq" />
+						</h:selectOneMenu>
+						
+						<h:selectOneMenu id="estado" 
+							value="#{beanAplicacionSMS.idEstado}" 
+							title="Lista de Departamentos" styleClass="combo"
+							rendered="#{beanAplicacionSMS.permisoTodosEstados and beanAplicacionSMS.permisoTodosBases}">						
+
+							<f:selectItems value="#{beanAplicacionSMS.listaDeEstados}"
+								var="estado" itemValue="#{estado.id}"
+								itemLabel="#{estado.nombre}" />
+							
+							<p:ajax event="valueChange" listener="#{beanAplicacionSMS.onSelectEdoListener}"
+								update="base, seleccion_terminal" />
+						</h:selectOneMenu>
+
+
+						<p:outputLabel for="base" value="Bases" />
+						<h:selectOneMenu
+							id="baseFrecuencia"
+							value="#{beanAplicacionSMS.idBase}" 
+							title="Lista de Bases" styleClass="combo"
+							rendered="#{!beanAplicacionSMS.permisoTodosEstados and !beanAplicacionSMS.permisoTodosBases}" >
+							<f:selectItem itemLabel="-- Opcional --" itemValue="0" noSelectionOption="true" />
+							<f:selectItems value="#{beanAplicacionSMS.listaDeBasesPorFrecuencia}"
+								var="base" 
+								itemLabel="#{base.descripcion} "  itemValue="#{base.id}"/>
+							<p:ajax event="valueChange"   update="seleccion_terminal_freq" />
+						</h:selectOneMenu>
+					
+						<h:selectOneMenu
+							id="base"
+							value="#{beanAplicacionSMS.idBase}" 
+							title="Lista de Bases" styleClass="combo"
+							rendered="#{beanAplicacionSMS.permisoTodosEstados and beanAplicacionSMS.permisoTodosBases}">
+							<f:selectItem itemLabel="-- Opcional --" itemValue="0" noSelectionOption="true" />
+							<f:selectItems value="#{beanAplicacionSMS.listaDeBasesTodas}"
+								var="base" 
+								itemLabel="#{base.descripcion} " itemValue="#{base.id}"/>
+							<p:ajax event="valueChange" update="seleccion_terminal" />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="seleccion_terminal" value="o Perito-Abogado" />
+						<h:selectOneMenu id="seleccion_terminal_freq"
+							value="#{beanAplicacionSMS.idTerminal}"
+							title="Lista de Terminales" 
+							rendered="#{!beanAplicacionSMS.permisoTodosEstados and !beanAplicacionSMS.permisoTodosBases}" >
+							<f:selectItem itemLabel="-- Opcional --" noSelectionOption="true" />
+							<f:selectItems
+								value="#{beanAplicacionSMS.obtenerTerminalFrecuencia}"
+								var="terminal" itemLabel="#{terminal.nombreCombo}"
+								itemValue="#{terminal.id}" />
+						</h:selectOneMenu>
+						
+						<h:selectOneMenu id="seleccion_terminal"
+							value="#{beanAplicacionSMS.idTerminal}"
+							title="Lista de Terminales"
+							rendered="#{beanAplicacionSMS.permisoTodosEstados and beanAplicacionSMS.permisoTodosBases}" >
+							<f:selectItem itemLabel="-- Opcional --" noSelectionOption="true" />
+							<f:selectItems
+								value="#{beanAplicacionSMS.listaDeTerminalesParaSeleccion}"
+								var="terminal" itemLabel="#{terminal.nombreCombo}"
+								itemValue="#{terminal.id}" />
+						</h:selectOneMenu>
+						
+						
+						</h:panelGrid>
+						
+						<h:panelGroup id="panelSMS" layout="block">
+							<p:panelGrid columns="2" styleClass="tabla_captura panelSinBorde"
+							columnClasses="cuarto,tres_cuartos" rendered="#{beanAplicacionSMS.txtOpcion eq '1'}" >
+								<p:outputLabel for="teldes" value="o Teléfono Destino" />
+								<p:inputText onkeyup="permitirSoloNumeros(this);" id="teldes"
+									value="#{beanAplicacionSMS.txtNumeroDestino}"
+									title="Numero de Reporte" />
+							</p:panelGrid>
+						</h:panelGroup>
+						
+						<h:panelGroup id="panelMensaje" layout="block">
+							<p:panelGrid  columns="2" styleClass="tabla_captura panelSinBorde"
+						columnClasses="cuarto,tres_cuartos" rendered="#{beanAplicacionSMS.txtOpcion != '3'}" >
+								<p:outputLabel for="rep" value="Reporte" />
+								<p:inputText onkeyup="permitirSoloNumeros(this);" id="rep"
+									value="#{beanAplicacionSMS.txtNumeroReporte}"
+									title="Numero de Reporte" />
+								
+								<p:outputLabel for="texto" value="o Texto Libre" />
+								<p:inputTextarea id="texto"
+									value="#{beanAplicacionSMS.txtMensaje}"
+									title="Texto libre a enviar via SMS"
+									onkeydown="textCounter(this,'forma:countfield',#{beanAplicacionSMS.txtMaxLength});"
+									onkeyup="textCounter(this,'forma:countfield',#{beanAplicacionSMS.txtMaxLength});" />
+									
+								<p:inputText id="countfield" style="width: 20px;"
+									title="Cuantos caracteres quedan" />
+								<p:outputLabel for="countfield" value=" "/>
+							</p:panelGrid>
+						</h:panelGroup>
+						
+						<h:panelGroup id="panelGCorreo" layout="block">
+							<h:panelGrid id="panelcorreo" columns="2" styleClass="tabla_captura panelSinBorde" columnClasses="cuarto,tres_cuartos"
+							 rendered="#{beanAplicacionSMS.txtOpcion eq '3'}">
+								
+								<p:outputLabel for="asunto" value="Asunto" id="labelasunto"/>
+								<p:inputText id="asunto" value="#{beanAplicacionSMS.txtAsunto}" title="Asunto del Correo" />
+								
+								<p:outputLabel for="correo" value="Correo" id="labelcorreo"/>
+								<p:editor id="correo" widgetVar="editor2" value="#{beanAplicacionSMS.txtCorreo}" height="300" style="margin-bottom:10px;border:1px solid #363636 !important;" placeholder="Enter your content" /> 
+							</h:panelGrid>
+						</h:panelGroup>
+						
+						<p:commandButton value="Aceptar" process="@form" actionListener="#{beanAplicacionSMS.doAccionEnviarSMS}"/>
+					</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

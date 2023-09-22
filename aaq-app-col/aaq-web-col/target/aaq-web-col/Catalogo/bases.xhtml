@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanCatalogoBase}"/>
+
+    <ui:define name="tituloPagina">AQ Catálogos - ABM&#160;<h:outputText
+            value="Base"/>s
+        <ui:param name="clase_pagina" value="catalogo"/>
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><a href="inicio.siica">Catálogos</a></li>
+        <li>Bases de Peritos-Abogados</li>
+    </ui:define>
+
+    <ui:define name="cuerpoPagina">
+        <ui:decorate template="/Comun/comunFiltro.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoBase}"/>
+            <ui:param name="mostrarFiltroComboEstado" value="true"/>
+            <ui:param name="listaDe" value="Base"/>
+            <ui:param name="mostrarBotonAgregarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+            <ui:define name="contenidoAdicional">
+                <h:outputLabel for="soloConCoordenadas" value="Solo Mostrar Bases Con Coordenadas"/>
+                <p:selectBooleanButton id="soloConCoordenadas" onLabel="Si" offLabel="No"
+                                       value="#{componente._filtroConLatitud}">
+                    <p:ajax listener="#{componente.actualizarListado}" update=":forma_tabla:tabla"/>
+                </p:selectBooleanButton>
+                <h:outputLabel for="soloConMapa" value="Solo Mostrar Bases Habilitadas en Mapa"/>
+                <p:selectBooleanButton id="soloConMapa" onLabel="Si" offLabel="No"
+                                       value="#{componente._filtroHabilitadoEnMapa}">
+                    <p:ajax listener="#{componente.actualizarListado}" update=":forma_tabla:tabla"/>
+                </p:selectBooleanButton>
+
+            </ui:define>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunExportacion.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoBase}"/>
+            <ui:param name="descripcion" value="Bases"/>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunTabla.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoBase}"/>
+            <ui:param name="listaObjetos" value="#{componente.listado}"/>
+            <ui:param name="listaColumnas" value="#{base.columnas}"/>
+            <ui:param name="listaDe" value="Bases"/>
+            <ui:param name="mostrarBotonEditarRegistro" value="true"/>
+            <ui:param name="mostrarBotonEliminarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunPanel.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoBase}"/>
+            <ui:param name="mostrarFiltroComboEstado" value="true"/>
+            <ui:param name="mostrarBotonAceptar" value="true"/>
+            <ui:param name="mostrarBotonCerrar" value="true"/>
+            <ui:param name="listaDe" value="Base"/>
+            <ui:param name="validador" value="Base"/>
+            <ui:define name="contenidoAdicional">
+                <p:outputLabel for="nombre" value="Nombre"/>
+                <p:inputText id="nombre" value="#{componente.objetoABM.nombre}"/>
+                <p:outputLabel for="zona" value="Zona"/>
+                <p:inputText id="zona" value="#{componente.objetoABM.zona}"/>
+                <p:outputLabel for="direccion" value="Dirección"/>
+                <p:inputText id="direccion" value="#{componente.objetoABM.direccion}"/>
+                <p:outputLabel for="lat" value="Latitud (Numero Negativo)"/>
+                <p:inputText id="lat" value="#{componente.objetoABM.latitud}"/>
+                <p:outputLabel for="lng" value="Longitud (Numero Positivo)"/>
+                <p:inputText id="lng" value="#{componente.objetoABM.longitud}"/>
+                <p:outputLabel for="habmapa" value="Habilitar en Mapa"/>
+                <p:selectBooleanButton onLabel="Si" offLabel="No" id="habmapa"
+                                       value="#{componente.objetoABM.habilitadoEnMapaCabina}"/>
+                <p:outputLabel for="habVulnerable" value="Vulnerables"/>
+                <p:selectBooleanButton onLabel="Si" offLabel="No" id="habVulnerable"
+                                       value="#{componente.objetoABM.vulnerable}"/>
+            </ui:define>
+        </ui:decorate>
+    </ui:define>
+</ui:composition>

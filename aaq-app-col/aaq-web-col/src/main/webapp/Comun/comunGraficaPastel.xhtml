@@ -1,0 +1,16 @@
+	<ui:component  xmlns="http://www.w3.org/1999/xhtml"  
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"  
+	xmlns:p="http://primefaces.org/ui">  
+	
+	<h:form id="forma_grafica">	
+	<div class="forma_completa" align="center"  >
+		<p:outputPanel id ="graficaPastel" autoUpdate="true">
+			<h:body>  
+					<p:chart  id="piePastel" type="pie"  model="#{componente.pieModel}" style="width:600px;height:600px"/>  
+			</h:body>  
+		</p:outputPanel>
+	</div>
+	</h:form>
+
+</ui:component>  

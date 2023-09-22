@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration  SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender class="org.apache.log4j.RollingFileAppender" name="APLICATIVO">
+		<param value="true" name="append" />
+		<param value="logs/aaq-aplicativo.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>	
+	<appender class="org.apache.log4j.RollingFileAppender" name="ALERTAS">
+		<param value="true" name="append" />
+		<param value="logs/aaq-alertas.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="DATABASE">
+		<param value="true" name="append" />
+		<param value="logs/aaq-database.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="SERVIDOR">
+		<param value="true" name="append" />
+		<param value="logs/aaq-servidores.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="ESPECIAL">
+		<param value="true" name="append" />
+		<param value="logs/aaq-especial.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="CARGA">
+		<param value="true" name="append" />
+		<param value="logs/aaq-carga-masiva.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="SERVIDOR_AVANZADO">
+		<param value="true" name="append" />
+		<param value="logs/aaq-servidores-avanzados.log"
+			name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="WEBSERVICES">
+		<param value="true" name="append" />
+		<param value="logs/aaq-webservices.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+		<filter class="com.aaq.col.clases.log4j.JMLog4JFilter" />
+	</appender>
+	<appender class="org.apache.log4j.RollingFileAppender" name="WEBSERVICES_ERRORES_APLICACION">
+		<param value="true" name="append" />
+		<param value="logs/aaq-webservices-errores-aplicacion.log"
+			name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+		<filter class="com.aaq.col.clases.log4j.JMLog4JFilter" />
+	</appender>
+	
+	<appender class="org.apache.log4j.RollingFileAppender" name="EXPEDIENTE">
+		<param value="true" name="append" />
+		<param value="logs/aaq-expediente.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	
+	<appender class="org.apache.log4j.RollingFileAppender" name="CANCELAR_REPORTES">
+		<param value="true" name="append" />
+		<param value="logs/aaq-cancelar-reportes.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	
+	<appender class="org.apache.log4j.RollingFileAppender" name="TIEMPOS">
+		<param value="true" name="append" />
+		<param value="logs/aaq-tiempos.log" name="file" />
+		<param value="10" name="MaxBackupIndex" />
+		<param value="100MB" name="MaxFileSize" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param value="%d [%c{1}] %p - %m%n" name="ConversionPattern" />
+		</layout>
+	</appender>
+	
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.beans">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.classes">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.fabricas">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.database">
+		<level value="info" />
+		<appender-ref ref="DATABASE" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.servidores">
+		<level value="info" />
+		<appender-ref ref="SERVIDOR" />
+	</logger>
+	<logger additivity="false"
+		name="com.jmfg.jmlibrerias.logging.servidores.avanzados">
+		<level value="info" />
+		<appender-ref ref="SERVIDOR_AVANZADO" />
+	</logger>
+	<logger additivity="false"
+		name="com.jmfg.jmlibrerias.logging.servidores.avanzados.teltonika">
+		<level value="info" />
+		<appender-ref ref="SERVIDOR_AVANZADO" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.utilerias">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+		<appender-ref ref="ALERTAS" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.especial">
+		<level value="info" />
+		<appender-ref ref="ESPECIAL" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.tiempos">
+		<level value="info" />
+		<appender-ref ref="TIEMPOS" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.carga">
+		<level value="info" />
+		<appender-ref ref="CARGA" />
+	</logger>
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.webservices">
+		<level value="info" />
+		<appender-ref ref="WEBSERVICES_ERRORES_APLICACION" />
+	</logger>
+	<logger name="com.sun.faces">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger name="javax.faces">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger name="org.ajax4jsf">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	<logger additivity="false" name="org.apache.cxf">
+		<level value="info" />
+		<appender-ref ref="WEBSERVICES" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="info" />
+		<appender-ref ref="APLICATIVO" />
+	</logger>
+	
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.expediente">
+		<level value="info" />
+		<appender-ref ref="EXPEDIENTE" />
+	</logger>
+	
+	<logger additivity="false" name="com.jmfg.jmlibrerias.logging.cancelarReportes">
+		<level value="info" />
+		<appender-ref ref="CANCELAR_REPORTES" />
+	</logger>
+	
+	
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DATABASE" />
+		<appender-ref ref="SERVIDOR" />
+		<appender-ref ref="ESPECIAL" />
+		<appender-ref ref="CANCELAR_REPORTES" />
+		<appender-ref ref="TIEMPOS" />
+		<appender-ref ref="CARGA" />
+		<appender-ref ref="WEBSERVICES" />
+		<appender-ref ref="SERVIDOR_AVANZADO" />
+		<appender-ref ref="WEBSERVICES_ERRORES_APLICACION" />
+		<appender-ref ref="EXPEDIENTE" />
+	</root>
+</log4j:configuration>

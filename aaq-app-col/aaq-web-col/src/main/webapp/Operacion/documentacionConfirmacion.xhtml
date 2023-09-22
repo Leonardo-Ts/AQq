@@ -1,0 +1,182 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente"
+		value="#{beanOperacionControlDocumentacion}" />
+
+	<ui:define name="tituloPagina">AQ Operaciones - Control de Documentación - Confirmación 
+			<ui:param name="clase_pagina" value="operacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Operaciones</a></li>
+		<li>Control de Documentos</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<h:form id="forma"
+			rendered="#{beanOperacionControlDocumentacion.reporteExiste}">
+			<div class="forma_completa">
+				<p:commandButton ajax="false" value="&#171; REGRESAR"
+					action="/Operacion/documentacion" />
+
+				<p:commandButton value="CONFIRMAR &#187;"
+					actionListener="#{beanOperacionControlDocumentacion.doAccionGuardarReporte}"
+					oncomplete="PF('panel_resultado').show()"
+					update=":forma_resultado:contenido_resultado"
+					title="Haga click aquí para guardar los datos de este reporte. Primero revise bien que los datos sean los correctos." />
+			</div>
+			<div class="forma_mitad">
+				<p:panel header="Confirmar Datos Reporte">
+					<h:panelGrid columns="4" styleClass="tabla_captura"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+
+						<p:outputLabel for="cnfanio" value="Año" />
+						<h:outputText id="cnfanio"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.anio}" />
+
+						<p:outputLabel for="cnfrep" value="Reporte" />
+						<h:outputText id="cnfrep"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.reporte}" />
+
+						<p:outputLabel for="cnfsin" value="Siniestro" />
+						<h:outputText id="cnfsin"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.siniestro}" />
+
+						<p:outputLabel for="cnffol" value="Folio Declaración" />
+						<h:outputText id="cnffol"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.folioAjustador}" />
+
+						<p:outputLabel for="cnfdepfec" value="Depósito Fecha" />
+						<h:outputText id="cnfdepfec"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoFecha}" />
+
+						<p:outputLabel for="cnfdephor" value="Depósito Hora" />
+						<h:outputText id="cnfdephor"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoHora}" />
+
+						<p:outputLabel for="cnfdepfol" value="Depósito Folio" />
+						<h:outputText id="cnfdepfol"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoFolio}" />
+
+						<p:outputLabel for="cnfdeprefe" value="Depósito Referencia" />
+						<h:outputText id="cnfdeprefe"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoReferencia}" />
+
+						<p:outputLabel for="cnfdepban" value="Depósito Banco" />
+						<h:outputText id="cnfdepban"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoBanco}" />
+
+						<p:outputLabel for="cnfdepimp" value="Depósito Importe" />
+						<h:outputText id="cnfdepimp"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoImporte}" />
+
+						<p:outputLabel for="cnfdeptipo" value="Depósito Tipo (PP,PD,PR)" />
+						<h:outputText id="cnfdeptipo"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoTipoPago}" />
+
+
+						<p:outputLabel for="reporte_robo_codigo_causa"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="Codigo de Causa" />
+						<h:outputText id="reporte_robo_codigo_causa"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.catalogoCodigoDeCausa.descripcion}" />
+
+						<p:outputLabel for="reporte_robo_codig_entidad"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="Codigo de Entidad" />
+						<h:outputText id="reporte_robo_codig_entidad"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.catalogoClaveDeEntidadByCodigoDeEntidad.descripcion}" />
+
+						<p:outputLabel for="reporte_robo_codigo_municipop"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="Codigo de Municipio" />
+						<h:outputText id="reporte_robo_codigo_municipop"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.catalogoClaveDeEntidadByCodigoDeMunicipio.descripcion}" />
+
+						<p:outputLabel for="reporte_robo_ver_num"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="Numero de Averiguacion Previa" />
+						<h:outputText id="reporte_robo_ver_num"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.averiguacionPreviaNumero}" />
+
+						<p:outputLabel for="reporte_robo_ver_fech"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="Fecha de Averiguacion Previa" />
+						<h:outputText id="reporte_robo_ver_fech"
+							rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.averiguacionPreviaFecha}" />
+					</h:panelGrid>
+				</p:panel>
+			</div>
+
+			<div class="forma_mitad">
+				<p:panel header="Confirmar Documentos">
+					<h:panelGrid columns="4" styleClass="tabla_captura"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+						<ui:repeat var="terminalreportedocumento" value="#{beanOperacionControlDocumentacion.actualTerminalReporte.terminalReporteDocumentos}">
+
+							<p:outputLabel for="texto_#{st.index}"
+								value="#{terminalreportedocumento.terminalReporteDocumentoTipo.tipo}" />
+
+							<h:outputText id="texto_#{st.index}"
+								value="#{terminalreportedocumento.valorDeDocumento}" />
+
+						</ui:repeat>
+
+					</h:panelGrid>
+				</p:panel>
+
+			</div>
+		</h:form>
+
+
+		<p:dialog closeOnEscape="true" closable="true" modal="true"
+			widgetVar="panel_resultado" header="Resultado de la Operacion">
+
+			<h:form id="forma_resultado">
+				<p:outputPanel id="contenido_resultado">
+					<p:panel>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="cuarto,tres_cuartos">
+
+
+							<p:outputLabel for="fhora" value="Fecha Hora" />
+							<h:outputText id="fhora"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.fecha}" />
+
+							<p:outputLabel for="ticket" value="Ticket" />
+							<h:outputText id="ticket"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.id}" />
+						</h:panelGrid>
+					</p:panel>
+					<h:panelGrid columns="3" styleClass="tabla_captura"
+						columnClasses="tercio,tercio,tercio">
+
+						<p:commandButton ajax="false" value="Bajar PDF"
+							action="#{beanOperacionControlDocumentacion.doAccionTicketPDF}"
+							title="Bajar el reporte en formato PDF" />
+						<p:commandButton ajax="false" value="Continuar"
+							action="#{beanOperacionControlDocumentacion.doAccionContinuar}"
+							title="Continuar con la captura de reportes" />
+
+						<p:commandButton ajax="false" value="Finalizar Sesión"
+							action="#{beanOperacionControlDocumentacion.doSalir}" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>

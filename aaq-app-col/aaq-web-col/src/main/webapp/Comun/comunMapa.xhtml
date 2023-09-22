@@ -1,0 +1,138 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<script src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/hashtable.js"></script>
+	<h:form id="formaMapa">
+		<p:outputPanel style="visibility:hidden; display:none" layout="block"
+			id="marcadoresActualizacionManual">
+			<h:outputText value="#{componente.marcadoresActualizacionManual}"
+				escape="false" />
+		</p:outputPanel>
+		<p:outputPanel style="visibility:hidden; display:none" layout="block"
+			id="marcadoresActualizacionAutomatica">
+			<h:outputText value="#{componente.marcadoresActualizacionAutomatica}"
+				escape="false" />
+		</p:outputPanel>
+
+		<h:panelGrid columns="2" columnClasses="mitad,mitad">
+			<p:menuButton value="Herramientas" id="menuMO" styleClass="menuP">
+				<p:menuitem ajax="true"
+					update="javascriptMapa,menuMO,panel_poll_mapa,marcadoresActualizacionAutomatica"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarAjustadores}"
+					rendered="#{!componente.mostrarObjetosActualizables}"
+					icon="check_no" value="Ajustadores"  styleClass="menuP">
+				</p:menuitem>
+				<p:menuitem ajax="true"
+					update="javascriptMapa,menuMO,panel_poll_mapa,marcadoresActualizacionAutomatica"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarAjustadores}"
+					rendered="#{componente.mostrarObjetosActualizables}"
+					icon="check_si" value="Ajustadores">
+				</p:menuitem>
+
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarPuntosInteres}"
+					rendered="#{!componente.mostrarPuntosInteres}" icon="check_no"
+					value="Puntos de Interés">
+				</p:menuitem>
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarPuntosInteres}"
+					rendered="#{componente.mostrarPuntosInteres}" icon="check_si"
+					value="Puntos de Interés">
+				</p:menuitem>
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarGeocercas}"
+					rendered="#{!componente.mostrarGeocercas}" icon="check_no"
+					value="Geocercas">
+				</p:menuitem>
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarGeocercas}"
+					rendered="#{componente.mostrarGeocercas}" icon="check_si"
+					value="Geocercas">
+				</p:menuitem>
+
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarEtiquetas}"
+					rendered="#{!componente.mostrarEtiqueta}" icon="check_no"
+					value="Etiquetas">
+				</p:menuitem>
+				
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarEtiquetas}"
+					rendered="#{componente.mostrarEtiqueta}" icon="check_si"
+					value="Etiquetas">
+				</p:menuitem>
+				
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarPosicionAlterna}"
+					rendered="#{componente.mostrarPosicionAlterna}" icon="check_si"
+					value="Pos. Alterna">
+				</p:menuitem>
+				
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarPosicionAlterna}"
+					rendered="#{!componente.mostrarPosicionAlterna}" icon="check_no"
+					value="Pos. Alterna">
+				</p:menuitem>
+
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionMostrarTraza}"
+					rendered="#{!componente.mostrarTraza}" icon="check_no"
+					value="Traza">
+				</p:menuitem>
+				
+				<p:menuitem ajax="true" update="javascriptMapa,menuMO"
+					oncomplete="inicializarMapa()"
+					actionListener="#{componente.doAccionOcultarTraza}"
+					rendered="#{componente.mostrarTraza}" icon="check_si" value="Traza">
+				</p:menuitem>
+			</p:menuButton>
+			<p:outputPanel id="liga_direccion" style="display:block"/>
+		</h:panelGrid>
+		
+		<div id="div_mapa" style="height: 600px; border: 1px solid black;">
+			<div id="imagenSatelital"
+				style="margin-left: 1px; margin-right: 1px; float: none; height: 100%"
+				title="Mapa Satelital"></div>
+			<h:outputText id="javascriptMapa" value="#{componente[metodo]}"
+				escape="false" />
+
+
+		</div>
+		<p:outputPanel id="panel_poll_mapa">
+			<p:poll rendered="#{componente.mostrarObjetosActualizables}"
+				interval="60" id="poll_mapa"
+				update="marcadoresActualizacionAutomatica" process="poll_mapa"
+				partialSubmit="true"
+				oncomplete="cargarListaPuntosActualizacionAutomatica();" />
+		</p:outputPanel>
+	</h:form>
+
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAvfUXdCodzS-YBPk2ow0mMxAWvgqvjk_k&amp;callback=Function.prototype" ></script>	
+
+
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/markerwithlabel.js"></script>
+	<script>
+		$(document).ready(function() {
+			inicializarMapa();
+
+		});
+	</script>
+
+</ui:component>
+

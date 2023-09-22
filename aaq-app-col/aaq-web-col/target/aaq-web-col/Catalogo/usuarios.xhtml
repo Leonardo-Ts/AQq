@@ -1,0 +1,255 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoUsuario}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Usuarios
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li>Usuarios</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoUsuario}" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarFiltroComboBase" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:param name="mostrarBotonAgregarRegistro" value="true" />
+			<ui:param name="listaDe" value="Usuario" />
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="perfil_f" value="Perfil:" />
+				<h:selectOneMenu id="perfil_f"
+								 value="#{componente._txtFiltroPerfil}" title="Lista de Perfiles">
+					<f:selectItem noSelectionOption="true" itemLabel="-- Opcional--"/>
+					<f:selectItems value="#{componente.listaDePerfil}" var="perfil"
+								   itemValue="#{perfil.id}" itemLabel="#{perfil.descripcion}" />
+					<p:ajax event="valueChange" listener="#{componente.actualizarListado}" update=":forma_tabla:tabla"/>
+				</h:selectOneMenu>
+				<p:outputLabel for="nombre_F" value="Nombre:" />
+				<p:inputText id="nombre_F" value="#{componente._txtFiltroNombre}"/>
+				<p:commandButton actionListener="#{componente.actualizarListado}" update=":forma_tabla:tabla" value="Filtrar"/>
+
+
+
+			</ui:define>
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoUsuario}" />
+			<ui:param name="descripcion" value="Usuarios del Sistema" />
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoUsuario}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{usuario.columnas}" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:param name="mostrarBotonEditarRegistro" value="true" />
+			<ui:param name="mostrarBotonEliminarRegistro" value="true" />
+			<ui:param name="listaDe" value="Usuarios del Sistema" />
+
+			<ui:define name="contenidoAdicional">
+				
+				<p:column style="text-align:center" headerText="Alertas"
+					rendered="#{componente.permisoAgregarAlertasUsuarios}">
+                    <p:commandLink oncomplete="PF('panelAlerta').show()"
+                                   update=":formaAlerta:contenidoAlerta"
+                                   actionListener="#{componente.doAccionRegistroAgregarAlerta}">
+                        <h:graphicImage url="/diseno/imagenes/acciones/icono16Permiso.png"/>
+                        <f:param name="id" value="#{riv}"/>
+                    </p:commandLink>
+                </p:column>
+
+			</ui:define>			
+				
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunPanel.xhtml">
+			<ui:param name="listaDe" value="Usuarios del Sistema" />
+			<ui:param name="componente" value="#{beanCatalogoUsuario}" />
+			<ui:param name="validador" value="Usuario" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarFiltroComboBase" value="true" />
+			<ui:param name="mostrarBotonAceptar" value="true" />
+			<ui:param name="mostrarBotonCerrar" value="true" />
+			<ui:define name="contenidoAdicional">
+
+				<p:outputLabel for="perfil" value="Perfil" />
+				<h:selectOneMenu id="perfil"
+					value="#{componente.objetoABM._idPerfil}" title="Lista de Perfiles">
+					<f:selectItems value="#{componente.listaDePerfil}" var="perfil"
+						itemValue="#{perfil.id}" itemLabel="#{perfil.descripcion}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="nombre" value="Nombre" />
+				<p:inputText id="nombre" value="#{componente.objetoABM.nombre}" />
+
+				<p:outputLabel for="usr" value="Nombre de Usuario" />
+				<p:inputText id="usr" value="#{componente.objetoABM.username}" />
+
+				<p:outputLabel for="passwd" value="Contraseña" />
+
+				<p:outputPanel>
+					<p:password id="passwd" value="#{componente.txtPasswd}" feedback="true"  weakLabel="Débil"
+                    goodLabel="Regular" strongLabel="Fuerte" maxlength="120" inline="true"  
+                    promptLabel="Se requiere una contraseña fuerte compuesta por al menos un numero, una letra minuscula, una letra mayuscula y un caracter especial. Minimo 8 caracteres, maximo 128 caracteres."/>
+					<h:inputHidden id="px" value="#{componente.objetoABM.passwd}" />
+				</p:outputPanel>
+
+				<p:outputLabel for="freq" value="Frecuencia" />
+				<h:selectOneMenu id="freq"
+					value="#{componente.objetoABM._idFrecuencia}"
+					title="Lista de Frecuencias">
+					<f:selectItems value="#{componente.listaDeFrecuencia}"
+						var="frecuencia" itemValue="#{frecuencia.id}"
+						itemLabel="#{frecuencia.descripcion}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="tel" value="Teléfono" />
+				<p:inputText onkeyup="permitirSoloNumeros(this);" id="tel"
+					value="#{componente.objetoABM.telefono}" maxlength="10" />
+
+				<p:outputLabel for="telefonica" value="Proveedor de Comunicaciones" />
+				<h:selectOneMenu id="telefonica"
+					value="#{componente.objetoABM.proveedorTelefonia}">
+					<f:selectItem itemLabel="TELCEL" itemValue="TELCEL" />
+					<f:selectItem itemLabel="IUSACELL" itemValue="IUSACELL" />
+					<f:selectItem itemLabel="NEXTEL" itemValue="NEXTEL" />
+					<f:selectItem itemLabel="MOVISTAR" itemValue="MOVISTAR" />
+					<f:selectItem itemLabel="OTRO" itemValue="OTRO" />
+				</h:selectOneMenu>
+				
+				<p:outputLabel for="mail" value="Correo Electrónico" />
+				<p:inputText id="mail"
+					value="#{componente.objetoABM.mail}" maxlength="100" />
+
+			</ui:define>
+		</ui:decorate>
+
+
+		<p:dialog closeOnEscape="true" closable="true" modal="true"
+			widgetVar="panelUsuarioEstado" header="Frecuencias A.V."
+			minWidth="600">
+			<h:form id="formaUsuarioEstado">
+
+				<p:outputPanel id="contenidoUsuarioEstado">
+					<h:panelGrid columns="2"
+						rendered="#{!empty beanCatalogoUsuario.objetoABM}">
+
+						<p:outputLabel for="estado_u" value="Departamento" />
+						<h:selectOneMenu id="estado_u"
+							value="#{beanCatalogoUsuario.objetoABM._idEstadoFrecuenciaAV}">
+							<f:selectItems value="#{beanCatalogoUsuario.listaDeEstados}"
+								itemValue="#{estado.id}" itemLabel="#{estado.nombre}"
+								var="estado" />
+						</h:selectOneMenu>
+
+						<p:commandButton value="Aceptar" update="tabla_estado_u"
+							actionListener="#{beanCatalogoUsuario.doAccionAgregarFrecuenciaAV}" />
+
+					</h:panelGrid>
+					<p:dataTable id="tabla_estado_u" var="objeto"
+						value="#{beanCatalogoUsuario.objetoABM.usuarioEstadoUsuarioViaIdUsuario}"
+						emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="5" rowKey="rkv" rowIndexVar="riv"
+						rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+						<p:column headerText="Departamento">
+							<h:outputText value="#{objeto.estado}" />
+
+						</p:column>
+						<p:column headerText="Eliminar" style="text-align:center">
+							<p:commandLink
+								actionListener="#{beanCatalogoUsuario.doAccionEliminarFrecuenciAV(objeto)}"
+								update="tabla_estado_u">
+
+								<h:graphicImage
+									value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+							</p:commandLink>
+
+						</p:column>
+
+
+					</p:dataTable>
+
+				</p:outputPanel>
+
+			</h:form>
+
+		</p:dialog>
+		
+		<p:dialog closeOnEscape="true" closable="true" widgetVar="panelAlerta"
+                  header="ABM de Alertas">
+
+            <h:form id="formaAlerta">
+                <p:outputPanel id="contenidoAlerta">
+                    <p:panel>
+                        <h:panelGrid columns="2" styleClass="tabla_captura"
+                                     columnClasses="cuarto,tres_cuartos">
+                            
+                            <p:outputLabel for="tipoAlerta" value="Tipo de Alerta"/>
+                            <h:selectOneMenu id="tipoAlerta" value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.tipoAlerta}"
+								style="width: 100px">
+								<f:selectItem itemLabel="CORREO" itemValue="CORREO" />
+								<f:selectItem itemLabel="SMS" itemValue="SMS" />
+								<f:selectItem itemLabel="TODAS" itemValue="TODAS" />								
+							</h:selectOneMenu>
+					
+                            <p:outputLabel for="tiempoLibre" value="Tiempo Libre"/>
+			                <p:selectBooleanButton id="tiempoLibre" onLabel="Si" offLabel="No"
+			                                       value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.tiempoLibre}">			                    
+			                </p:selectBooleanButton>
+			                <p:outputLabel for="tiempoOcupado" value="Tiempo Ocupado"/>
+			                <p:selectBooleanButton id="tiempoOcupado" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.tiempoOcupado}">			                    
+			                </p:selectBooleanButton>
+			                <p:outputLabel for="arriboPost" value="Arribo despues de tiempo"/>
+			                <p:selectBooleanButton id="arriboPost" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.arriboPostTiempo}">			                    
+			                </p:selectBooleanButton>
+			                <p:outputLabel for="login" value="Despues de inicio de sesión"/>
+			                <p:selectBooleanButton id="login" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.login}">			                    
+			                </p:selectBooleanButton>
+			                <p:outputLabel for="logout" value="Antes de terminar sesión"/>
+			                <p:selectBooleanButton id="logout" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.logout}">			                    
+			                </p:selectBooleanButton>
+			                
+			                <p:outputLabel for="noDisponible" value="Sin peritos-abogados disponibles"/>
+			                <p:selectBooleanButton id="noDisponible" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.noDisponibles}">			                    
+			                </p:selectBooleanButton>
+			                
+			                <p:outputLabel for="terminoDistancia" value="Termino reporte en un lugar distinto al arribo"/>
+			                <p:selectBooleanButton id="terminoDistancia" onLabel="Si" offLabel="No"
+			                                        value="#{beanCatalogoUsuario.objetoABMUsuarioAltertas.terminoDistancia}">			                    
+			                </p:selectBooleanButton>
+
+                        </h:panelGrid>
+                    </p:panel>
+                    
+					<h:panelGrid columns="2" columnClasses="mitad,mitad"
+						styleClass="tabla_captura">
+						
+						<p:commandButton value="Aceptar" ajax="false"
+							actionListener="#{beanCatalogoUsuario.doAccionRegistroUsuarioAlertas}"
+							oncomplete="PF('panel').hide();" />
+							
+						<p:commandButton value="Cerrar" ajax="false"
+							actionListener="#{componente.doAccionRegistroCerrar}" />
+	
+					</h:panelGrid>
+
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoFrecuencia}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Frecuencias
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li>Frecuencias</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoFrecuencia}" />
+			<ui:param name="listaDe" value="Frecuencia" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarBotonAgregarRegistro" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoFrecuencia}" />
+			<ui:param name="descripcion" value="Frecuencias" />
+
+		</ui:decorate>
+
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoFrecuencia}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{componente.columnas}" />
+			<ui:param name="listaDe" value="Frecuencia" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:param name="mostrarBotonEditarRegistro" value="true" />
+			<ui:param name="mostrarBotonEliminarRegistro" value="true" />
+
+			<ui:define name="contenidoAdicional">
+				<p:column style="text-align: center" headerText="Agregar Bases"
+					rendered="#{componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelAdicional').show()"
+						update=":formaAgregarBase:contenidoAgregarBase"
+						actionListener="#{componente.doAccionRegistroEditar}">
+						<f:param name="id" value="#{riv}" />
+						<h:graphicImage url="/diseno/imagenes/acciones/icono16Permiso.png" />
+					</p:commandLink>
+				</p:column>
+			</ui:define>
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunPanel.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoFrecuencia}" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="listaDe" value="Frecuencia" />
+			<ui:param name="validador" value="Frecuencia" />
+			<ui:param name="mostrarBotonAceptar" value="true" />
+			<ui:param name="mostrarBotonCerrar" value="true" />
+
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="nombre" value="Nombre" />
+				<p:inputText id="nombre"
+					value="#{beanCatalogoFrecuencia.objetoABM.nombre}" />
+
+			</ui:define>
+		</ui:decorate>
+
+		<p:dialog closeOnEscape="true" closable="true"
+			widgetVar="panelAdicional" header="Agregar Bases del Registro"
+			modal="true">
+
+			<h:form id="formaAgregarBase">
+				<p:outputPanel id="contenidoAgregarBase">
+					<p:panel>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="cuarto,tres_cuartos">
+
+
+							<p:outputLabel for="freq_estado" value="Departamento" />
+							<h:selectOneMenu id="freq_estado"
+								value="#{beanCatalogoFrecuencia.idEstadoDos}">
+								<f:selectItems value="#{beanCatalogoFrecuencia.listaDeEstados}"
+									var="estado" itemValue="#{estado.id}"
+									itemLabel="#{estado.nombre}" />
+								<p:ajax event="valueChange" update="freq_base" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="freq_base" value="Base" />
+							<h:selectOneMenu id="freq_base"
+								value="#{beanCatalogoFrecuencia.idBaseSeleccionadoDos}">
+								<f:selectItems
+									value="#{beanCatalogoFrecuencia.listaDeBasesTodas}" var="base"
+									itemValue="#{base.id}" itemLabel="#{base.descripcion}" />
+							</h:selectOneMenu>
+
+							<p:commandButton value="Agregar"
+								actionListener="#{beanCatalogoFrecuencia.doAccionFrecuenciaAgregarBase}"
+								update=":formaAgregarBase:tabla_agregar_base, :forma_tabla:tabla">
+							</p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:dataTable id="tabla_agregar_base" var="frecuenciaBase"
+						value="#{beanCatalogoFrecuencia.listaDeFrecuenciaBase}"
+						emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+						rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+						<f:facet name="header">Lista de Bases</f:facet>
+
+						<p:column sortBy="#{frecuenciaBase.base.estado.nombre}"
+							headerText="Estado">
+							<h:outputText value="#{frecuenciaBase.base.estado.nombre}" />
+						</p:column>
+						<p:column sortBy="#{frecuenciaBase.base.nombre}"
+							headerText="Nombre">
+							<h:outputText value="#{frecuenciaBase.base.nombre}" />
+						</p:column>
+						<p:column style="text-align:center" headerText="Eliminar">
+							<p:commandLink
+								actionListener="#{beanCatalogoFrecuencia.doAccionFrecuenciaEliminarBase}"
+								update="tabla_agregar_base,:forma_tabla:tabla">
+								<h:graphicImage
+									url="/diseno/imagenes/acciones/icono16Eliminar.png" width="16"
+									height="16" />
+								<f:param name="id" value="#{frecuenciaBase.id}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,1962 @@
+/**************************** CUERPO DE LA PAGINA ****************************/
+html {
+	background-color: #ffffff;
+	height: 100%;
+}
+
+body {
+	font-family: 'Roboto',Arial, Verdana, sans-serif;
+	font-size: 11px;
+	height: 100%;
+}
+
+html,body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+	
+/**************************** CONTENEDOR DE LA PAGINA **************************/
+.contenedor {
+	width: 100%;
+	height: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color:#FFFFFF;
+}
+
+/**************************** ESQUINAS CON BORDES REDONDEADOS ****************************/
+.esquina-superior-gris-centro {
+	width: 100%;
+	height: 10px;
+	background: transparent url(../imagenes/porcentaje/fondo_gris.png)
+		repeat-x;
+}
+
+.esquina-superior-gris-izq {
+	width: 10px;
+	height: 10px;
+	background: transparent url(../imagenes/porcentaje/gris_top_left.gif)
+		repeat-x;
+	float: left;
+}
+
+.esquina-superior-gris-der {
+	width: 10px;
+	height: 10px;
+	background: transparent url(../imagenes/porcentaje/gris_top_right.gif)
+		repeat-x;
+	float: right;
+}
+
+.esquina-inferior-gris-centro {
+	width: 100%;
+	height: 10px;
+	padding-bottom: 20px;
+	background: transparent url(../imagenes/porcentaje/fondo_gris.png)
+		repeat-x;
+}
+
+.esquina-inferior-gris-izq {
+	width: 10px;
+	height: 10px;
+	background: transparent url(../imagenes/porcentaje/gris_bottom_left.gif)
+		repeat-x;
+	float: left;
+}
+
+.esquina-inferior-gris-der {
+	width: 10px;
+	height: 10px;
+	background: transparent
+		url(../imagenes/porcentaje/gris_bottom_right.gif) repeat-x;
+	float: right;
+}
+
+.esquina-superior-blanco-centro {
+	clear: both;
+	width: 100%;
+	height: 10px;
+	background: white;
+}
+
+.esquina-superior-blanco-izq {
+	background: url(../imagenes/porcentaje/blanco_top_left.gif) repeat-x;
+	float: left;
+	width: 10px;
+	height: 10px;
+}
+
+.esquina-superior-blanco-der {
+	background: url(../imagenes/porcentaje/blanco_top_right.gif) repeat-x;
+	float: right;
+	width: 10px;
+	height: 10px;
+}
+
+.esquina-inferior-blanco-centro {
+	padding-top: 10px;
+	clear: both;
+	width: 100%;
+	height: 10px;
+	background: white;
+	overflow: hidden;
+}
+
+.esquina-inferior-blanco-izq {
+	background: url(../imagenes/porcentaje/blanco_bottom_left.gif) repeat-x;
+	width: 10px;
+	height: 10px;
+	float: left;
+}
+
+.esquina-inferior-blanco-der {
+	background: url(../imagenes/porcentaje/blanco_bottom_right.gif) repeat-x;
+	width: 10px;
+	height: 10px;
+	float: right;
+}
+
+/**************************** ENCABEZADO DE LA PAGINA ****************************/
+.encabezado-margen {
+	width: 100%;
+	background: #ffffff;
+}
+
+.encabezado {
+	width: 99%;
+	min-height: 112px /*Non-IE6*/;
+	height: auto !important /*Non-IE6*/;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/**************************** ENCABEZADO SUPERIOR ****************************/
+.encabezado-superior {
+	width: 100%;
+	height: 86px;
+	background: #ffffff;
+	overflow: hidden;
+}
+
+/****************************  ENCABEZADO INFERIOR ****************************/
+.encabezado-inferior {
+	width: 100%;
+	min-height: 30px /*Non-IE6*/;
+	height: auto !important /*Non-IE6*/;
+	background: #ffffff;
+	margin-left: 10px;
+}
+
+.encabezado-inferior ul {
+	float: left;
+	width: 40%;
+	list-style: none;
+	padding: 8px 0 3px 10px !important /*Non-IE6*/;
+}
+
+.encabezado-inferior ul li {
+	display: inline;
+	padding: 0 0 0 10px;
+	background: transparent url(../imagenes/porcentaje/flecha.gif) no-repeat
+		0 50%;
+}
+
+.encabezado-inferior ul a {
+	color: rgb(125, 125, 125);
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.encabezado-inferior ul a:hover {
+	color: rgb(255, 255, 255);
+}
+
+/**************************** LOGOTIPOS  ****************************/
+.logo_normal {
+	width: 165px;
+	height: 54px;
+	position: absolute;
+	z-index: 1;
+	margin: 10px 0 0 15px;
+	background: url(../imagenes/logos/logo_normal.png);
+}
+.logo_usuario{
+	width: 30px;
+	
+}
+.logo_qualitas {
+	width: 250px;
+	height: 60px;
+	position: absolute;
+	z-index: 1;
+	margin: 20px 0 0 15px;
+}
+
+.logo_sitio {
+	width: 500px;
+	z-index: 1;
+	margin: 3px 0 0 1px;
+	float: right;
+}
+
+.logo_sitio h3 {
+	color: rgb(125, 125, 125);
+}
+
+
+.logo_sitio h4 {
+	color: #008C99;
+	font-size: medium;
+	margin-top:17px;
+	margin-bottom:2px;
+}
+
+.logo_sitio a {
+	text-decoration: none;
+	color: rgb(125, 125, 125);
+}
+
+/**************************** BARRA DE NAVEGACION ****************************/
+.barra_navegacion_avanzada {
+	float: left;
+	width: 100%;
+	background-color: rgb(225, 225, 225);
+}
+
+/**************************** BLOQUE PRINCIPAL ****************************/
+.principal {
+	width: 99%;
+	padding: 10px 0 20px 0;
+	background-color: rgb(200, 200, 200);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.principal-margen {
+	width: 100%;
+	background: #c8c8c8;
+}
+
+.principal a {
+	color: #2ca8b5 !important;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.principal a:hover {
+	color: #008c99;
+	text-decoration: underline;
+}
+
+.principal a:visited {
+	color: #008c99;
+}
+
+/**************************** BLOQUE DE CONTENIDO ****************************/
+.contenido {
+	display: inline; /*Fix IE floating margin bug*/;
+	float: left;
+	width: 100%;
+	background-color: rgb(200, 200, 200);
+	overflow: visible !important /*Non-IE6*/;
+}
+
+.contenido h1 {
+	margin: 0;
+	padding: 5px 50px 12px 20px;
+	border-bottom: solid 1px rgb(215, 215, 215);
+	color: rgb(75, 75, 75);
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.contenido h5 {
+	margin: 1.0em 0 -0.5em 0;
+	padding: 0 20px 0 20px;
+	color: rgb(75, 75, 75);
+	font-weight: bold;
+}
+
+.contenido ul {
+	margin: 1.4em 0 1.0em 0;
+	padding: 0 20px 0 20px;
+	list-style: none;
+}
+
+.contenido ul li {
+	margin: 0 0 0.3em 2px;
+	padding: 0 0 0 12px;
+	background: url(../imagenes/porcentaje/cuadrado.gif) no-repeat 0 0.5em;
+	line-height: 1.3em;
+}
+
+/**************************** BLOQUE DE CONTENIDO CELDA ****************************/
+.contenido-celda {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(255, 255, 255);
+}
+
+.contenido-celda h1 img {
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+/**************************** REPORTES: TRANSACCION BANCARIA ****************************/
+.transaccion_pago_poliza {
+	height: 3.0em;
+	padding: 2px 7px 2px 7px;
+	background-color: #ffff99;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.transaccion_pago_recuperacion {
+	height: 3.0em;
+	padding: 2px 7px 2px 7px;
+	background-color: #ccffcc;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.transaccion_declinada {
+	background-color: #ff0000;
+	color: #ffffff;
+	vertical-align: middle;
+	text-align: center;
+}
+
+/**************************** APLICACIONES : MAPA SATELITAL ****************************/
+.imagen_de_mapa_satelital {
+	width: 100%;
+	float: left;
+}
+
+.liga_imagen_de_mapa {
+	color: rgb(70, 122, 167);
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.etiquetasMapa {
+	color: red;
+	background-color: white;
+	font-size: 8px;
+	font-weight: bold;
+	text-align: center;
+	width: 60px;
+	border: 2px solid black;
+}
+
+/**************************** APLICACIONES : ALARMA ****************************/
+.css_marca_agua {
+	text-decoration: line-through;
+}
+
+.terminal_fecha_demora {
+	background-color: rgb(153, 102, 254);
+}
+
+.terminal_fecha_ok {
+	background-color: rgb(221, 221, 221);
+}
+
+.terminal_fecha_conectado_demora {
+	background-color: rgb(0, 128, 0);
+}
+
+.terminal_fecha_conectado_ok {
+	background-color: rgb(204, 254, 153);
+}
+
+.terminal_fecha_reporte_nulo {
+	background-color: rgb(254, 254, 153);
+}
+
+.terminal_reporte_no_nulo {
+	background-color: rgb(254, 204, 0);
+}
+
+.terminal_fecha_hora_tiempo_uno {
+	background-color: rgb(254, 254, 153);
+}
+
+.terminal_fecha_hora_tiempo_uno_a {
+	background-color: rgb(254, 254, 153);
+}
+
+.terminal_fecha_hora_tiempo_dos_ok {
+	background-color: rgb(254, 254, 153);
+}
+
+.terminal_fecha_hora_tiempo_dos_s1 {
+	background-color: rgb(254, 153, 51);
+}
+
+.terminal_fecha_hora_tiempo_dos_s2 {
+	background-color: rgb(254, 0, 102);
+}
+
+.terminal_fecha_hora_tiempo_dos_s3 {
+	background-color: rgb(51, 153, 254);
+}
+
+.terminal_fecha_desconectado_nulo {
+	background-color: rgb(254, 204, 204);
+}
+
+.terminal_fecha_desconectado_no_nulo {
+	background-color: rgb(254, 0, 0);
+}
+
+.css_rojo {
+	background-color: #FF1919 !important;
+	color: black;
+	font-weight: bold;
+}
+
+.css_blanco {
+	background-color: #FFFFFF !important;
+	color: black !important;
+	font-weight: bold;
+}
+
+.ccs_fecha_arribo_1 {
+	background-color: #000B050 !important;
+	color: black;
+	font-weight: bold;
+}
+
+.ccs_fecha_arribo_2 {
+	background-color: #FFC000 !important;
+	color: black;
+	font-weight: bold;
+}
+
+.ccs_fecha_arribo_3 {
+	background-color: #FF0000 !important;
+	color: black;
+	font-weight: bold;
+}
+
+/**************************** APLICACIONES : ASISTENCIA VIAL ****************************/
+.css_amarillo {
+	background-color: yellow !important;
+	color: black !important;
+	font-weight: bold;
+}
+
+.css_verde {
+	background-color: green !important;
+	color: black !important;
+	font-weight: bold;
+}
+
+.css_verde2 {
+	background-color: #27AE60 !important;
+	color: black !important;
+	font-weight: bold;
+}
+
+.css_morado {
+	background-color: #A266D4 !important;
+	color: #FFFFFF !important;
+	font-weight: bold;
+	background-image: url(../imagenes/acciones/icono16Advertencia.png);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.back_proveedor_en_tiempo {
+	background: url(../imagenes/acciones/marcaProveedorEnTiempo.png) no-repeat right;
+}
+
+.back_proveedor_retraso {
+	background: url(../imagenes/acciones/marcaProveedorRetraso.png) no-repeat right;
+}
+
+.css_morado_nowarn {
+	background-color: #A266D4 !important;;
+	color: #FFFFFF !important;;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+.css_naranja {
+	background-color: #F5A53D !important;
+	color: black !important;
+	font-weight: bold !important;
+}
+
+/**************************** APLICACIONES : GRUAS ****************************/
+.css_grua_verde {
+	background-color: rgb(0, 255, 0);
+}
+
+.css_grua_amarillo {
+	background-color: rgb(255, 255, 0);
+}
+
+.css_grua_rojo {
+	background-color: rgb(255, 0, 0);
+}
+
+/**************************** APLICACIONES : MONITOR ****************************/
+.monitor_base_total {
+	background-color: #730F73;
+	color: #ffffff
+}
+
+.online {
+	background-color: #009900;
+	color: #ffffff
+}
+
+.busy {
+	background-color: #FFAB00;
+}
+
+.offline {
+	background-color: #FF0000;
+	color: #ffffff
+}
+
+/**************************** Reportes de Asistencia Vial ****************************/
+.reporte_asistencia_azul {
+	color: #000000;
+	background-color: #A4B9CC;
+}
+
+.reporte_asistencia_verde {
+	color: #000000;
+	background-color: #00FF01;
+}
+
+.reporte_asistencia_amarillo {
+	color: #000000;
+	background-color: #FFFF00;
+}
+
+.reporte_asistencia_rojo {
+	color: #FFFFFF;
+	background-color: #FE0000;
+}
+
+/**************************** PIE DE PAGINA ****************************/
+.pie_de_pagina {
+	clear: both;
+	width: 100%;
+	padding: 1.0em 0 1.0em 0;
+	
+	overflow: visible !important /*Non-IE6*/;
+}
+
+.pie_de_pagina p {
+	clear: both;
+	line-height: 1.3em;
+	text-align: center;
+	color: rgb(145, 39, 143);
+	font-weight: bold;
+}
+
+/**************************** RESETEO DE FLOATS ****************************/
+.contenedor:after,.encabezado:after,.encebazado-superior:after,.encabezado-inferior:after,.barra_navegacion:after,.principal:after,.contenido:after,.contenido div:after,.subcontenido:after,.subcontenido div:after,.pie_de_pagina:after
+	{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+/**************************** FORMAS CON TAMANOS DIFERENTES****************************/
+
+.forma_completa {
+	width: 98%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.forma_mitad {
+	width: 48%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.forma_dos_tercios {
+	width: 63%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.forma_un_tercio {
+	width: 31%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.forma_un_tercioDoc {
+	width: 28%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+
+.forma_un_tercioDes {
+	width: 18%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.forma_un_tercio2 {
+	position: relative;
+	width: 32%;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+.forma_un_tercio3 {
+	width: 19px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+
+.forma_un_sexto {
+	width: 31px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+.completo {
+	width: 100%;
+	padding-top: 10px;
+}
+
+.tercio {
+	width: 33%;
+}
+
+.sexto {
+	width: 16%;
+}
+
+.quinto {
+	width: 19%;
+}
+.cuarto {
+	width: 24%;
+}
+
+.mitad {
+	width: 49%;
+}
+
+.tres_cuartos {
+	width: 74%;
+}
+
+.cincuenta {
+	width: 25%;
+}
+
+.tabla_captura {
+	width: 100%;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+.tabla_captura label {
+	font-weight: bold;
+	width: auto;
+}
+
+.tabla_captura input[type=text] {
+	width: 90%;
+}
+
+.tabla_captura textarea {
+	width: 90%;
+}
+
+.tabla_captura select {
+	width: 90%;
+}
+
+.tabla_cotiza tr {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+/**************************** REPORTES MOVILES ****************************/
+.css_reporte_movil_agente_especial_54740 {
+	background-color: rgb(200, 191, 231) !important;
+}
+
+/**************************** ESPECIFICOS DE PRIME FACES ****************************/
+.ui-datatable table {
+	table-layout: auto !important;
+}
+
+.ui-growl {
+	margin-right: 40%;
+	top: 40%;
+}
+
+.ui-widget {
+	font-family: 'Roboto',Arial, Verdana, sans-serif;
+	font-size: 11px;
+}
+
+.ui-widget .ui-widget {
+	font-family: 'Roboto',Arial, Verdana, sans-serif;
+	font-size: 11px;
+}
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+	width: 250px;
+}
+
+.ui-menu-list .ui-menu-item {
+	width: 250px;
+}
+
+.ui-menuitem-text {
+	margin-left: 5px !important;
+}
+
+/**************************** ICONOS DE BACKGROUND DEL MENU DEL APLICATIVO ****************************/
+.menuP .menu_alarma {
+	background: url("../imagenes/menu/Aplicacionalarma.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_asignacion {
+	background: url("../imagenes/menu/Aplicacionasignacion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_asistencia_vial {
+	background: url("../imagenes/menu/AplicacionasistenciaVial.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_comunicado {
+	background: url("../imagenes/menu/Aplicacioncomunicado.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_grua {
+	background: url("../imagenes/menu/Aplicaciongrua.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_legal {
+	background: url("../imagenes/menu/Aplicacionlegal.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_monitor {
+	background: url("../imagenes/menu/Aplicacionmonitor.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_mobil {
+	background: url("../imagenes/menu/AplicacionreporteMobil.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_calificaciones{
+	background: url("../imagenes/menu/BoletaCalificaciones.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_resumen_ajustador{
+	background: url("../imagenes/menu/resumen.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_segundos_traslados {
+	background: url("../imagenes/menu/atencion2.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_tablero_ejecutivo {
+	background: url("../imagenes/menu/tableroEjecutivo.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_expediente_digital {
+	background: url("../imagenes/menu/expedienteDigital.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_resumen_ajustador_amis{
+	background: url("../imagenes/menu/hist_resu_ajus_amis.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_sise {
+	background: url("../imagenes/menu/AplicacionreporteSise.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_servicio_solicitado {
+	background: url("../imagenes/menu/AplicacionservicioSolicitado.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_sms {
+	background: url("../imagenes/menu/Aplicacionsms.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_encuestas {
+	background: url("../imagenes/menu/Aplicacionencuesta.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_poliza_especial {
+	background: url("../imagenes/menu/AVQcatalogoPolizaEspecial.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_poliza_tarifas {
+	background: url("../imagenes/menu/AVQcatalogoPolizaTarifas.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_poliza_agentes {
+	background: url("../imagenes/menu/AVQcatalogoPolizaAgentes.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_proveedor {
+	background: url("../imagenes/menu/AVQcatalogoProveedor.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_proveedor_capacidad {
+	background: url("../imagenes/menu/AVQcatalogoProveedorCapacidad.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_proveedor_semaforo {
+	background: url("../imagenes/menu/AVQcatalogoProveedorSemaforo.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_servicio {
+	background: url("../imagenes/menu/AVQcatalogoServicio.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_catalogo_servicio_resumido {
+	background: url("../imagenes/menu/AVQcatalogoServicioResumido.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_facturacion {
+	background: url("../imagenes/menu/AVQreporteFacturacion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_historico_proveedor {
+	background: url("../imagenes/menu/AVQreporteHistoricoProveedor.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_historico_notas_reporte {
+	background: url("../imagenes/menu/historicoNotasReporte.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_historico_servicio {
+	background: url("../imagenes/menu/AVQreporteHistoricoServicio.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_proveedor {
+	background: url("../imagenes/menu/AVQreporteProveedor.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_proveedor_bitacora {
+	background: url("../imagenes/menu/AVQreporteProveedorBitacora.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_reembolso_aclaracion {
+	background: url("../imagenes/menu/AVQreporteReembolsoAclaracion.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_siniestralidad {
+	background: url("../imagenes/menu/AVQreporteSiniestralidad.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_servicio_listado {
+	background: url("../imagenes/menu/AVQservicioListado.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_servicio_tablero {
+	background: url("../imagenes/menu/AVQservicioTablero.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_bases {
+	background: url("../imagenes/menu/Catalogobases.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_avisosresumenajustador {
+	background: url("../imagenes/menu/avisosajustador.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_grupos {
+	background: url("../imagenes/menu/Catalogogrupo.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_horarios {
+	background: url("../imagenes/menu/Catalogohorario.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_frecuencia {
+	background: url("../imagenes/menu/Catalogofrecuencia.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_geocerca {
+	background: url("../imagenes/menu/Catalogogeocerca.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_grua_proveedor {
+	background: url("../imagenes/menu/CatalogogruaProveedor.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_oficina {
+	background: url("../imagenes/menu/Catalogooficina.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_perfiles {
+	background: url("../imagenes/menu/Catalogoperfiles.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_proveedor_asistencia {
+	background: url("../imagenes/menu/CatalogoproveedorAsistencia.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_punto_interes {
+	background: url("../imagenes/menu/CatalogopuntoInteres.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_terminales {
+	background: url("../imagenes/menu/Catalogoterminales.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_usuarios {
+	background: url("../imagenes/menu/Catalogousuarios.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_configuracion {
+	background: url("../imagenes/menu/Operacionconfiguracion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_consola {
+	background: url("../imagenes/menu/Operacionconsola.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_documentacion {
+	background: url("../imagenes/menu/Operaciondocumentacion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_socket {
+	background: url("../imagenes/menu/Operacionsocket.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_usuario {
+	background: url("../imagenes/menu/Operacionusuario.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_auditoria_por_geocerca {
+	background: url("../imagenes/menu/ReporteauditoriaPorGeocerca.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_auditoria_por_punto {
+	background: url("../imagenes/menu/ReporteauditoriaPorPunto.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_documentacion {
+	background: url("../imagenes/menu/Reportedocumentacion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_historico_terminal {
+	background: url("../imagenes/menu/ReportehistoricoTerminal.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_mensaje_de_s_m_s {
+	background: url("../imagenes/menu/ReportemensajeDeSMS.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_asistencia {
+	background: url("../imagenes/menu/ReportereporteAsistencia.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_grua {
+	background: url("../imagenes/menu/ReportereporteGrua.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_movil {
+	background: url("../imagenes/menu/ReportereporteMovil.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_ajustador_montachoques{
+	background: url("../imagenes/menu/SOSAjustador16.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_reporte_sise {
+	background: url("../imagenes/menu/ReportereporteSise.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_terminal_celular {
+	background: url("../imagenes/menu/ReporteterminalCelular.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_terminal_k_m_dia {
+	background: url("../imagenes/menu/ReporteterminalKMDia.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_terminal_log {
+	background: url("../imagenes/menu/ReporteterminalLog.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_terminal_tiempo_detenido {
+	background: url("../imagenes/menu/ReporteterminalTiempoDetenido.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_transaccion {
+	background: url("../imagenes/menu/Reportetransaccion.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_cancela_reporte {
+	background: url("../imagenes/menu/SiseORcancelaReporte.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_asigna_reporte {
+	background: url("../imagenes/menu/SiseORasignaReporte.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_codigoresponsabilidad {
+	background: url("../imagenes/menu/reportesCodigoResponsabilidad.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .salir {
+	background: url("../imagenes/menu/salir.png") no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_historico_control_fotos {
+	background: url("../imagenes/menu/historicoFotos.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+/**************************** CATALOGACION ************************************/
+.menuP .menu_marcas {
+	background: url("../imagenes/menu/marcas.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_recuperaciones {
+	background: url("../imagenes/menu/recuperaciones.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_aseguradoras {
+	background: url("../imagenes/menu/aseguradoras.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_colores {
+	background: url("../imagenes/menu/colores.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_veh_terc {
+	background: url("../imagenes/menu/marcas.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_dependencias {
+	background: url("../imagenes/mapa/iconos/punto_ministero.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_tramo_carretero{
+	background: url("../imagenes/catalogacion/carretera.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_faq{
+	background: url("../imagenes/catalogacion/libro.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_coberturas{
+	background: url("../imagenes/menu/Aplicacioncontrolcalidad.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_clase_vehiculo{
+	background: url("../imagenes/catalogacion/claseVehiculo.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_credenciales{
+	background: url("../imagenes/catalogacion/credenciales.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_accidentes{
+	background: url("../imagenes/catalogacion/accidentes.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_rc_bienes{
+	background: url("../imagenes/funciones/agregar.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_grua{
+	background: url("../imagenes/catalogacion/grua.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_hospitales{
+	background: url("../imagenes/mapa/iconos/punto_hospital.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_marca_terc{
+	background: url("../imagenes/menu/aseguradoras.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_partes_auto{
+	background: url("../imagenes/catalogacion/partesAuto.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_mp{
+	background: url("../imagenes/catalogacion/mp.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_formato_catalogo{
+	background: url("../imagenes/menu/AVQreporteProveedor.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_entidades{
+	background: url("../imagenes/catalogacion/entidad.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.menuP .menu_municipios{
+	background: url("../imagenes/catalogacion/municipios.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+/**************************** ICONOS DE BACKGROUND DEL COMPONENTE DE MAPAS ****************************/
+.check_si {
+	background: url("../imagenes/menu/check_si.png") no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.check_no {
+	background: url("../imagenes/menu/check_no.png") no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+/**************************** ICONOS DE BACKGROUND DEL COMPONENTE AVQ HERRAMIENTAS ****************************/
+.herramienta_bitacora {
+	background: url("../imagenes/acciones/icono16BitacoraProv.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_editar_libre {
+	background: url("../imagenes/acciones/icono16EditarLibre.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramientas_alerta {
+	color: #F00 !important;
+	background-image: url("../imagenes/acciones/icono16Mensaje.png") no-repeat
+		!important;
+}
+
+.herramientas_alerta button{
+	color: #F00 !important;
+}
+
+.herramienta_editar_restringido {
+	background: url("../imagenes/acciones/icono16EditarRestringido.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_asignar_proveedor {
+	background: url("../imagenes/acciones/icono16AsignarProveedor.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_re_asignar_proveedor {
+	background: url("../imagenes/acciones/icono16ReasignarProveedor.png")
+		no-repeat !important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_arribar {
+	background: url("../imagenes/acciones/icono16Arribar.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_termino {
+	background: url("../imagenes/acciones/icono16Termino.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_cerrar {
+	background: url("../imagenes/acciones/icono16Cerrar.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.herramienta_cancelar {
+	background: url("../imagenes/acciones/icono16Cancelar.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+.herramienta_noProcede {
+	background: url("../imagenes/acciones/icono16NoProcede.png") no-repeat
+		!important;
+ 	width: 16px;
+	height: 16px; 
+}
+.herramienta_movimientos {
+	background: url("../imagenes/acciones/icono16Permiso.png") no-repeat
+		!important;
+	width: 16px;
+	height: 16px;
+}
+
+.texto_naranja {
+	color: #FF8C00;
+	font-weight: bold;
+}
+
+.texto_rojo {
+	color: #B70449;
+	font-weight: bold;
+}
+
+.texto_verde {
+	color: #249C62;
+	font-weight: bold;
+}
+
+/**************************** DISE? PARA LOS PANELES EN MONITOR ****************************/
+
+.numero_blanco{
+	color: white;
+	font-size: xx-large;
+}
+
+
+.texto_blanco{
+	color: white;
+	font-size: small;
+}
+
+.texto_blanco_sm{
+	color: white;
+	font-size: xx-small;
+}
+
+.panel_morado{
+	width:	23%;
+	padding-top:	10px;
+	padding-left: 	10px;
+	padding-bottom:	10px;
+	margin: 	5px;
+	text-align: right;
+	float:	left;
+	background-color: #AC31AA;
+}
+
+.panel_contador_v{
+	width:	15%;
+	padding-top:	8x;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	5px;
+	text-align: right;
+	float:	left;
+	background-color: #008C99;
+}
+
+.panel_verde{
+	width:	23%;
+	padding-top:	10px;
+	padding-left: 	10px;
+	padding-bottom:	10px;
+	margin: 	5px;
+	text-align: right;
+	float:	left;
+	background-color: #008C99;
+}
+
+
+
+
+/************************* DISENIO PARA TIEMPOS *******/
+.panel_verde_tiempos{
+	width:	19%;
+	padding-top:	8px;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	2px;
+	text-align: right;
+	float:	left;
+	background-color: #008C99;
+}
+
+.panel_verde_small{
+	width:	15%;
+	padding-top:	8px;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	2px;
+	text-align: right;
+	float:	left;
+	background-color: #008C99;
+}
+.panel_morado_tiempos{
+	width:	19%;
+	padding-top:	8px;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	2px;
+	text-align: right;
+	float:	left;
+	background-color: #AC31AA;
+}
+
+.panel_verde_tiempos_act{
+	width:	15%;
+	padding-top:	8px;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	2px;
+	text-align: right;
+	float:	left;
+	background-color: #939BA1;
+}
+
+.numero_blanco_tiempos{
+	color: white;
+	font-size: small;
+}
+
+.forma_completa_tiempos {
+	width: 98%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+/************************* DISENIO PARA CONTADORES EE *******/
+.panel_morado_contador{
+	width:	15%;
+	padding-top:	8x;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	5px;
+	text-align: right;
+	float:	left;
+	background-color: #AC31AA;
+}
+
+/************************* DISENIO PARA TIEMPOS *******/
+.panel_gris_tiempos{
+	width:	15%;
+	padding-top:	8px;
+	padding-left: 	8px;
+	padding-bottom:	8px;
+	margin: 	2px;
+	text-align: right;
+	float:	left;
+	background-color: #939BA1;
+}
+
+.numero_blanco_tiempos{
+	color: white;
+	font-size: small;
+}
+
+.forma_completa_tiempos {
+	width: 98%;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+/*********COMPONENTES DE PRIMEFACES MODIFICADOS****************/
+.ui-clock{
+	padding: 4px 5px;
+	border-color: white;
+	background-color: white;
+}
+.espacio_reloj{
+	margin:10px;
+}
+.ui-clock.ui-widget {
+	
+	font-size: 15px;
+}
+
+.ui-menubar{
+	height: auto;
+    padding: 20px;
+    background: #91278F !important;
+    border-radius: 0px;
+	
+}
+
+.ui-menu-child, .ui-menu,.ui-menuitem-text, .ui-menuitem-link{
+    background: #d68ecc ;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px;
+    font-size: 16px; 
+}
+
+
+.menuP .ui-menu-child,.menuP .ui-menu,.menuP .ui-menuitem-text,.menuP .ui-menuitem-link{
+    background: #91278F !important;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px;
+    font-size: 13px;
+   
+}
+
+/*******************radio button*********************/
+.ui-selectoneradio label{
+	margin-right:40px;
+}
+
+.subMenu .ui-menuitem-text, .subMenu .ui-menuitem-link{
+	background: #ffffff !important;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 0px;
+    font-size: 13px;
+}
+
+.ui-widget-content a{
+	color: white;
+}
+
+
+.ui-menu .ui-menu-parent .ui-menu-child {
+    width: 290px;
+    height: auto !important ;
+    overflow: unset !important;
+    border-color: transparent;
+}
+
+/***********PANELES***********/
+.ui-panel {
+    padding: 0.2em;
+    border-radius: unset;
+    border-color: #ededed;
+    margin: 3px;
+    box-shadow: 1px 1px 1px #c0bbbb;
+    }
+    
+.ui-panel .ui-panel-titlebar {
+    padding: 1em 1em 1em;
+    border-radius: unset;
+    font-size: 16px;
+    font-family: 'Roboto';
+    font-weight: 100;
+
+}
+
+.panelesM .ui-widget-header{
+    background: #91278F;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0);
+    color: white;
+}
+
+.panelesV .ui-widget-header{
+    background: #008C99;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0);
+    color: white;
+}
+
+
+.paneles .ui-widget-contet{
+	color: black;
+	font-size: 15px;
+}
+
+
+.ui-button {
+	padding: 2px;
+	border-radius: 0px;
+    color: white !important;
+    text-shadow: none !important;
+    background: purple !important;
+    font-weight: bold !important;
+    font-size: 12px !important;
+    border: 0px !important;
+}
+
+.ui-dialog .ui-dialog-titlebar{
+    border-radius: 0px;
+    background: purple;
+    color: white;
+    text-shadow: none;
+    padding: 15px !important;
+    font-size: 14px;
+    }
+ /************Diseño para tabla***********************/
+ 
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer{
+	background: #008c99;
+    color: white;
+    text-shadow: none;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 0px; 
+ }
+ 
+ .ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+    padding: 2px;
+    background: #2CA8B5;
+    text-shadow: none;
+    color: white;
+    font-size: 12px;
+    border: 0px;
+}
+
+
+
+.ui-datatable .ui-status-default {
+    cursor: pointer !important;
+    background: #008c99 !important;
+    color: white !important;
+    text-shadow: none !important;
+}
+
+.pieBlanco {
+	background: white;
+	border: none;
+	color: black;
+	
+}
+
+
+/************Alinado Radiobutton***********************/
+
+.ui-radiobutton {
+    margin: 3px 0;
+    width: 16px;
+    line-height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/************acordion***********************/
+ .ui-accordion .ui-accordion-header{
+	color: white;
+    text-shadow: none;
+    background:#d68ecc;
+    box-shadow: NONE;
+    border: purple;
+    margin: 4px;
+}
+
+.ui-menuitem .ui-widget .ui-corner-all .ui-status-hover{
+	background: #d68ecc !important;
+	color: white !important;
+}
+
+.ui-menuitem-active{
+	box-shadow: #000000;
+}
+
+.menuAlarma .ui-menu .ui-menu-list .ui-menuitem, .menuAlarma .ui-menu, .menuAlarma .ui-menuitem, .menuAlarma .ui-menu-child, .menuAlarma  .ui-menu, .menuAlarma .ui-menuitem-text, .menuAlarma .ui-menuitem-link{
+	background:#d68ecc !important;
+}
+
+.menuAlarma .ui-state-hover{
+	background: blue !important;
+	box-shadow: 4px 4px 8px #da61da !important;
+}
+
+.menuP .ui-state-hover{
+	    box-shadow: 4px 4px 8px #da61da !important;
+}
+
+
+
+.ui-state-hover, .ui-widget-content .ui-state-hover{
+	
+	box-shadow: 4px 4px 8px #800080 ;
+	background: 80008000 !important;
+	border-radius: 0px;
+
+}
+
+.ui-menuitem.ui-widget.ui-corner-all.ui-state-hover{
+	background: 80008000 !important;
+}
+.ui-inputfield.ui-state-focus, .ui-widget-content.ui-inputfield.ui-state-focus{
+	
+	box-shadow: 0px 0px 5px 2px #be73b7 !important;
+
+}
+
+.encabezado-inferior a:hover{
+	color:purple !important;
+	text-decoration: underline;
+}
+
+.encabezado-inferior a:visited{
+	color:purple;
+}
+
+/************iframe***********************/
+.iframe {
+	width: "100%";
+	height: "750px";
+	align:"middle"; 
+	border: "0px";
+}
+
+.li .ui-menuitem .ui-widget .ui-corner-all{
+	background: blue !important;
+}
+
+
+.panelSinBorde .ui-panelgrid .ui-panelgrid-cell,  .panelSinBorde .ui-panelgrid,.panelSinBorde .ui-panelgrid-cell,.panelSinBorde .ui-widget-content {
+	border: NONE !important;
+}
+.formato_titulo{
+	color: #008C99;
+	font-size: medium !important;
+	font-weight:100 !important; 
+}
+
+.formato_coment{
+	color: #008C99;
+	font-size: small !important;
+	font-weight:100 !important; 
+}
+
+.formato_usuario{
+	color: #008C99;
+	font-size: medium !important; 
+	font-weight: bold !important;
+}
+
+.formato_titulo2{
+	color: #008C99;
+	font-size: medium !important; 
+	font-weight: bold !important;
+}
+
+.formato_titulo3{
+	color: #008C99;
+	font-size: large !important; 
+	font-weight: bold !important;
+}
+
+
+.bMorado {
+	background: #AC31AA !important;
+}
+
+.bVerde {
+	background: #008C99 !important;
+}
+
+.completed {
+	background:  #008C99 !important;
+
+	}

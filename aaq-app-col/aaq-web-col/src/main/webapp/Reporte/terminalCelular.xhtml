@@ -1,0 +1,59 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanReporteSessionExterna}" />
+	<ui:define name="tituloPagina">
+		<h:outputText value="AQ Reportes - Sesiones de Celular" />
+		<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Reportes</a></li>
+		<li><h:outputText value="Sesiones de Celular" /></li>
+	</ui:define>
+
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanReporteSessionExterna}" />
+
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:param name="mostrarBotonReporte" value="true" />
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="l_estado" value="Estado:" />
+				<h:selectOneMenu id="l_estado" value="#{componente.idEstado}">
+					<f:selectItem noSelectionOption="true" itemLabel="-- Todos --" />
+					<f:selectItems value="#{componente.listaDeEstados}" var="estado"
+						itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+					<p:ajax event="valueChange" update="l_base,:forma_tabla:tabla"
+						listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="l_base" value="Base:" />
+				<h:selectOneMenu id="l_base" value="#{componente.idBase}">
+					<f:selectItem noSelectionOption="true" itemLabel="-- Todas --" />
+					<f:selectItems value="#{componente.listaDeBases}" var="base"
+						itemValue="#{base.id}" itemLabel="#{base.descripcion}" />
+					<p:ajax event="valueChange" update=":forma_tabla:tabla"
+						listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+
+			</ui:define>
+
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanReporteSessionExterna}" />
+			<ui:param name="descripcion" value="Sesiones de Celular" />
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanReporteSessionExterna}" />
+			<ui:param name="listaObjetos"
+				value="#{beanReporteSessionExterna.listado}" />
+			<ui:param name="listaColumnas" value="#{sessionExterna.columnas}" />
+			<ui:param name="listaDe" value="Sesiones de Celular" />
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

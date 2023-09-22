@@ -1,0 +1,194 @@
+
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/validador-catalogo.js"></script>
+		
+		
+	<p:dialog closeOnEscape="true" closable="true" modal="true"
+		widgetVar="panel" header="ABM del Registro" minWidth="600"   onShow="mostrarTipoAV();">
+
+		<h:form id="formaPanel" >
+			<p:outputPanel id="contenidoPanel" >
+				<p:panel rendered="#{componente.objetoABM != null}" styleClass="panelesV">
+				
+				<p:outputLabel value="Ubicación"
+							rendered="#{mostrarTituloTerminal}" styleClass="formato_titulo2" style="font-size:24px !important;" />
+					<h:panelGrid columns="2" columnClasses="cuarto,tres_cuartos"
+						styleClass="tabla_captura" >
+
+						<p:outputLabel for="estado" value="Departamento"
+							rendered="#{mostrarFiltroComboEstado and componente.permisoSIICAGlobalEstados}" />
+						<h:selectOneMenu id="estado"
+							value="#{componente.objetoABM._idEstado}"
+							rendered="#{mostrarFiltroComboEstado and componente.permisoSIICAGlobalEstados}"
+							title="Lista de departamentos">
+							<f:selectItems value="#{componente.listaDeEstados}" var="estado"
+								itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+							<p:ajax event="valueChange"
+								listener="#{componente.actualizarListado}"
+								update=":forma_tabla:tabla, base" />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="base" value="Base"
+							rendered="#{mostrarFiltroComboBase and componente.permisoSIICAGlobalBases}" />
+						<h:selectOneMenu
+							rendered="#{mostrarFiltroComboBase and componente.permisoSIICAGlobalBases}"
+							id="base" value="#{componente.objetoABM._idBase}"
+							title="Lista de Bases">
+							<f:selectItems
+								value="#{componente.getListaDeBases(componente.objetoABM._idEstado)}"
+								var="base" itemValue="#{base.id}"
+								itemLabel="#{base.descripcion}" />
+								
+							<p:ajax event="valueChange" 
+								listener="#{componente.actualizarListado}"
+								update=":forma_tabla:tabla, oficina" />
+								
+						</h:selectOneMenu>
+						
+						<p:outputLabel for="cerca" value="Geocerca"
+							rendered="#{mostrarFiltroComboGeocerca and componente.permisoSIICAGlobalBases}" />
+						<h:selectOneMenu
+							rendered="#{mostrarFiltroComboGeocerca and componente.permisoSIICAGlobalBases}"
+							id="cerca" value="#{componente.objetoABM._idGeocerca}"
+							title="Lista de Geocercas">
+							<f:selectItems
+								value="#{componente.getListaDeGeocercaByEstado(componente.objetoABM._idEstado)}"
+								var="cerca" itemValue="#{cerca.id}"
+								itemLabel="#{cerca.geocerca}" />
+						</h:selectOneMenu>
+						
+						<p:outputLabel for="oficina" value="Oficina Reporta" rendered="#{mostrarFiltroComboOficina}"/>
+						<h:selectOneMenu
+							rendered="#{mostrarFiltroComboOficina}"
+							id="oficina" value = "#{componente.objetoABM._idOficina}"
+							title="Lista de Oficinas">
+							<f:selectItems
+								value="#{componente.obtenerListaDeOficinaParaEstado(componente.objetoABM._idEstado)}"
+								var="oficina" itemValue="#{oficina.id}"
+								itemLabel="#{oficina.descripcion}" />
+						</h:selectOneMenu>
+						
+						<ui:insert name="contenidoAdicional" />
+						
+						
+						
+					</h:panelGrid>
+					<h:panelGrid columns="1" columnClasses="completo"
+						styleClass="tabla_captura" >
+						<ui:insert name="contenidoAdicionalHorarios" />
+					</h:panelGrid>
+
+					<ui:insert name="contenidoAdicionalExtendido" />
+					
+				</p:panel>
+
+				<h:panelGrid columns="2" columnClasses="mitad,mitad"
+					styleClass="tabla_captura">
+					<p:commandButton value="Aceptar" rendered="#{mostrarBotonAceptar}"
+						actionListener="#{componente.doAccionRegistroGuardar}"
+						update=":forma_tabla:tabla" oncomplete="PF('panel').hide();" />
+					<p:commandButton value="Cerrar" rendered="#{mostrarBotonCerrar}"
+						actionListener="#{componente.doAccionRegistroCerrar}"
+						update=":forma_tabla:tabla" oncomplete="PF('panel').hide();" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+		
+		
+	</p:dialog>
+	
+	<p:dialog closeOnEscape="true" closable="true" modal="true"
+		widgetVar="panelhora" header="ABM del Registro" minWidth="600" onShow="mostrarTipoAV();">
+		
+		<h:form id="formaPanel2">
+			<p:outputPanel id="contenidoPanel2">
+				<p:panel rendered="#{componente.objetoABM != null}" styleClass="panelesV">
+				
+					<h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto"
+						styleClass="tabla_captura" >
+						<ui:insert name="contenidoAdicionalHorarios2" />
+					</h:panelGrid>
+					
+					
+				</p:panel>
+
+				<h:panelGrid columns="2" columnClasses="mitad,mitad"
+					styleClass="tabla_captura">
+					<p:commandButton value="Aceptar" rendered="#{mostrarBotonAceptar}"
+						actionListener="#{componente.doAccionRegistroGuardarHora}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelhora').hide();" />
+					<p:commandButton value="Cerrar" rendered="#{mostrarBotonCerrar}"
+						actionListener="#{componente.doAccionRegistroCerrar}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelhora').hide();" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+	
+	<p:dialog closeOnEscape="true" closable="true" modal="true"
+		widgetVar="panelhora2" header="ABM del Registro" minWidth="600" onShow="mostrarTipoAV();">
+		
+		<h:form id="formaPanel3">
+			<p:outputPanel id="contenidoPanel3">
+				<p:panel rendered="#{componente.objetoABM != null}" styleClass="panelesV">
+				
+					<h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto"
+						styleClass="tabla_captura" >
+						<ui:insert name="contenidoAdicional3" />
+					</h:panelGrid>
+					
+					
+				</p:panel>
+
+				<h:panelGrid columns="2" columnClasses="mitad,mitad"
+					styleClass="tabla_captura">
+					<p:commandButton value="Aceptar" rendered="#{mostrarBotonAceptar}"
+						actionListener="#{componente.doAccionRegistroGuardarHora}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelhora').hide();" />
+					<p:commandButton value="Cerrar" rendered="#{mostrarBotonCerrar}"
+						actionListener="#{componente.doAccionRegistroCerrar}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelhora').hide();" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+	
+
+	<p:dialog closeOnEscape="true" closable="true" modal="true"
+		widgetVar="panelAvisos" header="ABM del Registro" minWidth="600" onShow="mostrarTipoAV();">
+		
+		<h:form id="formaPanel4">
+			<p:outputPanel id="contenidoPanel4">
+				<p:panel rendered="#{componente.objetoABM != null}" styleClass="panelesV">
+				
+					<h:panelGrid columns="3" columnClasses="tercio,tercio,tercio"
+						styleClass="tabla_captura" >
+						<ui:insert name="contenidoAdicionalAvisos4" />
+					</h:panelGrid>
+				</p:panel>
+
+				<h:panelGrid columns="2" columnClasses="mitad,mitad"
+					styleClass="tabla_captura">
+					<p:commandButton value="Aceptar" rendered="#{mostrarBotonAceptar}"
+						actionListener="#{componente.doAccionRegistroEditarAvisos}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelhora').hide();" ajax="false" />
+					<p:commandButton value="Cerrar" rendered="#{mostrarBotonCerrar}"
+						actionListener="#{componente.doAccionRegistroCerrar}"
+						update=":forma_tabla:tabla" oncomplete="PF('panelAvisos').hide();" />
+
+				</h:panelGrid>
+			</p:outputPanel>
+		</h:form>
+	</p:dialog>
+	
+</ui:component>

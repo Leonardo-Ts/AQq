@@ -1,0 +1,45 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<ui:param name="componente" value="#{beanAplicacionFirma}" />
+
+<ui:composition>
+	<div class="forma_completa">
+		<p:panel header="Acceso Denegado">
+			<h:panelGrid columns="1" styleClass="tabla_captura">
+
+				<h:outputText value="El acceso al módulo" />
+				<h:outputText value="#{beanAplicacionFirma.nombrePagina}"
+					style="font-weight: bold" />
+
+
+				<h:outputText
+					value="ha sido denegado debido a que el perfil de su usuario no cuenta con el o los permisos necesarios para acceder al mismo." />
+
+				<h:outputText
+					value="Por favor, envíe un correo electrónico a &#160;" />
+				<h:outputLink
+					value="mailto:#{beanAplicacionFirma.SIICAResponsableEmail}">
+					<h:outputText value="#{beanAplicacionFirma.SIICAResponsableNombre}" />
+				</h:outputLink>
+				<h:outputText
+					value="o a su coordinador de área para solicitar el acceso a este módulo." />
+
+				<a href="sistema.siica"> <h:graphicImage style="float: left"
+						url="/diseno/imagenes/accessdenied.jpg" />
+				</a>
+
+			</h:panelGrid>
+		</p:panel>
+
+	</div>
+
+</ui:composition>
+
+</html>

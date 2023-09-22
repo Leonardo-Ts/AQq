@@ -1,0 +1,516 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionCobroWeb}" />
+			<ui:param name="clase_pagina" value="aplicacion" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Generar Link de Pago
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li><a href="alarma.siica">Alarma</a></li>
+		<li>Link De Pago</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/validador-cobro.js"></script>
+
+		<script>
+			function disableF5(e) {
+				if (e.which == 116)
+					e.preventDefault();
+			};
+			$(document).bind("keydown", disableF5);
+		</script>
+
+		<h:form id="formaCobro"
+			rendered="#{empty beanAplicacionCobroWeb.actualTransaccion}">
+			<div class="forma_completa">
+
+
+				<p:panel header="Paso 1: Datos Generales" styleClass="panelesV">
+					<h:panelGrid columns="8" styleClass="tabla_captura">
+
+
+						<p:outputLabel for="fechahr" value="Fecha Hora:" />
+						<h:outputText id="fechahr"
+							value="#{beanAplicacionCobroWeb.fechaHoraActual}" />
+
+
+						<p:outputLabel for="usuario" value="Usuario:" />
+						<h:outputText id="usuario"
+							value="#{beanAplicacionCobroWeb.usuarioActual.nombre}" />
+
+
+						<p:outputLabel for="ajustador" value="Perito-Abogado:" />
+						<h:outputText id="ajustador"
+							value="#{beanAplicacionCobroWeb.actualTerminal.nombre}" />
+
+						<p:outputLabel for="reporte" value="Reporte:" />
+						<h:outputText id="reporte"
+							value="#{beanAplicacionCobroWeb.actualTerminal.reporteAtendiendo}" />
+
+
+
+						<p:outputLabel for="clave_oficina" value="Clave Oficina:" />
+						<p:inputText onkeyup="permitirSoloNumeros(this);"
+							id="clave_oficina"
+							value="#{beanAplicacionCobroWeb.txtClaveOficina}" />
+
+						<p:outputLabel for="tipocobro" value="Tipo de Cobro:" />
+						<h:selectOneMenu id="tipocobro" rendered="#{beanAplicacionCobroWeb.estatus == '0'}"
+							value="#{beanAplicacionCobroWeb.txtTipoDePagoSeleccionado}"
+							title="Tipo de Cobro">
+							<f:selectItem itemLabel="Pago Recuperación" itemValue="P.R." />
+<!-- 							<f:selectItem itemLabel="Pago Deducible" itemValue="P.D." /> -->
+							<p:ajax event="valueChange" partialSubmit="true" process="@this" 
+								immediate="#{beanAplicacionCobroWeb.doAccionPonerMontoPorTipoDePago}"
+								update="panel_monto_cobrar,cobertura_afectada" />
+						</h:selectOneMenu>
+						
+						<h:selectOneMenu id="tipocobroDeducible" rendered="#{beanAplicacionCobroWeb.estatus == '1'}"
+							value="#{beanAplicacionCobroWeb.txtTipoDePagoSeleccionado}"
+							title="Tipo de Cobro">
+							<f:selectItem itemLabel="Pago Deducible" itemValue="P.D." />
+							<p:ajax event="valueChange" partialSubmit="true" process="@this" 
+								immediate="#{beanAplicacionCobroWeb.doAccionPonerMontoPorTipoDePago}"
+								update="panel_monto_cobrar,cobertura_afectada" />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="cobertura_afectada"
+							value="Cobertura Afectada:" />
+						<h:selectOneMenu id="cobertura_afectada"
+							value="#{beanAplicacionCobroWeb.txtCoberturaAfectada}">
+							<f:selectItems
+								value="#{beanAplicacionCobroWeb.listaCoberturaAfectada}" />
+						</h:selectOneMenu>
+
+						
+						<p:outputLabel for="monto" value="Monto a Cobrar:" />
+						<p:outputPanel id="panel_monto_cobrar">
+						
+						<p:inputText id="monto" onkeyup="permitirSoloNumeros(this);"
+								title="Solo números y punto decimal"
+								style="width: 80px" value="#{beanAplicacionCobroWeb.txtMonto}"
+								maxlength="8" />
+
+<!-- 							<p:inputText id="monto" onkeyup="permitirSoloNumeros(this);" -->
+<!-- 								rendered="#{beanAplicacionCobroWeb.esPaginaPR}" -->
+<!-- 								title="Solo números y punto decimal" -->
+<!-- 								style="width: 80px" value="#{beanAplicacionCobroWeb.txtMonto}" -->
+<!-- 								maxlength="8" /> -->
+								
+
+<!-- 							<h:inputText id="monto_tx" onkeyup="permitirSoloNumeros(this);" -->
+<!-- 								rendered="#{beanAplicacionCobroWeb.esPaginaPP or beanAplicacionCobroWeb.esPaginaPD}" -->
+<!-- 								title="Solo números y punto decimal" -->
+<!-- 								style="width: 80px" value="#{beanAplicacionCobroWeb.txtMonto}"  -->
+<!-- 								maxlength="8"  -->
+<!-- 								/> -->
+								
+<!-- 							<p:tooltip for="monto_tx" -->
+<!-- 								rendered="#{beanAplicacionCobroWeb.esPaginaPP or  beanAplicacionCobroWeb.esPaginaPD}"> -->
+<!-- 								<h:outputText -->
+<!-- 									value="Asegurado: #{beanAplicacionCobroWeb.actualPoliza.nombreAseg}" /> -->
+<!-- 								<br /> -->
+<!-- 								<h:outputText id="pp2" -->
+<!-- 									value="Póliza:  #{beanAplicacionCobroWeb.actualPoliza.numPoliza}" /> -->
+<!-- 								<br /> -->
+<!-- 								</p:tooltip> -->
+						</p:outputPanel>
+						
+						
+				<!-- 						Checkbox para ¿Abogado realiza recuperación?.  -->
+					<p:outputLabel for="abogado" value="¿Abogado realiza recuperación?"/>
+					<p:selectBooleanButton id="abogado" onLabel="Si" offLabel="No" 
+							 value="#{beanAplicacionCobroWeb.abogado}"
+							 widgetVar="abogado" >
+							 <p:ajax update="campoAbogado" />
+					</p:selectBooleanButton>
+						
+					<p:panelGrid id="test">
+						<p:inputText 	id="campoAbogado" 
+										onkeyup="permitirSoloNumeros(this);"
+										disabled="#{beanAplicacionCobroWeb.abogado == 'No'}"
+										value="#{beanAplicacionCobroWeb.txtClaveAbogado}"
+										widgetVar="campoAbogado" 
+										placeholder="Clave de abogado"
+										maxlength="5" 
+										readonly="#{beanAplicacionCobroWeb.abogado == 'No'}"
+										immediate="true"/>
+					</p:panelGrid>
+						
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel header="Paso 2: Generar Link de Pago" styleClass="panelesV">
+
+					<h:panelGrid columns="6" styleClass="tabla_captura"
+						columnClasses="sexto,sexto,sexto,sexto,sexto,sexto">
+						<p:outputLabel for="correo" value="Correo Electrónico" />
+						<p:inputText id="correo" title="Correo Electrónico"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtCorreo}" />
+
+
+						<p:outputLabel for="celular" value="o Número Telefónico: " />
+						<p:inputText id="celular" title="Número Telefónico"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtCelular}" />
+							
+						<p:outputLabel for="moneda" value="Moneda:" />	
+						<h:selectOneMenu id="moneda" value="#{beanAplicacionCobroWeb.txtMoneda}"
+							title="Tipo de Moneda">
+							<f:selectItem itemLabel="PESOS" itemValue="MXN" />
+							<f:selectItem itemLabel="DOLARES" itemValue="DLS" />
+						</h:selectOneMenu>	
+							
+						<p:outputLabel for="deducible" value="Deducible:"/>
+						<p:selectBooleanButton id="deducible" offLabel="#{beanAplicacionCobroWeb.estatus == '0' ? 'No' : 'Si'}" disabled="true"
+								 value="#{beanAplicacionCobroWeb.deducible}"
+								 widgetVar="deducible" >
+						</p:selectBooleanButton>	
+							
+						<p:outputLabel for="siniestro" value="Siniestro:" />
+						<p:inputText id="siniestro" title="Siniestro (Opcional)" placeholder="Opcional"  
+							style="width: 90%;" onkeyup="permitirSoloNumeros(this);"
+							value="#{beanAplicacionCobroWeb.txtSiniestro}" />
+							
+						<p:outputLabel for="razonSocial" value="Nombre de afectado (a) o Razón Social:" />
+						<p:inputText id="razonSocial" title=""
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtRazonSocial}" />	
+							
+						<p:outputLabel for="calle" value="Calle:" />
+						<p:inputText id="calle" title="Nombre de Calle"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtCalle}" />
+							
+						<p:outputLabel for="noExt" value="No. Exterior:" />
+						<p:inputText id="noExt" title=""
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtNoExt}" />
+						
+						<p:outputLabel for="noInt" value="No. Interior:" />
+						<p:inputText id="noInt" title=""
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtNoInt}" />
+							
+						<p:outputLabel for="colonia" value="Colonia:" />
+						<p:inputText id="colonia" title="Nombre Colonia"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtColonia}" />
+							
+						<p:outputLabel for="delPob" value="Población:" />
+						<p:inputText id="delPob" title="Delegación o Municipio"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtDelPob}" />	
+							
+						<p:outputLabel for="cp" value="Código Postal:" />
+						<p:inputText id="cp" title="Número de Código Postal"
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtCp}" />	
+							
+						<p:outputLabel for="estado" value="Estado:" />
+						<h:selectOneMenu id="estado" value="#{beanAplicacionCobroWeb.txtEstado}"
+							title="Estado:">
+							<f:selectItem noSelectionOption="false" itemLabel="-- Seleccionar --" />
+							<f:selectItems value="#{beanAplicacionCobroWeb.listaDeEstados}"
+								var="estado" itemValue="#{estado.nombre}"
+								itemLabel="#{estado.nombre}" />
+						</h:selectOneMenu>
+							
+						<p:outputLabel for="domRef" value="Lugar de referencia del siniestro:" />
+						<p:inputText id="domRef" title=""
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtDomicilioRef}" />					
+							
+						<p:outputLabel for="rfc" value="RFC del Afectado (a) o Razón Social:" />
+						<p:inputText id="rfc" title=""
+							style="width: 90%;"
+							value="#{beanAplicacionCobroWeb.txtRfc}" />	
+						
+						<p:outputLabel for="factura" value="¿Requiere factura?"/>
+						<p:selectBooleanButton id="factura" onLabel="Si" offLabel="No" 
+								 value="#{beanAplicacionCobroWeb.factura}"
+								 widgetVar="factura" >
+						</p:selectBooleanButton>				
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" styleClass="tabla_captura"
+						columnClasses="mitad">		
+						<p:commandButton value="Confirmar Datos"
+							oncomplete="PF('panelCobro').show()"
+							update=":formaPanelCobro:contenidoPanelCobro"
+							actionListener="#{beanAplicacionCobroWeb.doAccionPaginaConfirmar}" />
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+
+
+		<p:dialog closeOnEscape="true" closable="true" widgetVar="panelCobro"
+			header="Generar Link De Pago" modal="true">
+
+			<h:form id="formaPanelCobro">
+				<p:outputPanel id="contenidoPanelCobro">
+					<p:panel
+						rendered="#{(beanAplicacionCobroWeb.actualTransaccion == null) and (beanAplicacionCobroWeb.actualTerminal != null)}"
+						styleClass="panelesV">
+
+						<h:panelGrid columns="4" styleClass="tabla_captura"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+							<p:outputLabel for="conffecha" value="Fecha:" />
+							<h:outputText id="conffecha"
+								value="#{beanAplicacionCobroWeb.fechaHoraActual}" />
+
+							<p:outputLabel for="confusr" value="Usuario:" />
+							<h:outputText id="confusr"
+								value="#{beanAplicacionCobroWeb.usuarioActual.nombre}" />
+
+							<p:outputLabel for="confajustador" value="Perito-Abogado:" />
+							<h:outputText id="confajustador"
+								value="#{beanAplicacionCobroWeb.actualTerminal.nombre}" />
+
+							<p:outputLabel for="confreporte" value="Reporte:" />
+							<h:outputText id="confreporte"
+								value="#{beanAplicacionCobroWeb.actualTerminal.reporteAtendiendo}" />
+
+							<p:outputLabel for="confoffice" value="Clave de Oficina:" />
+							<h:outputText id="confoffice"
+								value="#{beanAplicacionCobroWeb.txtClaveOficina}" />
+
+							<p:outputLabel for="confcob" value="Cobertura Afectada:" />
+							<h:outputText id="confcob"
+								value="#{beanAplicacionCobroWeb.txtCoberturaAfectada}" />
+
+
+							<p:outputLabel for="conftipocobro" value="Tipo de Cobro:" />
+							<h:outputText id="conftipocobro"
+								value="#{beanAplicacionCobroWeb.txtTipoDePagoSeleccionado}" />
+
+							<p:outputLabel for="confmontoacobrar" value="Monto:" />
+							<h:outputText id="confmontoacobrar" title="Monto a cobrar"
+								styleClass="scroll_back"
+								value="$#{beanAplicacionCobroWeb.txtMonto}" />
+							
+							<p:outputLabel for="confmontoacobrarl" value="Monto Con Letra :" />
+							<h:outputText id="confmontoacobrarl" title="Monto a cobrar"
+								styleClass="scroll_back"
+								value="#{beanAplicacionCobroWeb.txtNumeroLetra}" />
+								
+							<p:outputLabel for="confTipoMoneda" value="Tipo de Moneda:" />	
+							<h:outputText id="confTipoMoneda" value="#{beanAplicacionCobroWeb.txtMoneda}" />
+
+							<p:outputLabel for="confCorreo"
+								value="Correo Electrónico:" />
+							<h:outputText id="confCorreo"
+								title="Correo Electrónico"
+								value="#{beanAplicacionCobroWeb.txtCorreo}" />
+
+							<p:outputLabel for="confCelular" value="Número Telefónico:" />
+							<h:outputText id="confCelular"
+								value="#{beanAplicacionCobroWeb.txtCelular}" />
+
+							<p:outputLabel for="confclaveAbogado"
+								value="Clave Abogado:" />
+							<h:outputText id="confclaveAbogado"
+								title="Clave Abogado"
+								value="#{beanAplicacionCobroWeb.txtClaveAbogado}" />
+								
+							<p:outputLabel for="confSiniestro"
+								value="Siniesto" />
+							<h:outputText id="confSiniestro"
+								title="Siniestro:"
+								value="#{beanAplicacionCobroWeb.txtSiniestro}" />
+								
+							<p:outputLabel for="confRazonSocial"
+								value="Nombre de afectado (a) o Razón Social:" />
+							<h:outputText id="confRazonSocial"
+								title="Nombre de asegurado (a) o Razón Social:"
+								value="#{beanAplicacionCobroWeb.txtRazonSocial}" />	
+								
+							<p:outputLabel for="confCalle"
+								value="Calle:" />
+							<h:outputText id="confCalle"
+								title="Calle:"
+								value="#{beanAplicacionCobroWeb.txtCalle}" />	
+								
+							<p:outputLabel for="confNoExt"
+								value="No. Exterior:" />
+							<h:outputText id="confNoExt"
+								title="No. Exterior:"
+								value="#{beanAplicacionCobroWeb.txtNoExt}" />	
+								
+							<p:outputLabel for="confNoInt"
+								value="No. Interior:" />
+							<h:outputText id="confNoInt"
+								title="No. Interior:"
+								value="#{beanAplicacionCobroWeb.txtNoInt}" />	
+								
+							<p:outputLabel for="confColonia"
+								value="Colonia:" />
+							<h:outputText id="confColonia"
+								title="Colonia:"
+								value="#{beanAplicacionCobroWeb.txtColonia}" />	
+								
+							<p:outputLabel for="confDelPob"
+								value="Población:" />
+							<h:outputText id="confDelPob"
+								title="Población:"
+								value="#{beanAplicacionCobroWeb.txtDelPob}" />		
+								
+							<p:outputLabel for="confCp"
+								value="Código Postal:" />
+							<h:outputText id="confCp"
+								title="Código Postal:"
+								value="#{beanAplicacionCobroWeb.txtCp}" />	
+								
+							<p:outputLabel for="confEstado"
+								value="Departamento:" />
+							<h:outputText id="confEstado"
+								title="Estado:"
+								value="#{beanAplicacionCobroWeb.txtEstado}" />	
+								
+							<p:outputLabel for="confDomRef"
+								value="Lugar de referencia del siniestro" />
+							<h:outputText id="confDomRef"
+								title="Lugar de referencia del siniestro"
+								value="#{beanAplicacionCobroWeb.txtDomicilioRef}" />	
+								
+							<p:outputLabel for="confRfc"
+								value="RFC del afectado (a) o Razón Social:" />
+							<h:outputText id="confRfc"
+								title="RFC del Asegurado (a) o Razón Social:"
+								value="#{beanAplicacionCobroWeb.txtRfc}" />										
+								
+							<p:outputLabel for="confDeducible"
+								value="Deducible:" />
+							<h:outputText id="confDeducible"
+								title="Dedicible:"
+								value="#{beanAplicacionCobroWeb.estatus == '0' ? 'NO' : 'SI'}" />
+								
+							<p:outputLabel for="confFactura"
+								value="¿Requiere factura?" />
+							<h:outputText id="confFactura"
+								title="¿Requiere factura?"
+								value="#{beanAplicacionCobroWeb.factura ? 'SI' : 'NO'}" />		
+									
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="mitad,mitad">
+
+							<p:commandButton id="btnRegresar" value="&#171; Cambiar Datos"
+								onclick="PF('panelCobro').hide()" />
+							<p:commandButton id="btnConfirmar" value="Enviar Datos &#187;"
+								update="contenidoPanelCobro"
+								onclick="jQuery(this).addClass('ui-state-disabled')"
+								oncomplete="PF('panelCobro').hide();"
+								actionListener="#{beanAplicacionCobroWeb.doAccionPaginaCobrar}" />
+						</h:panelGrid>
+
+
+					</p:panel>
+
+
+					<p:panel
+						rendered="#{(!empty beanAplicacionCobroWeb.actualTransaccion) and  (!empty beanAplicacionCobroWeb.actualTerminal) }"
+						styleClass="panelesV">
+
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="cuarto,tres_cuartos">
+
+
+							<p:outputLabel for="tranestatus" value="Estatus:" />
+							<h:outputText id="tranestatus"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.respuestaAmigable}" />
+
+							<p:outputLabel for="tranfecha" value="Fecha:" />
+							<h:outputText id="tranfecha"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.fecha}">
+								<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+									pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+
+							<p:outputLabel for="tranref" value="Número Referencia:" />
+							<h:outputText id="tranref"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.numeroReferencia}" />
+
+
+
+							<p:outputLabel for="tranauth"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="Número Autorización:" />
+							<h:outputText id="tranauth"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.numeroAutorizacion}" />
+
+							<p:outputLabel for="tranop" value="Número Operación:"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+							<h:outputText id="tranop"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.numeroOperacion}" />
+
+
+							<p:outputLabel for="tra_no" value="Tarjeta Habiente: "
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+							<h:outputText id="tra_no"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.tarjetaNombre}" />
+
+							<p:outputLabel for="tar_tipo_cc" value="Tipo de Tarjeta:"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+							<h:outputText id="tar_tipo_cc"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="#{beanAplicacionCobroWeb.txtTipoDeTarjeta}" />
+
+							<p:outputLabel for="tar_ul" value="Últimos 4 Dígitos:"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+							<h:outputText id="tar_ul"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}"
+								value="#{beanAplicacionCobroWeb.actualTransaccion.ultimos4Tarjeta}" />
+
+
+							<p:outputLabel for="tranmont" value="Monto Cargado:"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+							<h:outputText id="tranmont"
+								value="MXN $#{beanAplicacionCobroWeb.actualTransaccion.monto}"
+								rendered="#{beanAplicacionCobroWeb.actualTransaccion.transaccionAprobada}" />
+
+
+						</h:panelGrid>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="mitad,mitad">
+
+							<p:commandButton ajax="false" value="Voucher"
+								action="#{beanAplicacionCobroWeb.doAccionVoucherPDF}" />
+							<p:commandButton ajax="false" value="Continuar"
+								action="#{beanAplicacionCobroWeb.doAccionRegresarAlarma}" />
+						</h:panelGrid>
+
+
+					</p:panel>
+
+					<h:outputText
+						value="La funcion del Navegador Atras/Refrescar ha sido deshabilitada. Por favor presione el boton para regresar a AQ Alarmas e iniciar de nuevo una transaccion bancaria"
+						rendered="#{empty beanAplicacionCobroWeb.actualTerminal}" />
+
+					<p:commandButton ajax="false" value="Continuar"
+						rendered="#{empty beanAplicacionCobroWeb.actualTerminal}"
+						action="#{beanAplicacionCobroWeb.doAccionRegresarAlarma}" />
+				</p:outputPanel>
+			</h:form>
+
+		</p:dialog>
+
+
+	</ui:define>
+
+</ui:composition>

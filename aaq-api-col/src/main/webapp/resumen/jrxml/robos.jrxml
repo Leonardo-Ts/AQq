@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2018-12-18T09:50:32 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="robos" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="0" bottomMargin="0" uuid="8c12b0aa-79c9-41ee-acd3-2247021fdf0b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="motor" class="java.lang.String"/>
+	<field name="serieAsegurado" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<field name="averiguacionPrev" class="java.lang.String"/>
+	<field name="placasAsegurado" class="java.lang.String"/>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="6" width="159" height="27" forecolor="#107986" uuid="7fc8fe63-7a7c-4829-86e8-789fb5477533"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos de Robo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="9" width="79" height="20" uuid="aec6c286-49aa-46a6-915e-dbcd00f19191"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="79" height="20" uuid="99021e7c-821d-4c6e-a7e3-fbf2bd5ab66f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Num. Serie:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="30" width="56" height="20" uuid="4d9ab929-b672-441f-9281-280e25cd2c0a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="9" width="56" height="20" uuid="b4c3351a-3476-4b4f-9a07-4fccbe85de67"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="51" width="96" height="20" uuid="2fffe53b-7bba-4e4f-b2fa-9443fd0f42a5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Averiguación:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="367" y="30" width="100" height="20" uuid="f9c51bb6-beb8-492d-88be-95dc47169517"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{motor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="367" y="9" width="100" height="20" uuid="b6c7ea31-bdc6-4cfb-a3fe-fe8bb45609a8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="96" y="9" width="100" height="20" uuid="e8e82c30-3f80-4bf2-a7bf-20603fc0edc4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{placasAsegurado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="96" y="30" width="100" height="20" uuid="069e4e52-62d2-464d-ac40-aa033e453d3e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serieAsegurado}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="96" y="51" width="100" height="20" uuid="0ded0502-7457-445e-9638-a666fa19f778"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{averiguacionPrev}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

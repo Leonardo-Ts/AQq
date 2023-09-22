@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2019-02-07T17:04:23 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gruas" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="0" bottomMargin="0" uuid="4d4ea94e-4934-4e17-a5c1-810281117947">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="codigoGrua" class="java.lang.String"/>
+	<field name="claveProovedor" class="java.lang.String"/>
+	<field name="proveedorNombre" class="java.lang.String"/>
+	<field name="tipoAfectado" class="java.lang.String"/>
+	<field name="respuestaGruasColi" class="java.lang.String"/>
+	<field name="fecha" class="java.util.Date"/>
+	<title>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="7" width="220" height="23" forecolor="#0F7784" uuid="8847350c-52eb-4c39-a39c-d35bc1164021"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grúas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="111" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="55" width="130" height="20" uuid="1b4497d7-f1ea-49bc-92d9-350164101566"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claveProovedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="32" width="462" height="20" uuid="a10b41f8-d42c-444d-99ba-f4eb8952d304"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proveedorNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="55" width="120" height="20" uuid="dc2d86f5-26e6-4119-a461-91ca38306584"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave proveedor:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="75" height="20" uuid="4fb9da02-b2a7-4a7e-923a-dfa3af1d8a7e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Proveedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="79" width="202" height="20" uuid="7b78a9ed-4f76-485e-b7e3-a71501ccbc3d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{respuestaGruasColi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="252" y="79" width="126" height="20" uuid="178ab531-f3dc-4ce5-b9f8-26c795869fce"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Folio de atención:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="483639df-a8d4-4adf-a0e7-1c0cbd5c47df"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement x="120" y="10" width="100" height="20" uuid="e04c756f-7031-44f0-97d4-b3a9b3d520e2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="252" y="55" width="118" height="20" uuid="e7e03aac-7e08-491d-bf69-d69ceb33b463"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ticket de Grúa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="55" width="100" height="20" uuid="f7a0d9ae-0014-464a-865d-e4bafbda6f37"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoGrua}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="79" width="70" height="20" uuid="40bd87ab-24a2-40c8-89cb-8ca7562c79ce"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Afectado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="79" width="130" height="20" uuid="3365eb99-8a3e-4abf-9da8-b01f98ae6e82"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoAfectado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="252" y="10" width="88" height="20" uuid="659c9225-7cc0-439f-9009-58fbefc733bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="HH:mm " isBlankWhenNull="true">
+				<reportElement x="340" y="10" width="100" height="20" uuid="f69f94d3-a1b4-45f9-a0a6-b4d435c09a83"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,68 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionMonitorTraza}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Monitor - Traza de <h:outputText
+			value="#{beanAplicacionMonitorTraza.objetoTerminal.nombre}" />
+		<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Aplicaciones</a></li>
+		<li><a href="monitor.siica">Monitor</a></li>
+		<li>Detalle</li>
+	</ui:define>
+	<ui:define name="cuerpoPagina">
+		<div class="forma_un_tercio">
+			<h:form>
+				<p:panel header="Detalle del Perito-Abogado" styleClass="panelesV">
+					<h:panelGrid columns="2" styleClass="tabla_captura"
+						columnClasses="cuarto,tres_cuartos">
+
+						<p:outputLabel for="finicio" value="Inicio" />
+						<p:calendar id="finicio" locale="es_MX"
+							value="#{beanAplicacionMonitorTraza.txtFechaInicio}" mode="popup"
+							pattern="yyyy/MM/dd HH:mm" />
+
+						<p:outputLabel for="ffin" value="Fin" />
+						<p:calendar id="ffin" locale="es_MX"
+							value="#{beanAplicacionMonitorTraza.txtFechaFin}" mode="popup"
+							pattern="yyyy/MM/dd HH:mm" />
+
+
+
+						<p:commandButton ajax="false" value="Buscar"
+							actionListener="#{beanAplicacionMonitorTraza.actualizarListado}" />
+					</h:panelGrid>
+				</p:panel>
+
+			</h:form>
+
+			<ui:decorate template="/Comun/comunTabla.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionMonitorTraza}" />
+				<ui:param name="metodo" value="imagenSatelital" />
+				<ui:param name="listaObjetos" value="#{componente.listado}" />
+				<ui:param name="listaColumnas" value="#{terminalLog.columnasTraza}" />
+				<ui:param name="listaDe" value="Posiciones de Ajustador" />
+				<ui:define name="contenidoAdicional">
+					<p:column headerText="Mapa">
+						<p:commandLink value="Ver" onclick="localizarPunto(#{objeto.id})" />
+					</p:column>
+				</ui:define>
+			</ui:decorate>
+		</div>
+
+
+
+		<div class="forma_dos_tercios">
+			<ui:decorate template="/Comun/comunMapa.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionMonitorTraza}" />
+				<ui:param name="metodo" value="imagenSatelital" />
+			</ui:decorate>
+		</div>
+	</ui:define>
+</ui:composition>

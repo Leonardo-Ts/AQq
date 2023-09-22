@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanCatEntidades}"/>
+
+    <ui:define name="tituloPagina">Catalogacion &#160;<h:outputText
+            value="Entidades"/>
+        <ui:param name="clase_pagina" value="catalogacion"/>
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><a href="inicio.siica">Catalogación</a></li>
+        <li>Entidades</li>
+    </ui:define>
+
+    <ui:define name="cuerpoPagina">
+        <ui:decorate template="/Comun/FiltroCatalogos.xhtml">
+            <ui:param name="componente" value="#{beanCatEntidades}"/>
+            <ui:param name="mostrarTxtClave" value="true"/>
+            <ui:param name="mostrarEtiquetaClave" value="true"/>
+            <ui:param name="mostrarTxtNombre" value="true"/>
+            <ui:param name="mostrarEtiquetaNombre" value="true"/>
+            <ui:param name="listaDe" value="Entidad"/>
+            <ui:param name="mostrarBotonFiltrar" value="true"/>
+            <ui:param name="mostrarBotonAgregarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+           
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunDownUp.xhtml">
+            <ui:param name="componente" value="#{beanCatEntidades}"/>
+            <ui:param name="descripcion" value="Entidades"/>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunTabla.xhtml">
+            <ui:param name="componente" value="#{beanCatEntidades}"/>
+            <ui:param name="listaObjetos" value="#{componente.listado}"/>
+            <ui:param name="listaColumnas" value="#{estado.columnas}"/>
+            <ui:param name="listaDe" value="Entidades"/>
+            <ui:param name="mostrarBotonEditarRegistro" value="true"/>
+            <ui:param name="mostrarBotonEliminarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+        </ui:decorate>
+        
+        <ui:decorate template="/Comun/comunPanel.xhtml">
+            <ui:param name="componente" value="#{beanCatEntidades}"/>
+            <ui:param name="mostrarBotonAceptar" value="true"/>
+            <ui:param name="mostrarBotonCerrar" value="true"/>
+            <ui:param name="listaDe" value="Entidades"/>
+            <ui:param name="validador" value="Entidades"/>
+            <ui:define name="contenidoAdicional">
+            	<p:outputLabel for="identidad" value="Identidad: "/>
+                <p:inputText id="identidad" value="#{componente.objetoABM.identidad}" placeholder="Identidad"/>
+                <p:outputLabel for="nombre" value="Nombre: "/>
+                <p:inputText id="nombre" value="#{componente.objetoABM.nombre}" placeholder="Nombre"/>
+                <p:outputLabel for="husoHorario" value="Huso Horario: "/>
+                <p:inputText id="husoHorario" value="#{componente.objetoABM.husoHorario}" placeholder="Huso Horario (5)"/>
+                <p:outputLabel for="claveEntidad" value="Clave Entidad "/>
+                <p:inputText id="claveEntidad" value="#{componente.objetoABM.claveEntidad}" placeholder="Clave Entidad"/>
+            </ui:define>
+        </ui:decorate>
+    </ui:define>
+</ui:composition>

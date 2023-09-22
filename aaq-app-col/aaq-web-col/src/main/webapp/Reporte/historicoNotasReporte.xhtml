@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanReporteHistoricoNotas}" />
+
+	<ui:define name="tituloPagina">
+			<h:outputText value="AQ Reportes - Historico de Notas" />
+			<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Reportes</a></li>
+		<li><h:outputText value="Historico De Notas" /></li>
+	</ui:define>
+	
+		<ui:define name="cuerpoPagina">
+		
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanReporteHistoricoNotas}" />
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="mostrarFiltroComboBase" value="true" />
+			<ui:param name="mostrarFiltroComboTerminal" value="false" />
+			<ui:param name="mostrarTxtNumeroReporte" value="true" />
+			<ui:param name="mostrarEtiquetaNumeroReporte" value="true" />
+			<ui:define name="contenidoAdicional">
+				<p:commandButton ajax="false" value="Consultar"
+					action="#{componente.actualizarListado}" />
+			</ui:define>
+		</ui:decorate>
+		
+			<div class="forma_un_tercio">
+				<h:form>
+					<p:panel header="Descargar Archivo" styleClass="panelesV">
+						<h:panelGrid columns="1" styleClass="tabla_captura">
+							<h:commandLink id="ExportExcel" title="Listado Excel"
+								action="#{beanReporteHistoricoNotas.doAccionReporte}">
+								<f:param name="id" value="excel" />
+								<h:graphicImage
+									url="/diseno/imagenes/reportes/iconExportExcel.png" />
+							</h:commandLink>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		
+
+		
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanReporteHistoricoNotas}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{notasReporte.columnas}" />
+			<ui:param name="listaDe" value="Historico de Notas de Reportes" />
+		</ui:decorate>
+
+	</ui:define>
+</ui:composition>

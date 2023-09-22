@@ -1,0 +1,83 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="forma_mitad">
+		<h:form id="forma_catalogo" rendered="#{beanAplicacionMonitor.permisoTodosEstados and beanAplicacionMonitor.permisoTodosBases}">
+			<p:panel header="Acciones y Filtros" styleClass="panelesV">
+				<h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto"
+					styleClass="tabla_captura">
+
+					<p:outputLabel for="estado" value="Departamento:"
+					rendered="#{mostrarFiltroComboEstado}" />
+					
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboEstado}"
+						id="estado" value="#{componente.idEstado}"
+						title="Lista de Departamentos">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="-- Seleccione --" />
+						<f:selectItem itemValue="9999" itemLabel="-- Todos --" />
+						<f:selectItems value="#{componente.listaDeEstados}" var="estado"
+							itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+						<p:ajax event="valueChange"
+							update=":forma_tabla:tabla"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+					
+					<p:outputLabel for="txt_clave" value="Clave:"
+						rendered="#{mostrarTxtClave and mostrarEtiquetaClave}" />
+					<p:inputText rendered="#{mostrarTxtClave}" id="txt_clave"
+						value="#{componente.txtClave}" />
+						
+					<p:outputLabel for="txt_nombre" value="Nombre:"
+						rendered="#{mostrarTxtNombre and mostrarEtiquetaNombre}" />
+					<p:inputText rendered="#{mostrarTxtNombre}" id="txt_nombre"
+						value="#{componente.txtNombre}" />
+						
+					<p:outputLabel for="txt_descripcion" value="Descripcion:"
+						rendered="#{mostrarTxtDescripcion and mostrarEtiquetaDescripcion}" />
+					<p:inputText rendered="#{mostrarTxtDescripcion}" id="txt_descripcion"
+						value="#{componente.txtDescripcion}" />
+						
+					<p:outputLabel for="txt_tipo" value="Tipo:"
+						rendered="#{mostrarTxtTipo and mostrarEtiquetaTipo}" />
+					<p:inputText rendered="#{mostrarTxtTipo}" id="txt_tipo"
+						value="#{componente.txtTipoParte}" />
+						
+					<p:outputLabel for="txt_numero" value="Número:"
+						rendered="#{mostrarTxtNumero and mostrarEtiquetaNumero}" />
+					<p:inputText rendered="#{mostrarTxtNumero}" id="txt_numero"
+						value="#{componente.txtNumParte}" />
+						
+					<ui:insert name="contenidoAdicional" />
+					
+				</h:panelGrid>
+				
+				<h:panelGrid columns="3" styleClass="tabla_captura" >
+				<ui:insert name="contenidoAdicionalBotones" />
+				
+				<p:commandButton id="botonFiltrar" value="Filtrar"
+					rendered="#{mostrarBotonFiltrar}"
+					actionListener="#{componente.actualizarListado}"
+					update=":forma_tabla:tabla" />
+				<br> </br>
+				<p:commandButton id="boton" value="Agregar #{listaDe}"
+					rendered="#{mostrarBotonAgregarRegistro and componente.permisoABM and mostrarPanel}"
+					oncomplete="PF('panel').show()" update=":formaPanel:contenidoPanel"
+					actionListener="#{componente.doAccionRegistroNuevo}" />
+
+				<p:commandButton ajax="false" id="boton_nopanel"
+					value="Agregar #{listaDe}"
+					rendered="#{mostrarBotonAgregarRegistro and componente.permisoABM and !mostrarPanel}"
+					action="#{componente.doAccionRegistroNuevo}" />
+			</h:panelGrid>	
+				
+			</p:panel>
+
+		</h:form>
+
+	</div>
+</ui:component>

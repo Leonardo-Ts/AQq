@@ -1,0 +1,136 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionNotaReporte}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Notas Reporte
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+		<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li><a href="alarma.siica">Alarma</a></li>
+		<li>Notas de Reporte</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<h:form id="forma" >
+			<div class="forma_completa">	
+				<p:panel header="Notas del Reporte" styleClass="panelesV">
+					<h:panelGrid columns="4" styleClass="tabla_captura"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+						
+						<p:outputLabel for="fechahr" value="Fecha Hora:" />
+						<h:outputText id="fechahr"
+							value="#{beanAplicacionNotaReporte.fechaHoraActual}" />
+							
+						<p:outputLabel for="usuario" value="Usuario:" />
+						<h:outputText id="usuario"
+							value="#{beanAplicacionNotaReporte.usuarioActual.nombre}" />
+
+
+						<p:outputLabel for="ajustador" value="Perito-Abogado" />
+						<h:outputText id="ajustador"
+							value="#{beanAplicacionNotaReporte.actualTerminal.nombre}" />
+
+						<p:outputLabel for="reporte" value="Reporte:" />
+						<h:outputText id="reporte"
+							value="#{beanAplicacionNotaReporte.actualTerminal.reporteAtendiendo}" />
+						
+						<p:outputLabel for="txtCausaNota" value="Causa De Nota:" />
+			            <h:selectOneMenu id="txtCausaNota" value="#{componente._causaNota}">
+			             		<f:selectItem itemLabel="-- SELECCIONAR  --" itemValue="seleccionar"/> 
+			                    <f:selectItem itemLabel="Solicitud de Abogado" itemValue="Solicitud de Abogado"/> 
+								<f:selectItem itemLabel="Solicitud de Grua" itemValue="Solicitud de Grua"/> 
+								<f:selectItem itemLabel="3ro no acepta Responsabilidad" itemValue="3ro no acepta Responsabilidad"/> 
+								<f:selectItem itemLabel="En espera de recuperación" itemValue="En espera de recuperación"/>
+								<f:selectItem itemLabel="Ded en RC" itemValue="Ded en RC"/>
+								<f:selectItem itemLabel="Cobranza" itemValue="Cobranza"/>
+								<f:selectItem itemLabel="Espera de seguro de 3ro" itemValue="Espera de seguro de 3ro"/>
+								<f:selectItem itemLabel="Daños a autopista" itemValue="Daños a autopista"/>
+								<f:selectItem itemLabel="Siniestro relevante" itemValue="Siniestro relevante"/>
+								<f:selectItem itemLabel="Robo total" itemValue="Robo total"/>
+								<f:selectItem itemLabel="Rechazo o Improcedente" itemValue="Rechazo o Improcedente"/>
+								<f:selectItem itemLabel="Espera Patrulla" itemValue="Espera Patrulla"/>
+								<f:selectItem itemLabel="NA no acepta responsabilidad" itemValue="NA no acepta responsabilidad"/>
+								<f:selectItem itemLabel="Montachoques" itemValue="Montachoques"/>
+								<f:selectItem itemLabel="Controversia" itemValue="Controversia"/>
+			             </h:selectOneMenu>
+			             
+						<p:outputLabel for="nota" value="Nota:" />
+						<p:inputTextarea id = "nota" maxlength="500"
+                     		value = "#{beanAplicacionNotaReporte.txtNota}"/>
+                     		
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2" columnClasses="mitad,mitad"
+						styleClass="tabla_captura">
+						
+						
+                     		
+							<p:commandButton value="Agregar" ajax="false"
+								actionListener="#{beanAplicacionNotaReporte.doAccionRegistroNotasBtn}"
+								 process="@form"  update=":formaListaNotasVer:tabla_notas"/>
+							
+						</h:panelGrid>
+					</p:panel>
+			<BR />
+			<BR />
+		<h:form id="formaListaNotasVer">
+             <p:outputPanel id="contenidoNotasVer">                    
+                    <p:dataTable value="#{componente.notas}"
+                                 id="tabla_notas" var="notasReporte" emptyMessage="Sin Datos"
+                                 currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+                                 paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+                                 rowsPerPageTemplate="10,20,30,40,50" lazy="true" >
+
+                        <f:facet name="header">Lista de Notas</f:facet>
+						 
+						 <p:column headerText="Causa Nota">
+                            <h:outputText value = "#{notasReporte.causaNota}"/>
+                        </p:column>  
+                        
+                        <p:column headerText="Notas">
+                            <h:outputText value = "#{notasReporte.notas}" />
+                        </p:column>
+                        <p:column headerText="Fecha y Hora">
+                            <h:outputText value = "#{notasReporte.fecha}">
+                            	<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <h:outputText value = "#{notasReporte.usuario}"/>
+                        </p:column> 
+                         <p:column headerText="Reporte">
+                            <h:outputText value = "#{notasReporte.reporte}"/>
+                        </p:column>
+                        <p:column headerText="Eliminar">
+							<p:commandLink update="tabla_notas"
+								actionListener="#{componente.doAccionRegistroEliminarNota}">
+								<h:graphicImage alt="Eliminar"
+									value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+								<f:param name="notasReporte.id" value="#{riv}" />
+								<p:confirm header="Confirmación de Eliminado"
+									message="Por favor confirme que desea eliminar la nota"
+									icon="ui-icon-alert" />
+							</p:commandLink>
+							<p:confirmDialog global="true" header="Confirmación de Eliminado">
+								<p:commandButton value="Si" type="button"
+									update=":formaListaNotasVer:tabla_notas" styleClass="ui-confirmdialog-yes"
+									icon="ui-icon-check">
+									<f:param name="id" value="#{componente.objetoNotasReporte.id}" />
+		
+								</p:commandButton>
+								<p:commandButton value="No" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+						</p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </h:form>	
+            </div>
+		</h:form>
+	</ui:define>
+</ui:composition>

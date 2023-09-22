@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanMunicipios}"/>
+
+    <ui:define name="tituloPagina">Catalogacion &#160;<h:outputText
+            value="Municipios"/>
+        <ui:param name="clase_pagina" value="catalogacion"/>
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><a href="inicio.siica">Catalogación</a></li>
+        <li>Municipios</li>
+    </ui:define>
+
+    <ui:define name="cuerpoPagina">
+        <ui:decorate template="/Comun/FiltroCatalogos.xhtml">
+            <ui:param name="componente" value="#{beanMunicipios}"/>
+            <ui:param name="mostrarFiltroComboEstado" value="true"/>
+            <ui:param name="listaDe" value="Municipio"/>
+            <ui:param name="mostrarBotonFiltrar" value="true"/>
+            <ui:param name="mostrarBotonAgregarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+           
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunDownUp.xhtml">
+            <ui:param name="componente" value="#{beanMunicipios}"/>
+            <ui:param name="descripcion" value="Municipios"/>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunTabla.xhtml">
+            <ui:param name="componente" value="#{beanMunicipios}"/>
+            <ui:param name="listaObjetos" value="#{componente.listado}"/>
+            <ui:param name="listaColumnas" value="#{municipio.columnas}"/>
+            <ui:param name="listaDe" value="Municipios"/>
+            <ui:param name="mostrarBotonEditarRegistro" value="true"/>
+            <ui:param name="mostrarBotonEliminarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+        </ui:decorate>
+        
+        <ui:decorate template="/Comun/comunPanel.xhtml">
+            <ui:param name="componente" value="#{beanMunicipios}"/>
+            <ui:param name="mostrarBotonAceptar" value="true"/>
+            <ui:param name="mostrarBotonCerrar" value="true"/>
+            <ui:param name="listaDe" value="Municipio"/>
+            <ui:param name="validador" value="Municipio"/>
+            <ui:define name="contenidoAdicional">
+            	<p:outputLabel for="estado_" value="Departamento:" />
+				<h:selectOneMenu  id="estado_" value="#{componente._id_Estado}"
+					title="Lista de Departamentos">
+				<f:selectItem noSelectionOption="true"
+					itemLabel="-- Seleccione --" />
+				<f:selectItem itemValue="9999" itemLabel="-- Todos --" />
+				<f:selectItems value="#{componente.listaDeEstados}" var="estado_"
+					itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+				<p:ajax event="valueChange"
+					update=":forma_tabla:tabla"
+					listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+					
+                <p:outputLabel for="nombre" value="Nombre: "/>
+                <p:inputText id="nombre" value="#{componente.objetoABM.nombre}" placeholder="Nombre"/>
+                <p:outputLabel for="idmunicipio" value="ID Municipio "/>
+                <p:inputText id="idmunicipio" value="#{componente.objetoABM.idmunicipio}" />
+            </ui:define>
+        </ui:decorate>
+    </ui:define>
+</ui:composition>

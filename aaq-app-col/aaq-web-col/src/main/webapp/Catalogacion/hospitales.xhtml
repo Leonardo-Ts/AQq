@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanCatHospitales}"/>
+
+    <ui:define name="tituloPagina">Catalogacion &#160;<h:outputText
+            value="Hospitales"/>
+        <ui:param name="clase_pagina" value="catalogacion"/>
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><a href="inicio.siica">Catalogación</a></li>
+        <li>Hospitales</li>
+    </ui:define>
+
+    <ui:define name="cuerpoPagina">
+        <ui:decorate template="/Comun/FiltroCatalogos.xhtml">
+            <ui:param name="componente" value="#{beanCatHospitales}"/>
+            <ui:param name="mostrarTxtClave" value="true"/>
+            <ui:param name="mostrarEtiquetaClave" value="true"/>
+            <ui:param name="listaDe" value="Hospital"/>
+            <ui:param name="mostrarBotonFiltrar" value="true"/>
+            <ui:param name="mostrarBotonAgregarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+           
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunDownUp.xhtml">
+            <ui:param name="componente" value="#{beanCatHospitales}"/>
+            <ui:param name="descripcion" value="Hospitales"/>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunTabla.xhtml">
+            <ui:param name="componente" value="#{beanCatHospitales}"/>
+            <ui:param name="listaObjetos" value="#{componente.listado}"/>
+            <ui:param name="listaColumnas" value="#{catalogoHospitales.columnas}"/>
+            <ui:param name="listaDe" value="Hospitales"/>
+            <ui:param name="mostrarBotonEditarRegistro" value="true"/>
+            <ui:param name="mostrarBotonEliminarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+        </ui:decorate>
+        
+        <ui:decorate template="/Comun/comunPanel.xhtml">
+            <ui:param name="componente" value="#{beanCatHospitales}"/>
+            <ui:param name="mostrarBotonAceptar" value="true"/>
+            <ui:param name="mostrarBotonCerrar" value="true"/>
+            <ui:param name="listaDe" value="Hospitales"/>
+            <ui:param name="validador" value="Hospital"/>
+            <ui:define name="contenidoAdicional">
+            
+            	<p:outputLabel for="clave" value="Clave: "/>
+                <p:inputText id="clave" value="#{componente.objetoABM.clave}" placeholder="Clave"/>
+                <p:outputLabel for="descripcion" value="Descripción: "/>
+                <p:inputTextarea id="descripcion" value="#{componente.objetoABM.descripcion}" placeholder="Descripción"/>
+                <p:outputLabel for="direccion" value="Dirección: "/>
+                <p:inputTextarea id="direccion" value="#{componente.objetoABM.direccion}" placeholder="Dirección"/>
+                <p:outputLabel for="telefono" value="Teléfono: "/>
+                <p:inputText id="telefono" value="#{componente.objetoABM.telefono}" placeholder="Teléfono"/>
+                
+            </ui:define>
+        </ui:decorate>
+    </ui:define>
+</ui:composition>

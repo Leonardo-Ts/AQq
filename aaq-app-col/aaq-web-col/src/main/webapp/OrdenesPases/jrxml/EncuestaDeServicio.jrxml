@@ -1,0 +1,2050 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EncuestaDeServicio" pageWidth="595" pageHeight="960" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0fbb2577-39ff-41a6-b1b6-99141a14d9e8">
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<style name="p1_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p1}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p1_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p1}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p1_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p1}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p1_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p1}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p2_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p2}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p2_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p2}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p2_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p2}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p2_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p2}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p3_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p3}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p3_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p3}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p3_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p3}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p3_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p3}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p4_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p4}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p4_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p4}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p4_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p4}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p4_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p4}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p5_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p5}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p5_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p5}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p5_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p5}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p5_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p5}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p6_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p6}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p6_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p6}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p6_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p6}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p6_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p6}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p7_M" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p7}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p7_R" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p7}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p7_B" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p7}.intValue()==3]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p7_E" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p7}.intValue()==4]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p7_N" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p7}.intValue()==0]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p8_SI" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p8}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p8_NO" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p8}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p8_N" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p8}.intValue()==0]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p9_SI" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p9}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p9_NO" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p9}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p9_N" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p9}.intValue()==0]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p10_SI" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p10}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p10_NO" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p10}.intValue()==2]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="p10_N" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p10}.intValue()==0]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="acepataUno">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{chUno}.intValue()==1]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<style name="aceptaDos">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{chDos}.intValue()==1]]></conditionExpression>
+			<style backcolor="#050505"/>
+		</conditionalStyle>
+	</style>
+	<style name="aceptaTres">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{chTres}.intValue()==1]]></conditionExpression>
+			<style backcolor="#050505"/>
+		</conditionalStyle>
+	</style>
+	<style name="aceptaCuatro">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{chCuatro}.intValue()==1]]></conditionExpression>
+			<style backcolor="#030202"/>
+		</conditionalStyle>
+	</style>
+	<style name="p6_N" backcolor="#FFFFFF">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$P{p6}.intValue()==0]]></conditionExpression>
+			<style backcolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="nomAsegurado" class="java.lang.String"/>
+	<parameter name="numReporte" class="java.lang.String"/>
+	<parameter name="numSiniestro" class="java.lang.String"/>
+	<parameter name="p1" class="java.lang.Integer"/>
+	<parameter name="p2" class="java.lang.Integer"/>
+	<parameter name="p3" class="java.lang.Integer"/>
+	<parameter name="p4" class="java.lang.Integer"/>
+	<parameter name="p5" class="java.lang.Integer"/>
+	<parameter name="p6" class="java.lang.Integer"/>
+	<parameter name="p7" class="java.lang.Integer"/>
+	<parameter name="p8" class="java.lang.Integer"/>
+	<parameter name="p9" class="java.lang.Integer"/>
+	<parameter name="p10" class="java.lang.Integer"/>
+	<parameter name="observaciones1" class="java.lang.String"/>
+	<parameter name="observaciones2" class="java.lang.String"/>
+	<parameter name="observaciones3" class="java.lang.String"/>
+	<parameter name="observaciones4" class="java.lang.String"/>
+	<parameter name="observaciones5" class="java.lang.String"/>
+	<parameter name="observaciones6" class="java.lang.String"/>
+	<parameter name="nomConductor" class="java.lang.String"/>
+	<parameter name="telConductor" class="java.lang.String"/>
+	<parameter name="emailConductor" class="java.lang.String"/>
+	<parameter name="lugarFecha" class="java.lang.String"/>
+	<parameter name="folio" class="java.lang.String"/>
+	<parameter name="imgLogoQualitas" class="java.lang.String"/>
+	<parameter name="chUno" class="java.lang.Integer"/>
+	<parameter name="chDos" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="chTres" class="java.lang.Integer"/>
+	<parameter name="chCuatro" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="imgBits" class="java.io.InputStream"/>
+	<parameter name="chCinco" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="chSeis" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="920">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="271" y="56" width="286" height="7" forecolor="#006F69" uuid="f1ca3909-11ef-41d3-bb9a-dd7025ad08c3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[Quálitas Compañia de Seguros S.A. de C.V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="63" width="286" height="7" forecolor="#006F69" uuid="401ab1d1-2cd5-4256-92e1-6eafbb4f47b0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[José Ma. Castorena N°. 426 Col.  San José de los Cedros,Cuajimalpa  05200 Ciudad de México.]]></text>
+			</staticText>
+			<rectangle radius="4">
+				<reportElement x="203" y="39" width="354" height="17" forecolor="#7C1482" backcolor="#006F69" uuid="853febaa-b990-44bf-b853-35faa8cb0bca"/>
+				<graphicElement>
+					<pen lineColor="#228997"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="203" y="40" width="354" height="16" forecolor="#FFFFFF" uuid="11380b9c-de77-40aa-8a5c-4b3b7968414e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENCUESTA DE SERVICIO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="37" width="128" height="93" uuid="c35e5ad9-9a18-409b-8c15-933403831037"/>
+				<imageExpression><![CDATA[$P{imgLogoQualitas}.toString()]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="160" y="109" width="218" height="28" forecolor="#F70B07" uuid="dde8599d-31e0-43c6-aa92-c78e2d3e53f7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO CONFIDENCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="87" width="61" height="15" forecolor="#006F69" uuid="bfd20402-5b8a-416b-834f-bb9a2a14d9d5">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7.5"/>
+				</textElement>
+				<text><![CDATA[REPORTE N°]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="89" width="110" height="13" uuid="cb503134-c4b6-4ebc-abe9-c81fc41a7b59">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numReporte}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="105" width="110" height="13" uuid="6ecfedac-2067-4b58-b74b-009f8e70e6eb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numSiniestro}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="104" width="61" height="15" forecolor="#006F69" uuid="1cf6243f-6194-496b-99a7-d7abbe9ba714">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7.5"/>
+				</textElement>
+				<text><![CDATA[SINIESTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="70" width="61" height="15" forecolor="#006F69" uuid="e31c732a-1a21-4d3f-9cb6-ec5461de7308">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7.5"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="72" width="110" height="13" uuid="2c9ce0cf-d5a0-4f0b-bd37-23a9e108ca2e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{folio}.toString()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="-1" y="139" width="555" height="681" forecolor="#FFFFFF" backcolor="#E3F9FC" uuid="afa591ed-7a9e-4bae-a1af-6a632b037316">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#228997"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="149" width="110" height="15" forecolor="#006F69" uuid="c0a8e14c-db1b-427d-8549-41156f0f57af">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE DEL ASEGURADO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="133" y="149" width="411" height="15" uuid="dedbf00e-f8f7-4e38-9bb9-49e137ca9390">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomAsegurado}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="181" width="534" height="42" forecolor="#006F69" uuid="87e3fe41-ea1a-4f14-9cdf-bc3f491553ab">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ES NUESTRO INTERÉS CONOCER SU OPINIÓN Y COMENTARIOS, MOTIVO POR EL CUAL LE AGRADECEMOS CONTESTAR CONFIDENCIALMENTE ESTE CUESTIONARIO QUE NOS AYUDARÁ A IDENTIFICAR AQUELLOS ASPECTOS EN LOS CUALES DEBEMOS TRABAJAR PARA CORREGIR Y MEJORAR EL SERVICIO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="165" width="172" height="15" forecolor="#006F69" uuid="58900681-cc97-4b64-a2f3-eb8dce7085a1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISTINGUIDO ASEGURADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="229" width="191" height="15" forecolor="#006F69" uuid="5afd315d-ca09-40b3-994a-502a4d1c6d11">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[LOS OVALOS PARA CONTESTAR LA PREGUNTA]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement x="340" y="230" width="17" height="13" uuid="c4a132d9-b93f-4650-b957-7a5c1e470fae"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement x="319" y="230" width="17" height="13" backcolor="#006F69" uuid="20577a8b-6cea-4a69-bb6a-96982f05cdbc"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="10" y="229" width="150" height="15" forecolor="#006F69" uuid="0ad8d7de-ca1d-43cd-a8af-31c31703f2d8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELLENE COMPLETAMENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="248" width="533" height="1" uuid="64d63378-338a-4b90-bb04-be52f2103539">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="466" y="231" width="22" height="15" forecolor="#FFFFFF" backcolor="#006F69" uuid="89604006-b19c-4c2b-9fee-0dcc64951b64">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BIEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="490" y="231" width="55" height="15" forecolor="#FFFFFF" backcolor="#006F69" uuid="86c3c623-a2fe-451a-ab84-fd739c2e96fe">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7.5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EXCELENTE]]></text>
+			</staticText>
+			<line>
+				<reportElement x="540" y="248" width="1" height="206" uuid="6267ee40-be13-4a8c-a680-ba4ff3c6ab63">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="464" y="248" width="1" height="206" uuid="da18abc3-94e7-4be7-b380-632ae14a553d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="387" y="247" width="1" height="206" uuid="71069c7f-72cb-41be-9393-cd36bb5c26c9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="231" width="27" height="15" forecolor="#FFFFFF" backcolor="#006F69" uuid="10152351-95f6-4bab-9760-7db7aa11e39d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="419" y="231" width="45" height="15" forecolor="#FFFFFF" backcolor="#006F69" uuid="44925235-58c1-47b5-bebc-4e7d48289437">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="251" width="376" height="15" forecolor="#006F69" uuid="f894eaa1-564f-41d7-90ce-4b64d8e6377b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[1-. LA ATENCIÓN RECIBIDA POR EL PERSONAL DE CABINA, CUANDO REALIZÓ SU REPORTE DE ACCIDENTE FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="268" width="533" height="1" uuid="f9e5e694-7614-4fa3-8701-ca6599c28dcf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p1_M" x="395" y="252" width="17" height="13" uuid="c611dc51-02ae-4620-bcc0-70665297b511"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p1_R" x="433" y="252" width="17" height="13" uuid="20cdf92f-0d90-40e8-a6e5-9f7bcd7e3b72"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p1_B" x="468" y="252" width="17" height="13" uuid="fa6df055-9bd4-410a-8473-1d9515fba7cc"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p1_E" x="507" y="252" width="17" height="13" uuid="b1ab0477-0f42-4c28-9664-8720601ec26e"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="271" width="376" height="15" forecolor="#006F69" uuid="df51d6df-38e4-4cdd-b727-35c6c81cb0a3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[2-. LA OPORTUNIDAD EN LA LLEGADA DEL AJUSTADOR AL LUGAR DEL ACCIDENTE FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="288" width="533" height="1" uuid="bf992591-acf6-4bb3-9494-3556c646177c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p2_M" x="395" y="272" width="17" height="13" uuid="f352b7ae-322c-4497-9b83-9ed442c8da34"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p2_R" x="433" y="272" width="17" height="13" uuid="11a098dc-b5b1-415e-a1b2-fca25ad6af6e"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p2_B" x="468" y="272" width="17" height="13" uuid="7aed0496-b99d-46e1-9de0-e258e31c0ef1"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p2_E" x="507" y="272" width="17" height="13" uuid="ba2b225f-c5af-42e4-9a3c-9582d54fac90"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="291" width="376" height="15" forecolor="#006F69" uuid="f749b591-906e-4c83-8137-91d1582b5833">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[3-. LA PRESENTACIÓN Y PERSONALIDAD DEL AJUSTADOR FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="308" width="533" height="1" uuid="b11486ae-ef3a-42a5-a42e-bcf4f9ea8e12">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p3_M" x="395" y="292" width="17" height="13" uuid="a4e8cf43-b0d8-4f33-aef1-0201760fc0cb"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p3_R" x="433" y="292" width="17" height="13" uuid="5a8008e7-eadb-4f2b-8415-b906a5dd5ef3"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p3_B" x="468" y="292" width="17" height="13" uuid="9b7e21af-0f1c-4666-aadb-e522e18bb84c"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p3_E" x="507" y="292" width="17" height="13" uuid="92e7914c-e12b-48a8-b844-3297fd21e0ac"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="311" width="376" height="15" forecolor="#006F69" uuid="ae5c5588-64a0-45d9-8446-69f6d3571a5d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[4-. ¿CÓMO FUE EL TRATO DEL AJUSTADOR?]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="328" width="533" height="1" uuid="69cfe3cb-382f-4e8a-96c4-287284b62beb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p4_M" x="395" y="312" width="17" height="13" uuid="7bff65ef-8f8d-4ab9-aee3-8cf78a2206f3"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p4_R" x="433" y="312" width="17" height="13" uuid="1df00a29-0c38-4247-8b3e-f4b4108f71b9"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p4_B" x="468" y="312" width="17" height="13" uuid="699172a0-24b9-4e87-8d51-cccb782ca725"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p4_E" x="507" y="312" width="17" height="13" uuid="01934091-7d62-4819-882d-1aac8888bd12"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="330" width="376" height="15" forecolor="#006F69" uuid="df6c8edd-e152-42e4-8bbc-409f1f670fbc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[5-. LA CAPACIDAD Y ASISTENCIA DEL AJUSTADOR EN EL SINIESTRO FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="347" width="533" height="1" uuid="26fa72ec-4dbf-490f-982a-620877de5fd8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p5_M" x="395" y="331" width="17" height="13" uuid="b7a70b92-4604-48bd-8436-6d19da325e28"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p5_R" x="433" y="331" width="17" height="13" uuid="9f2eed96-b7c3-4793-a760-a45100b20907"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p5_B" x="468" y="331" width="17" height="13" uuid="fdc7ae4c-e4e8-4921-9ec3-8c0ec0e5dbc5"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p5_E" x="507" y="331" width="17" height="13" uuid="f9633e7b-13df-41c2-b2f0-ef1aefc952e9"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="350" width="293" height="15" forecolor="#006F69" uuid="1f4719f2-726a-4fe9-826c-8f942d7de63e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[6-. EL TRATO DEL AJUSTADOR HACIA  EL TERCERO INVOLUCRADO FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="367" width="533" height="1" uuid="f56b6383-c689-4549-a6bb-22dde825831e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p6_M" x="395" y="351" width="17" height="13" uuid="29378284-835b-4aa2-b1e5-e66a98cf1483"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p6_R" x="433" y="351" width="17" height="13" uuid="7e197450-d04e-48a9-b632-17fbbbf35a50"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement key="" style="p6_B" x="468" y="351" width="17" height="13" uuid="204fc860-dd9b-4429-bb02-3261c2509f33"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p6_E" x="507" y="351" width="17" height="13" uuid="9ed6d38a-4035-47d0-9291-ab79ff009938"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="314" y="370" width="47" height="15" forecolor="#006F69" uuid="bf989040-63fe-43be-b616-9ce03aa54d66">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO APLICA]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p7_N" x="365" y="371" width="17" height="13" uuid="981cae05-d525-4318-900e-72ba369994c5"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="370" width="306" height="15" forecolor="#006F69" uuid="57543440-e866-47a9-8f35-69ec2da44083">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[7-. EN SU CASO, EL SERVICIO DE GRÚA FUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="387" width="533" height="1" uuid="20e7e3c7-7004-471e-bff2-0db8f2883862">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p7_M" x="395" y="371" width="17" height="13" uuid="903e51d0-56d7-4ec5-82dc-23255bd2f36a"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p7_R" x="433" y="371" width="17" height="13" uuid="3c2d862d-6dc8-4fcd-b24d-015fffc80a29"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p7_B" x="468" y="371" width="17" height="13" uuid="81e236ae-fb1a-4b1d-bc1f-cdf8e0a9762f"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<ellipse>
+				<reportElement style="p7_E" x="507" y="371" width="17" height="13" uuid="f6334961-94a1-445a-9355-91f6f537d97b"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="390" width="306" height="19" forecolor="#006F69" uuid="6412f064-c96f-4224-b4fc-8bd7118a084e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[8-. ¿EN SU CASO, ELIGIÓ LIBREMENTE DEL MENÚ OFRECIDO POR EL AJUSTADOR, EL TALLER / AGENCIA PARA REPARAR SU UNIDAD?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="392" width="45" height="15" forecolor="#006F69" uuid="c017f3d2-3e23-411c-8924-854764b547cb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO APLICA]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p8_N" x="365" y="393" width="17" height="13" uuid="82b0aa4a-159f-4a8f-a482-2ce7881ac315"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<line>
+				<reportElement x="7" y="412" width="533" height="1" uuid="57a29e48-1b58-441c-b0ca-b1336f6de75a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p8_NO" x="503" y="393" width="17" height="13" uuid="7a4970d4-09a0-497f-a0e2-97ba8fa97c26"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="481" y="392" width="22" height="15" forecolor="#006F69" uuid="8637b71a-b61c-469a-919f-496f0c30de72">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p8_SI" x="424" y="393" width="17" height="13" uuid="3ef04a6b-a29a-412e-8df3-f9159fe1ad93"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="414" y="392" width="13" height="15" forecolor="#006F69" uuid="880409e3-0426-46a6-a5b1-06275ada0127">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="415" width="306" height="15" forecolor="#006F69" uuid="337a2097-47c6-400e-827b-89367ab3289e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[9-. ¿OBSERVÓ ALGUNA IRREGULARIDAD EN EL SERVICIO?]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="432" width="533" height="1" uuid="51cb2285-d84b-489d-b7ba-142ecf6f21ca">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<ellipse>
+				<reportElement style="p9_SI" x="424" y="416" width="17" height="13" uuid="785461da-4804-4aaa-ab69-105548c3e489"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="414" y="415" width="13" height="15" forecolor="#006F69" uuid="c92aaead-1542-4540-91bd-9ecd22cf96d2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="415" width="21" height="15" forecolor="#006F69" uuid="caa12e59-5eea-4dd5-ad71-cc093da8939f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p9_NO" x="503" y="416" width="17" height="13" uuid="7b8da31a-f8ad-4b71-acdc-851fed304126"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="11" y="435" width="306" height="15" forecolor="#006F69" uuid="e5499f2e-a102-4491-a957-08deb08bf45d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6.5"/>
+				</textElement>
+				<text><![CDATA[10-. ¿RECIBIÓ USTED COPIA DE LA DECLARACIÓN DE ACCIDENTE?]]></text>
+			</staticText>
+			<line>
+				<reportElement x="7" y="452" width="533" height="1" uuid="bf2b863a-d2ed-40ae-99b9-4e31f00b063c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="414" y="435" width="13" height="15" forecolor="#006F69" uuid="fc839ed7-784b-4cfb-be53-d6f85c05a98b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p10_SI" x="424" y="436" width="17" height="13" uuid="3a30db76-fef1-4282-b24c-518e6dc684a7"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement x="482" y="435" width="21" height="15" forecolor="#006F69" uuid="1b999534-c4c2-493b-9038-48a648b538a3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement key="" style="p10_NO" x="503" y="436" width="17" height="13" uuid="f8ee84df-a098-4be6-af4e-6df2260211fe"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<line>
+				<reportElement x="490" y="248" width="1" height="140" uuid="458643bc-e92d-43d9-80a7-2b94ba8a8e12">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="419" y="248" width="1" height="140" uuid="20e165a0-2a68-47f1-8c8c-b2a9e17e9e28">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed" lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="11" y="459" width="122" height="15" forecolor="#006F69" uuid="c3dc0a36-3463-4913-8194-5a32b95e4440">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IMPORTANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="474" width="528" height="24" forecolor="#006F69" uuid="372e9c7e-0da2-43cd-bb13-0f13ce3bc33b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PARA CUALQUIER SUGERENCIA  O INCONFORMIDAD, FAVOR DE REPORTARLO AL CENTRO DE CONTACTO QUÁLITAS 01 800 800 2021, EN DÍAS Y HORAS HÁBILES.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="5" y="499" width="535" height="24" forecolor="#FFFFFF" backcolor="#006F69" uuid="08012efd-ba20-46c4-97ba-19a59349a902">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES Y/O SUGERENCIAS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="519" width="532" height="15" uuid="dc662ff1-0f16-46f7-a211-1e005914615e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones1}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="534" width="532" height="15" uuid="81189153-097c-4227-a716-43869babb3cf">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones2}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="549" width="532" height="15" uuid="412a5e6e-25f4-4e7c-811e-0bfcb4827cc3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones3}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="564" width="532" height="15" uuid="60084446-7d5b-47be-a44f-20812a65aa56">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones4}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="579" width="532" height="15" uuid="1230a719-d781-4111-9135-cb2632f378fa">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones5}.toString()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="7" y="594" width="532" height="15" uuid="cc9fbdd9-b9fb-41c9-acc6-b943b10cdb93">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{observaciones6}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="7" y="621" width="532" height="15" forecolor="#FFFFFF" backcolor="#006F69" uuid="454df7e6-51f0-4437-8c33-5daf0f4bef0b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATOS GENERALES DEL CONDUCTOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="641" width="43" height="15" forecolor="#006F69" uuid="da1bc1de-f0d3-4ab5-8009-52facdfa4767">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="50" y="641" width="490" height="15" uuid="f00c3211-4828-440b-a556-e9594b59b3f4">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomConductor}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="660" width="64" height="15" forecolor="#006F69" uuid="ae822e74-6baa-40bf-adc2-61483ad847f6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TELÉFONOS:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="64" y="660" width="146" height="15" uuid="d720289c-b164-4be8-baac-68744c5e657a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{telConductor}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="218" y="660" width="98" height="15" forecolor="#006F69" uuid="9b5a44c3-2e59-477b-ad61-42a82625d4ff">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CORREO ELECTRÓNICO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="319" y="660" width="220" height="15" uuid="d5e645d2-419f-4cdc-a60e-580a87ab71c0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{emailConductor}.toString()]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="8" y="704" width="245" height="65" forecolor="#FFFFFF" uuid="b76324ea-ec30-473d-b3e9-c539caf44d40"/>
+				<graphicElement>
+					<pen lineColor="#228997"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="83" y="748" width="100" height="15" forecolor="#7C1482" uuid="c0b5ebca-fc6f-486e-b063-f903738772a1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[LUGAR Y FECHA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="262" y="687" width="286" height="82" forecolor="#1C1514" uuid="2cf54dc5-e183-467f-a43e-34b1a25fe3d2"/>
+				<graphicElement>
+					<pen lineColor="#228997"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="359" y="749" width="100" height="15" forecolor="#7C1482" uuid="6bafe744-e15a-430f-a551-999e39438f6c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="12" y="730" width="239" height="15" uuid="8d3d2e6c-d6ad-4434-9c02-3d58cd806d8a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+					<topPen lineColor="#FFFFFF"/>
+					<leftPen lineColor="#FFFFFF"/>
+					<bottomPen lineColor="#FFFFFF"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{lugarFecha}.toString()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="17" y="743" width="233" height="1" forecolor="rgba(34, 137, 151, 0.69411767)" uuid="a548ac3b-b3f8-42e0-b47c-5e520c43ec49"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="510" y="824" width="34" height="13" forecolor="#006D67" uuid="80b10a4d-e9b4-4cdc-b00e-926036138af4">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QS-25]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="271" y="730" width="265" height="15" uuid="d0608b1d-b586-4855-89f5-cacc325f59bf">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#228997"/>
+					<topPen lineColor="#FFFFFF"/>
+					<leftPen lineColor="#FFFFFF"/>
+					<bottomPen lineColor="#FFFFFF"/>
+					<rightPen lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="5" rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomAsegurado}.toString()]]></textFieldExpression>
+			</textField>
+			<image isUsingCache="true" onErrorType="Blank">
+				<reportElement x="395" y="706" width="48" height="38" uuid="68c58bd6-46e7-46d1-a999-52b737b282d8"/>
+				<imageExpression><![CDATA[$P{imgBits}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="313" y="349" width="47" height="15" forecolor="#006F69" uuid="098262ec-523f-4a92-8e01-4b87597759ef">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO APLICA]]></text>
+			</staticText>
+			<ellipse>
+				<reportElement style="p6_N" x="364" y="350" width="17" height="13" uuid="d8ed2a20-c38b-40fe-903f-c6a075790f04"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</ellipse>
+			<staticText>
+				<reportElement mode="Transparent" x="269" y="771" width="278" height="55" isPrintWhenDetailOverflows="true" forecolor="#7C1482" uuid="508ede7f-e3a6-4460-b092-c482d2405ec2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineColor="rgba(34, 137, 151, 0.35686275)"/>
+					<leftPen lineColor="rgba(34, 137, 151, 0.35686275)"/>
+					<bottomPen lineColor="rgba(34, 137, 151, 0.35686275)"/>
+					<rightPen lineColor="rgba(34, 137, 151, 0.35686275)"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Manifiesto que fue puesto a mí disposición el Aviso de Privacidad de Quálitas Compania de Seguros, S.A. de C.V., por lo que autorizo el tratamiento de mis Datos Personales para los fines señalados en el mismo, incluyendo el intercambio de información para el cumplimiento del contrato de seguro.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="276" y="745" width="258" height="1" forecolor="rgba(34, 137, 151, 0.69411767)" uuid="bb4fa787-6636-422e-af42-7ff17abb6367"/>
+				<graphicElement>
+					<pen lineColor="#006F69"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement mode="Opaque" x="262" y="688" width="286" height="15" forecolor="#FFFFFF" backcolor="#05818B" uuid="b86ef9ae-b40a-4974-9c24-964d61b077d0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ACEPTO EL DOCUMENTO Y EL AVISO DE PRIVACIDAD"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="920">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="10" width="560" height="908" backcolor="#F9F2F9" uuid="3292d99d-65ad-4888-8d9a-41886a9062a3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textField>
+					<reportElement x="15" y="463" width="259" height="10" forecolor="#7C1482" uuid="0d996dee-8c7a-4de0-afcd-b202b5c6c8bc">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["• Finalidades del tratamiento de datos personales de  Clientes:"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="15" y="473" width="259" height="85" forecolor="#7C1482" uuid="8f469117-af93-473f-890a-0170350a6d6c">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["La evaluación de su solicitud de seguro y selección de riesgos, en su caso, validar la veracidad de sus datos, emisión del contrato de seguro, atención y trámite a las reclamaciones de siniestros, venta de salvamentos, administración, mantenimiento o renovación de la póliza de seguro, realizar pagos, cobranza, facturación, atención a clientes, prevención de fraudes y operaciones ilícitas, estudios y estadística, fomento a la educación vial, administrar los fondos aportados por el cliente con el fin de cubrir el costo de los servicios contratados, dar seguimiento y atención a los derechos y revocación del consentimiento de los titulares, así como para todos los fines relacionados con    el cumplimiento de nuestras obligaciones de conformidad con lo establecido en la Ley sobre el Contrato de Seguro y en la normatividad aplicable."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="15" y="557" width="259" height="20" forecolor="#7C1482" uuid="a0e4e534-4cca-48b5-9165-0bf8cf11eac7">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["•Finalidades del tratamiento de datos personales de  Visitantes: VIDEOVIGILANCIA Y FOTOGRAFIA.-"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="667" width="259" height="160" forecolor="#7C1482" uuid="b2ee762c-c792-4983-82ef-5ddc8bf2418a">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[•Cuando nuestros asegurados, directamente o a través de nuestros intermediarios de seguros, nos soliciten información de los terceros afectados por algún siniestro, con el fin de analizar el siniestro, y en su caso llevar a cabo planes, pláticas y programas de prevención de riesgos.
+
+•En el caso de flotillas, nuestros asegurados o nuestros intermediarios de seguros nos soliciten información para determinar porcentajes de siniestralidad, con el fin de definir si en la renovación se incrementará el costo de la póliza o puede otorgarse un descuento.
+
+•Con fines de mercadotecnia, publicidad, prospección comercial y en su caso para brindarle los beneficios adicionales a su póliza, por medios físicos o electrónicos, ya sea personalmente o por conducto de intermediarios de seguros.
+
+•Invitarlo a participar en concursos, actividades recreativas o altruistas sin fines de lucro.
+
+•Evaluar la calidad del servicio y realizar estudios estadísticos, así como contactar a sus familiares y/o terceros, nombrados para contacto en caso de emergencia, con la misma finalidad.]]></text>
+				</staticText>
+				<rectangle radius="4">
+					<reportElement x="6" y="4" width="550" height="20" forecolor="#7C1482" backcolor="#91278F" uuid="290455cf-a056-4f9a-9693-30abfe8c0fca">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#228997"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="38" y="5" width="241" height="17" forecolor="#FFFFFF" uuid="ea4c70a4-de0b-45b9-9741-f7005e5948ec"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="9" isBold="true" isUnderline="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["AVISO DE PRIVACIDAD INTEGRAL CLIENTES"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="5" width="259" height="17" forecolor="#FFFFFF" uuid="b0294718-b36b-4aa8-ae16-e39ea1d12173">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["(Vigente a partir del 16 de enero de 2023)"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement key="" x="4" y="670" width="10" height="10" backcolor="#FFFFFF" uuid="08f105e8-2670-4ed9-9906-4c0af8ba5975">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line direction="BottomUp">
+					<reportElement x="7" y="670" width="6" height="8" forecolor="#7C1482" uuid="50e4072b-e8e3-47a0-8c8e-6a6049097f71">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chUno}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="5" y="675" width="3" height="3" forecolor="#7C1482" uuid="0ef2d911-c7e4-46ad-93c9-4c318580ccd5">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chUno}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<rectangle>
+					<reportElement key="" x="4" y="708" width="10" height="10" uuid="99ca5934-3aef-4564-8d67-97075eb91860">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line>
+					<reportElement x="5" y="713" width="3" height="3" forecolor="#7C1482" uuid="a231052a-3484-475a-837b-81cf94e8aa94">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chDos}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="7" y="708" width="6" height="8" forecolor="#7C1482" uuid="4526b025-c16c-4cdc-904c-28f9139d6609">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chDos}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<rectangle>
+					<reportElement key="" x="4" y="738" width="10" height="10" uuid="4504ce5c-96f6-4fab-ae38-92ea0c293c03">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line direction="BottomUp">
+					<reportElement x="7" y="738" width="6" height="8" forecolor="#7C1482" uuid="61fb9df9-21cb-4cb6-9783-6eafbf4e32e4">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chTres}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="5" y="743" width="3" height="3" forecolor="#7C1482" uuid="f1f7201e-7126-46ce-8861-a45fea10f385">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chTres}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="5" y="25" width="269" height="70" forecolor="#7C1482" uuid="27e004c7-316a-422a-80d6-88c86de03ba8">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Quálitas Compañía de Seguros, S.A. de C.V. (en adelante Quálitas), en cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDP), su Reglamento y los LINEAMIENTOS del Aviso de privacidad, hace de su conocimiento que el presente Aviso de Privacidad aplica a los Datos Personales proporcionados por Usted mediante solicitudes de seguro, cuestionarios, formatos, contacto telefónico, directamente o a través de terceros autorizados por Quálitas, por vía impresa, electrónica, óptica, sonora o cualquier otro medio o tecnología, en virtud de la relación jurídica que tengamos celebrada o que en su caso celebremos. Para efectos del presente Aviso se entenderá por:"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="15" y="94" width="259" height="167" forecolor="#7C1482" uuid="a123133c-dd97-48ca-9fb6-eb6efb929baf">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[•“Clientes”: Prospectos, solicitantes, contratantes, asegurados, beneficiarios, terceros afectados (cualquier persona que se encuentre fuera o dentro de un vehículo asegurado por Quálitas en el momento en el que se actualice un siniestro), conductor y ocupantes de vehículo no asegurado por Qualitas, fideicomitentes, fideicomisarios, proveedores de recursos y visitantes de la página pública de Quálitas y cualquier otra aplicación proporcionada por ésta para la prestación de sus servicios. (en adelante de forma indistinta “el/los Titular[es]).
+
+Por el término “terceros autorizados” o “terceros afectados” no deberá entenderse el concepto de “tercero” que señala la ley aplicable. 
+
+•Acorde con la regla general, el consentimiento por parte del titular para el tratamiento de sus datos personales será “tácito”, por lo cual el titular manifiesta que el presente Aviso de Privacidad le ha sido dado a conocer por Quálitas, teniéndose por aceptado el presente con la puesta a disposición de este a través de cualquier medio autorizado por la ley y la entrega de los datos por parte del Titular.
+
+En caso de solicitarle datos financieros y/o sensibles, Quálitas ya sea a través de formato impreso, o valiéndose de medios electrónicos obtendrá el “Consentimiento expreso” del Titular para el tratamiento de dichos datos.
+]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="15" y="264" width="259" height="10" forecolor="#7C1482" uuid="bec8091d-0d4b-41fa-a7ab-826f2262afed">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["1. IDENTIDAD Y DOMICILIO DEL RESPONSABLE: "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="274" width="259" height="26" forecolor="#7C1482" uuid="a39ad3a2-1376-4112-86ab-92ae771c3160">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Quálitas Compañía de Seguros, S.A. de C.V., con domicilio en Avenida San Jerónimo número 478, Colonia Jardines del Pedregal, Alcaldía Álvaro Obregón, C.P. 01900, Ciudad de México.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="17" y="300" width="259" height="20" forecolor="#7C1482" uuid="b91a9128-3714-4b82-a339-91902537d160">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["2. INFORMACIÓN QUE RECABA DE LOS TITULARES (DATOS PERSONALES SOMETIDOS A TRATAMIENTO): "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="320" width="259" height="56" forecolor="#7C1482" uuid="2516ec66-bcbe-44dd-a34d-41355fd9d814">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Quálitas hace de su conocimiento que tratará sus Datos Personales (datos de identificación, datos de contacto, datos laborales, datos académicos, datos de tránsito y migratorios, geolocalización, así como datos personales contenidos en procedimientos administrativos, administrativos seguidos en forma de juicio, judiciales y/o jurisdiccionales). Datos Patrimoniales y Datos Financieros, que en su caso se recaben, así como las imágenes captadas por cámaras de video vigilancia para los fines indicados en el presente Aviso de Privacidad.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="17" y="376" width="259" height="10" forecolor="#7C1482" uuid="de202282-103f-4951-9b70-fdb6fdd70c26">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["3. SEÑALAMIENTO EXPRESO DE LOS DATOS SENSIBLES QUE TRATARÁ: "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="386" width="259" height="16" forecolor="#7C1482" uuid="facd6fe0-67c2-4d4d-887a-da8f8ff1a6b1">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Quálitas tratará también datos sensibles (datos de salud, características personales, físicas, género y datos biométricos), que en su caso se requieran.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="17" y="424" width="259" height="10" forecolor="#7C1482" uuid="eeb3ef0e-70d0-4de0-9456-e8985e772efb">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4.1 FINALIDADES PRIMARIAS DEL TRATAMIENTO.-"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="17" y="404" width="259" height="20" forecolor="#7C1482" uuid="c6237d37-b875-4c6b-8081-0fd971f15cbe">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["4. CON QUÉ FINES DARÁ TRATAMIENTO A LOS DATOS PERSONALES RECABADOS:"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="434" width="259" height="32" forecolor="#7C1482" uuid="d121d4c8-af89-4a44-90ba-92dac8fc28a0">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Los datos personales antes enunciados, incluso aquellos de carácter sensible, se tratarán para todos los fines vinculados con la  relación jurídica  y/o comercial que tengamos con Usted con motivo de los servicios  proporcionados por Quálitas y podrán ser:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="17" y="577" width="259" height="55" forecolor="#7C1482" uuid="448a21d4-92dd-44b7-92dd-65ff6c30ef9a">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Toda persona que ingrese a cualquiera de las instalaciones de Quálitas, podrá ser videograbada y/o fotografiada por nuestras cámaras de seguridad respecto de los cuales se guardaran registros que podrán ser utilizados tanto para salvaguardar la seguridad del visitante, como la del personal, teniendo como propósito el monitoreo remoto en tiempo real de los inmuebles y así atenuar cualquier condición de riesgo emergente, así como llevar un control de acceso a nuestras instalaciones. "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="17" y="632" width="259" height="10" forecolor="#7C1482" uuid="dffeaadf-a077-4a26-9096-5982ed711493">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[4.2. FINALIDADES SECUNDARIAS DEL TRATAMIENTO.- ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="17" y="642" width="259" height="24" forecolor="#7C1482" uuid="ee582dfa-b6e7-42bc-84c7-984d4e52cd4f">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Cuando Usted sea un tercero afectado de una póliza corporativa (contratada por una empresa) o cliente, sus datos personales podrían ser tratados para las siguientes finalidades secundarias:"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement key="" x="4" y="785" width="10" height="10" uuid="052e165d-8d94-4548-8d81-9e4faaa13a2e">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line direction="BottomUp">
+					<reportElement x="7" y="785" width="6" height="8" forecolor="#7C1482" uuid="be1765b1-cd25-49d7-9f50-b619ac7e2be5">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chSeis}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="5" y="790" width="3" height="3" forecolor="#7C1482" uuid="f4a18ffc-fb95-4bfe-b047-6dd5c1caff17">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chSeis}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="7" y="830" width="269" height="63" forecolor="#7C1482" uuid="4885179d-688a-40e0-98fc-97e06942805c">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+						<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.1"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0" spacingBefore="0" spacingAfter="0"/>
+					</textElement>
+					<text><![CDATA[En caso de que no desee que sus datos personales se utilicen para alguno (o todos) estos fines secundarios, indíquelo marcando con una X la casilla que aparece a la izquierda de cada inciso. Si la(s) casilla(s) no se marcan, usted manifiesta su consentimiento para que tratemos sus datos para dichas finalidades secundarias.
+La negativa para el uso de sus datos personales para estas finalidades no podrá ser un motivo para que le neguemos los servicios y productos que solicita o contrata con nosotros.]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="296" y="25" width="259" height="10" forecolor="#7C1482" uuid="d82c0889-8b45-4a77-b200-a72188e55de9">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA["5.TRANSFERENCIAS DE DATOS: "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="296" y="34" width="259" height="32" forecolor="#7C1482" uuid="016a7979-64ff-482c-9ac3-609f1b8dfe10">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Quálitas podrá realizar transferencias de datos personales sin requerir el consentimiento del Titular, ya sean nacionales o internacionales, en los casos previstos en el Artículo 37 de la LFPDP o en cualquier otro caso de excepción previsto por la misma u otra legislación aplicable, así como a:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="68" width="259" height="242" forecolor="#7C1482" uuid="64cf3731-9d2e-4172-a46b-424964b9a48d">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[•Sociedades relacionadas o subsidiarias, con la finalidad de ofrecerle otros productos y servicios;
+
+•Empresas afiliadas, subsidiarias y/o terceras empresas que formen parte del “Grupo”, y/o con las que mantengamos una relación jurídica y/o sean nuestros socios comerciales, que operan bajo las mismas políticas internas en materia de protección de datos personales; para los fines previstos en el presente Aviso de Privacidad.
+
+•Autoridades mexicanas y extranjeras, con la finalidad de dar cumplimiento a nuestras obligaciones derivadas de leyes, tratados o acuerdos internacionales como institución de seguros, obligaciones tributarias, así como para el cumplimiento de notificaciones o requerimientos oficiales o de carácter judicial.
+
+•Instituciones, organizaciones o entidades del sector asegurador (integrantes y auxiliares o de apoyo), para selección, seguimiento y control de riesgos, prevención de fraudes y la realización de negocios en coaseguro y reaseguro; pago y compensación de siniestros entre compañías de seguros.
+
+•Personas físicas o morales dedicadas a la compra y/o comercialización de salvamentos, de acuerdo a las facturas y/o documentos de propiedad.
+
+•Su Agente de Seguros y/o Administrador de Riesgos, para dar cumplimiento a la relación jurídica con Quálitas.
+
+•Contratantes del seguro, producto o servicio, para dar cumplimiento a las obligaciones derivadas del contrato.
+
+•Cualquier entidad con la que hayamos celebrado un acuerdo jurídico vinculante con la finalidad de dar cumplimiento a obligaciones contractuales.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="311" width="259" height="98" forecolor="#7C1482" uuid="49ceef7e-b11c-45eb-a0a8-6e9f7a5637d7">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[5.1. Por petición de:
+
+i. Clientes corporativos (personas morales), que requieran datos de clientes y/o terceros afectados con el fin de preparar reportes o llevar a cabo estadísticas, los datos a que se refiere este aviso podrán ser transferidos a:
+
+• Intermediarios en operaciones de seguros, para determinar porcentajes de siniestralidad, con el fin de definir si en la renovación se incrementará el costo de la póliza o puede otorgarse algún descuento, así como para preparar reportes, estudios o estadísticas para sus clientes, en relación con los destinatarios o beneficiarios finales de las pólizas de seguro (como Usted, si fuere el caso).]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="410" width="259" height="63" forecolor="#7C1482" uuid="97c61620-07b9-4a43-af1b-34cf3fecf768">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[•En caso de que no desee que sus datos personales sean transferidos a intermediarios de seguros, indíquelo marcando con  una “X” la casilla que aparece a la izquierda de este párrafo. Si la casilla no se marca, usted manifiesta su consentimiento para que transfiramos sus datos a intermediarios de seguros.
+
+En caso de que realicemos alguna transferencia adicional que requiera su consentimiento expreso, se recabará el mismo previamente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="475" width="259" height="36" forecolor="#7C1482" uuid="9252b0e3-0ba7-424b-8247-23e03d7e08e5">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[6. MECANISMOS PARA SOLICITAR EL EJERCICIO DE LOS DERECHOS ARCO Y REVOCACIÓN DEL CONSENTIMIENTO, ASÍ COMO OPCIONES Y MEDIOS QUE OFRECE QUÁLITAS PARA LIMITAR EL USO O DIVULGACIÓN DE LOS DATOS PERSONALES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="512" width="259" height="110" forecolor="#7C1482" uuid="a3624431-ed44-4b42-b208-fd6727911db1">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Usted podrá solicitar al Departamento de Datos Personales de Quálitas, el Acceso, Rectificación, Cancelación y Oposición al tratamiento de sus Datos Personales, así como la limitación de su uso y revocación del consentimiento, de forma escrita en el domicilio señalado en el numeral I del presente Aviso o al correo electrónico datospersonales@qualitas.com.mx, de conformidad con lo establecido en los Procedimientos que se encuentran disponibles en la página de internet www.qualitas.com.mx en la sección “Aviso de Privacidad”. En los Procedimientos que aparecen al final de dicho aviso, usted encontrará las vías de respuesta a las diferentes solicitudes, dependiendo del contenido de las mismas.
+
+Además del ejercicio de sus derechos de Revocación o ARCO, usted   podrá limitar el uso o divulgación de sus datos personales, mediante su inscripción en el Registro Público de Usuarios Personas Físicas (REUS).]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="624" width="259" height="10" forecolor="#7C1482" uuid="ca86a357-3e61-4be5-8d2d-1570699fa192">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[7. COOKIES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="634" width="259" height="95" forecolor="#7C1482" uuid="be9fd641-d093-4709-b78b-eb1bafd90e1f">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.2"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[“Cookies” son archivos de datos que se almacenan en el disco duro del equipo de cómputo o del dispositivo de comunicaciones electrónicas de un usuario al navegar en un sitio de internet específico, el cual permite intercambiar información de estado entre dicho sitio y el navegador del usuario. La información de estado puede revelar medios de identificación de sesión, autenticación o preferencias del usuario, así como cualquier dato almacenado por el navegador respecto al sitio de internet.
+
+Por lo anterior, Quálitas le informa que, en todo momento, puede deshabilitar el uso de estos mecanismos, de acuerdo a las instrucciones que cada empresa propietaria de los browsers (navegador o visor de internet) tiene implementado para activar y desactivar las citadas “Cookies”.
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="730" width="259" height="10" forecolor="#7C1482" uuid="0d27ae48-b300-4a37-bc18-91125d63221c">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[8. INFORMACIÓN DEL ÁREA DE DATOS PERSONALES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="742" width="259" height="87" forecolor="#7C1482" uuid="e81d35ba-abb2-4476-86df-31f24e213d15">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.1"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Usted podrá contactar al Departamento de Datos Personales, para resolver dudas o comentarios respecto de su(s) procedimiento(s), a través de los siguientes medios:
+
+-Correo electrónico: datospersonales@qualitas.com.mx
+
+-Escrito libre dirigido al Departamento de Datos Personales, con domicilio en Avenida San Jerónimo número 478, Colonia Jardines del Pedregal, Alcaldía Álvaro  Obregón, C.P. 01900, en la Ciudad de México.
+
+-Horario de atención: 09:00 a 14:00 horas
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="830" width="259" height="20" forecolor="#7C1482" uuid="af033c30-e59b-4ffe-996d-3d9b3285303b">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" markup="none">
+						<font fontName="SansSerif" size="6.5" isBold="true" pdfFontName="Helvetica-Bold"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[9. MEDIOS A TRAVÉS DE LOS CUALES SE ENCUENTRA A SU DISPOSICIÓN EL AVISO DE PRIVACIDAD Y SUS ACTUALIZACIONES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="296" y="849" width="259" height="48" forecolor="#7C1482" uuid="210ed687-2124-4132-b5a3-bc025296e871">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="SansSerif" size="6.1"/>
+						<paragraph lineSpacingSize="1.0"/>
+					</textElement>
+					<text><![CDATA[Quálitas se reserva el derecho a modificar en cualquier tiempo este Aviso de Privacidad con motivo de sus cambios en prácticas de operación y mejoras de servicio; es responsabilidad del titular revisar el contenido del Aviso en el sitio de Internet www.qualitas.com.mx, por lo que le recomendamos lo visite periódicamente, o bien solicitándolo al correo electrónico  datospersonales@qualitas.com.mx. ]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement key="" x="4" y="765" width="10" height="10" uuid="28c3e077-b22e-4b67-acf9-d70cf910d5b5">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line>
+					<reportElement x="5" y="770" width="3" height="3" forecolor="#7C1482" uuid="a497448d-a161-4561-baa5-1300a2944281">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chCinco}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line direction="BottomUp">
+					<reportElement x="7" y="765" width="6" height="8" forecolor="#7C1482" uuid="d1b54e1a-be2d-48e4-beb3-0b6d9175cd3c">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<printWhenExpression><![CDATA[$P{chCinco}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<rectangle>
+					<reportElement key="" x="284" y="419" width="10" height="10" uuid="883df515-0351-4cfa-acf9-2088c4493982">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<graphicElement>
+						<pen lineColor="#7C1482"/>
+					</graphicElement>
+				</rectangle>
+				<line direction="BottomUp">
+					<reportElement x="287" y="419" width="6" height="8" forecolor="#7C1482" uuid="59462a89-4c96-4615-a5a7-90ab501a6b54">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<printWhenExpression><![CDATA[$P{chCuatro}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="285" y="424" width="3" height="3" forecolor="#7C1482" uuid="f4aacccc-4101-4b2e-a564-7740f6504243">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<printWhenExpression><![CDATA[$P{chCuatro}.intValue()==1]]></printWhenExpression>
+					</reportElement>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,83 @@
+package com.aaq.col.clases.database.repositorios.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.aaq.col.clases.database.entidades.CatalogoRecuperaciones;
+import com.aaq.col.clases.database.entidades.abstracto.AbstractCatalogoRecuperaciones_;
+import com.aaq.col.clases.database.repositorios.SIICAServerGenericDaoJpaImpl;
+import com.aaq.col.clases.database.repositorios.interfase.CatalogoRecuperacionesDaoInterfase;
+
+
+@org.springframework.stereotype.Repository(value = "catalogoRecuperacionesDao")
+public class CatalogoRecuperacionesDao extends SIICAServerGenericDaoJpaImpl<CatalogoRecuperaciones> implements
+		CatalogoRecuperacionesDaoInterfase {
+
+	@Override
+	public CatalogoRecuperaciones objetoCatalogoRecuperacionesClave(String clave) {
+		try {
+			final CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+			final CriteriaQuery<CatalogoRecuperaciones> query = builder.createQuery(CatalogoRecuperaciones.class);
+			final Root<CatalogoRecuperaciones> root = query.from(CatalogoRecuperaciones.class);
+			query.select(root);
+			final List<Predicate> predicates = new ArrayList<>();
+			predicates.add(builder.equal(root.get(AbstractCatalogoRecuperaciones_.clave), clave));
+
+			query.where(predicates.toArray(new Predicate[predicates.size()]));
+			query.orderBy(builder.asc(root.get(AbstractCatalogoRecuperaciones_.id)));
+			final TypedQuery<CatalogoRecuperaciones> typedQ = this.getEntityManager().createQuery(query);
+
+			final List<CatalogoRecuperaciones> l = typedQ.getResultList();
+			if ((l != null) && (l.size() > 0)) {
+				return l.get(0);
+			}
+		} catch (final NoResultException e) {
+			return null;
+		} catch (final Exception e) {
+			this.documentarExcepcionParaMetodo(e, "objetoCatalogoRecuperacionesClave", clave);
+		}
+		return null;
+	}
+	
+	@Override
+	public List<CatalogoRecuperaciones> listaRecuperaciones(final String clave, final String nombre) {
+		try {
+			final CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
+			final CriteriaQuery<CatalogoRecuperaciones> query = builder.createQuery(CatalogoRecuperaciones.class);
+			final Root<CatalogoRecuperaciones> root = query.from(CatalogoRecuperaciones.class);
+			query.select(root);
+			final List<Predicate> predicates = new ArrayList<>();
+			if (StringUtils.isNotBlank(clave)) {
+				predicates.add(builder.equal(root.get(AbstractCatalogoRecuperaciones_.clave), clave));
+			}
+			if (StringUtils.isNotBlank(nombre)) {
+				predicates.add(builder.equal(root.get(AbstractCatalogoRecuperaciones_.descripcion), nombre));
+			}
+			query.where(predicates.toArray(new Predicate[predicates.size()]));
+			query.orderBy(builder.asc(root.get(AbstractCatalogoRecuperaciones_.descripcion)));
+			final TypedQuery<CatalogoRecuperaciones> typedQ = this.getEntityManager().createQuery(query);
+			return typedQ.getResultList();
+		} catch (final NoResultException e) {
+			this.documentarExcepcionParaMetodo(e, "listaRecuperaciones");
+		}  catch (final IllegalArgumentException e) {
+			this.documentarExcepcionParaMetodo(e, "listaRecuperaciones");
+		}  catch (final IllegalStateException e) {
+			this.documentarExcepcionParaMetodo(e, "listaRecuperaciones");
+		}  catch (final PersistenceException e) {
+			this.documentarExcepcionParaMetodo(e, "listaRecuperaciones");
+		}
+		return new Vector<>();
+	}
+
+}

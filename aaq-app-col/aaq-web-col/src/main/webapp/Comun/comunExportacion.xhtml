@@ -1,0 +1,37 @@
+
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="forma_mitad">
+		<h:form id="forma_exportacion">
+			<p:panel header="Bajar Reportes" styleClass="panelesV">
+				<h:panelGrid columns="3" columnClasses="tercio,tercio,tercio"
+					styleClass="tabla_captura">
+
+					<h:commandLink id="ExportXML" title="Listado XML"
+						action="#{componente.doAccionReporte}">
+						<f:param name="id" value="xml" />
+						<h:graphicImage url="/diseno/imagenes/reportes/iconExportXml.png" alt="XML"/>
+					</h:commandLink>
+					<h:commandLink id="ExportExcel" title="Listado Excel"
+						action="#{componente.doAccionReporte}">
+						<f:param name="id" value="excel" />
+						<f:param name="descripcion" value="#{descripcion}" />
+						<h:graphicImage
+							url="/diseno/imagenes/reportes/iconExportExcel.png" alt="Excel"/>
+					</h:commandLink>
+					<h:commandLink id="ExportPDF" title="Listado PDF"
+						action="#{componente.doAccionReporte}">
+						<f:param name="id" value="pdf" />
+						<h:graphicImage url="/diseno/imagenes/reportes/iconExportPdf.png" alt="PDF"/>
+					</h:commandLink>
+					<ui:insert name="contenidoAdicional" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+</ui:component>

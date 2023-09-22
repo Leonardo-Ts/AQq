@@ -1,0 +1,423 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente"
+		value="#{beanOperacionControlDocumentacion}" />
+
+	<ui:define name="tituloPagina">AQ Operaciones - Control de Documentación 
+			<ui:param name="clase_pagina" value="operacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Operaciones</a></li>
+		<li>Control de Documentación</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<h:form>
+
+			<p:commandButton ajax="false" value="Nueva Captura"
+				action="#{beanOperacionControlDocumentacion.doAccionNuevoReporte}"
+				rendered="#{!beanOperacionControlDocumentacion.reporteExiste}"
+				title="Haga click aquí para iniciar una nueva captura de documentación" />
+			<h5>Comandos Disponibles</h5>
+			<ul>
+				<li><h:commandLink value="Finalizar Sesión"
+						action="#{beanOperacionControlDocumentacion.doSalir}"
+						title="Finalizar sesion" /></li>
+				<li><h:commandLink
+						value="Bajar Listado de Tickets en Formato PDF (Actualmente tiene #{beanOperacionControlDocumentacion.conteoDeTickets}
+					tickets)"
+						action="#{beanOperacionControlDocumentacion.doAccionTicketPDF}"
+						title="Bajar el reporte en formato PDF" style="font-weight: bold;" />
+				</li>
+			</ul>
+
+			<p:outputPanel
+				rendered="#{beanOperacionControlDocumentacion.reporteExiste}">
+				<p:panel header="Datos Generales" styleClass="forma_un_tercio2 panelesV">
+					<h:panelGrid columns="2"
+						columnClasses="cuarto,cuarto,cuarto,cuarto"
+						styleClass="tabla_captura">
+
+
+						<p:outputLabel for="ramo" value="Ramo" />
+						<h:outputText id="ramo"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.ramo}"
+							title="Ramo de atención. Ejemplos: 04, 05" />
+
+						<p:outputLabel for="anio" value="Año" />
+						<p:inputText onkeyup="permitirSoloNumeros(this);" id="anio"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.anio}"
+							maxlength="2"
+							title="Año en que se registró el reporte, máximo 2 caracteres. Ejemplos: 07, 08, 09" />
+
+						<p:outputLabel for="rep" value="Reporte" />
+						<p:inputText onkeyup="permitirSoloNumeros(this);" id="rep"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.reporte}"
+							maxlength="7"
+							title="Número de reporte a consultar, máximo 7 caracteres. Ejemplos: 000001, 0000002" />
+
+						<p:outputLabel for="rsin" value="Siniestro" />
+						<p:inputText id="rsin"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.siniestro}"
+							maxlength="7"
+							title="Número de siniestro a consultar, máximo 7 caracteres.  Ejemplos: 000001, 0000002" />
+
+						<p:outputLabel for="rfol" value="Folio Declaración" />
+						<p:inputTextarea id="rfol"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.folioAjustador}"
+							title="Folio de declaración, máximo 7 caracteres. Ejemplos: 000001, 0000002" />
+
+						<p:commandButton value="Consultar &#187;"
+							actionListener="#{beanOperacionControlDocumentacion.doAccionConsultarReporteSISE}"
+							update="contenidoDatosReporte"
+							title="Haga click aquí para consultar los detalles del reporte o siniestro. No olvide capturar su número de folio!" />
+
+					</h:panelGrid>
+				</p:panel>
+
+
+				<p:outputPanel id="contenidoDatosReporte">
+
+					<p:panel header="Datos Reporte / Siniestro"
+						styleClass="forma_un_tercio2"
+						rendered="#{beanOperacionControlDocumentacion.resultadoExiste}">
+						<h:panelGrid columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto"
+							styleClass="tabla_captura">
+
+
+							<p:outputLabel for="resaju" value="Ajustador" />
+							<h:outputText id="resaju"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.ajustador} #{beanOperacionControlDocumentacion.nombreAjustador}" />
+
+							<p:outputLabel for="resdoctos" value="ST Documentos" />
+							<h:outputText id="resdoctos"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.stDocto}" />
+
+							<p:outputLabel for="resobsajus" value="OBS Ajustador" />
+							<h:outputText id="resobsajus"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.obsAjustador}" />
+
+							<p:outputLabel for="resrecuera" value="Recuperación" />
+							<h:outputText id="resrecuera"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.recuperacion}" />
+
+							<p:outputLabel for="resexep" value="Expediente" />
+							<h:outputText id="resexep"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.expediente}" />
+
+							<p:outputLabel for="rescolo" value="Color" />
+							<h:outputText id="rescolo"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.color}" />
+
+							<p:outputLabel for="resestatusexp" value="ST Expediente" />
+							<h:outputText id="resestatusexp"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.stExpediente}" />
+
+							<p:outputLabel for="resobservaexp" value="OBS Expediente" />
+							<h:outputText id="resobservaexp"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.obsExpediente}" />
+
+							<p:outputLabel for="rescodigoresp" value="Código Respuesta" />
+							<h:outputText id="rescodigoresp"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.codResp}" />
+
+							<p:outputLabel for="resqueja" value="Quejas (S/N)" />
+							<h:outputText id="resqueja"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.queja}" />
+
+							<p:outputLabel for="resfecharecepaccidente"
+								value="Fecha Recep. Expediente" />
+							<h:outputText id="resfecharecepaccidente"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.fechaRecep}" />
+
+							<p:outputLabel for="reshorarecepexpediente"
+								value="Hora Recep. Expediente" />
+							<h:outputText id="reshorarecepexpediente"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.resultado.horaRecep}" />
+
+							<p:outputLabel for="polizanumero" value="Número de Póliza" />
+							<h:outputText id="polizanumero"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.numPoliza}" />
+
+							<p:outputLabel for="polinzico" value="Inciso de Póliza" />
+							<h:outputText id="polinzico"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.inciso}" />
+
+							<p:outputLabel for="polaseg" value="Asegurado" />
+							<h:outputText id="polaseg"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.nombreAseg}" />
+
+							<p:outputLabel for="polveh" value="Vehículo" />
+							<h:outputText id="polveh"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.datosVehiculo}" />
+
+							<p:outputLabel for="polubi" value="Ubicación" />
+							<h:outputText id="polubi"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.datosUbicacion}" />
+						</h:panelGrid>
+
+					</p:panel>
+
+
+					<p:panel header="Documentación" styleClass="forma_un_tercio"
+						rendered="#{beanOperacionControlDocumentacion.resultadoExiste}">
+						<p:dataTable id="tablaDocumentos" var="terminalreportedocumento"
+							value="#{beanOperacionControlDocumentacion.actualTerminalReporte.terminalReporteDocumentos}"
+							emptyMessage="Sin Datos"
+							currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+							paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+							rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+							<f:facet name="header">Documentos Agregados</f:facet>
+							<p:column headerText="Documento">
+								<h:outputText
+									value="#{terminalreportedocumento.terminalReporteDocumentoTipo.clave} #{terminalreportedocumento.terminalReporteDocumentoTipo.tipo}" />
+							</p:column>
+							<p:column headerText="Valor">
+								<p:commandLink update="valor"
+									actionListener="#{beanOperacionControlDocumentacion.doAccionCambiarValor}">
+									<f:param name="id"
+										value="#{terminalreportedocumento.terminalReporteDocumentoTipo.clave}" />
+									<h:outputText id="valor"
+										value="#{terminalreportedocumento.valorDeDocumento}" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+
+
+
+					<p:panel header="Datos Bancarios" styleClass="forma_un_tercio2"
+						rendered="#{beanOperacionControlDocumentacion.resultadoExiste}">
+						<h:panelGrid columns="4"
+							rendered="#{beanOperacionControlDocumentacion.transaccionExiste}"
+							columnClasses="cuarto,cuarto,cuarto,cuarto"
+							styleClass="tabla_captura">
+
+
+							<p:outputLabel for="tranfecha" value="Transacción Fecha / Hora" />
+							<h:outputText id="tranfecha"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.transaccion.fecha}" />
+
+							<p:outputLabel for="tranfolio"
+								value="Transacción Número Operación" />
+							<h:outputText id="tranfolio"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.transaccion.numeroOperacion}" />
+
+							<p:outputLabel for="tranauth" value="Número Autorización" />
+							<h:outputText id="tranauth"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.transaccion.numeroAutorizacion}" />
+
+							<p:outputLabel for="tranmonto" value="Importe" />
+							<h:outputText id="tranmonto"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.transaccion.monto}" />
+
+							<p:outputLabel for="trantipo" value="Tipo" />
+							<h:outputText id="trantipo"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.transaccion.tipoDeCobro}" />
+						</h:panelGrid>
+						<h:panelGrid columns="4"
+							rendered="#{!beanOperacionControlDocumentacion.transaccionExiste}"
+							columnClasses="cuarto,cuarto,cuarto,cuarto"
+							styleClass="tabla_captura">
+
+
+							<p:outputLabel for="depfec"
+								value="Depósito Fecha (DIA/MES/A&#209;O)" />
+							<p:inputText id="depfec"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoFecha}"
+								maxlength="8"
+								title="La fecha en la cual se realizó el depósito. Máximo 8 caracteres. La fecha tiene que estar en formato DIA/MES/A&#209;O. Ejemplo: 31/01/2008" />
+
+
+							<p:outputLabel for="dephor" value="Depósito Hora (HORA:MINUTO)" />
+							<p:inputText id="dephor"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoHora}"
+								maxlength="5"
+								title="La hora en que se realizó el depósito. Máximo 5 caracteres. La hora tiene que estar en formato HORA:MINUTO. Ejemplo: 23:59" />
+
+
+							<p:outputLabel for="depfol" value="Depósito Folio" />
+							<p:inputText id="depfol"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoFolio}"
+								maxlength="10"
+								title="El número de folio del depósito. Máximo 10 caracteres. Ingresar solamente numeros. Ejemplo: 0123456790" />
+
+							<p:outputLabel for="deprefe" value="Depósito Referencia" />
+							<p:inputText id="deprefe"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoReferencia}"
+								maxlength="16"
+								title="El numero de referencia bancaria del depósito. Máximo 16 caracteres. Esta puede ser alfanumérica. Ejemplo 040800001-ABC-123" />
+
+							<p:outputLabel for="depban" value="Depósito Banco" />
+							<h:selectOneMenu id="depban"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoBanco}"
+								title="Seleccione el banco donde se realizó el depósito.">
+								<f:selectItem itemDescription="AFIRME" itemLabel="AFIRME"
+									itemValue="AFIRME" />
+								<f:selectItem itemDescription="BANAMEX" itemLabel="BANAMEX"
+									itemValue="BANAMEX" />
+								<f:selectItem itemDescription="BANCOMER" itemLabel="BANCOMER"
+									itemValue="BANCOMER" />
+								<f:selectItem itemDescription="BANORTE" itemLabel="BANORTE"
+									itemValue="BANORTE" />
+								<f:selectItem itemDescription="BANREGIO" itemLabel="BANREGIO"
+									itemValue="BANREGIO" />
+								<f:selectItem itemDescription="HSBC" itemLabel="HSBC"
+									itemValue="HSBC" />
+								<f:selectItem itemDescription="INVERLAT" itemLabel="INVERLAT"
+									itemValue="INVERLAT" />
+								<f:selectItem itemDescription="SANTANDER MEXICANO"
+									itemLabel="SANTANDER MEXICANO" itemValue="SANTANDER MEXICANO" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="depimp"
+								value="Depósito Importe (Solo numeros y punto decimal)" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="depimp"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoImporte}"
+								maxlength="9"
+								title="El importe que se depositó. Solamente numeros y punto decimal. Ejemplo: 100.25 " />
+
+
+							<p:outputLabel for="deptipo" value="Depósito Tipo (PD,PR)" />
+							<h:selectOneMenu id="deptipo"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.depositoTipoPago}"
+								title="Seleccione el tipo de depósito que se hizo.">
+								<f:selectItem itemDescription="PD" itemLabel="Pago de Deducible"
+									itemValue="PD" />
+								<f:selectItem itemDescription="PR"
+									itemLabel="Pagp de Recuperación" itemValue="PR" />
+							</h:selectOneMenu>
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel header="Datos Sipac Aseguradoras"
+						styleClass="forma_un_tercio2"
+						rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.sipacAplica}">
+						<h:panelGrid columns="3" styleClass="tabla_captura"
+							columnClasses="tercio,tercio,tercio">
+							<p:outputLabel for="idaseguradorasipacdamos"
+								value="SIPAC - Dimos" />
+							<p:selectBooleanCheckbox id="idaseguradorasipacdamos"
+								style="width: 30px"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.sipacDimos}" />
+							<h:selectOneMenu
+								value="#{beanOperacionControlDocumentacion.idAseguradoraDamos}">
+								<f:selectItems var="catalogoAseguradora"
+									itemValue="#{catalogoAseguradora.id}"
+									itemLabel="#{catalogoAseguradora.razonSocial}"
+									value="#{beanOperacionControlDocumentacion.listaDeCatalogoAseguradora}" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="idaseguradorasipacrecibimos"
+								value="SIPAC - Recibimos" />
+							<p:selectBooleanCheckbox id="idaseguradorasipacrecibimos"
+								style="width: 30px"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.sipacRecibimos}" />
+							<h:selectOneMenu
+								value="#{beanOperacionControlDocumentacion.idAseguradoraRecibimos}">
+								<f:selectItems var="catalogoAseguradora"
+									itemValue="#{catalogoAseguradora.id}"
+									itemLabel="#{catalogoAseguradora.razonSocial}"
+									value="#{beanOperacionControlDocumentacion.listaDeCatalogoAseguradora}" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="idaseguradoraambos" value="SIPAC - Ambos" />
+							<p:selectBooleanCheckbox id="idaseguradoraambos"
+								style="width: 30px"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.sipacAmbos}" />
+							<h:selectOneMenu
+								value="#{beanOperacionControlDocumentacion.idAseguradoraAmbos}">
+								<f:selectItems var="catalogoAseguradora"
+									itemValue="#{catalogoAseguradora.id}"
+									itemLabel="#{catalogoAseguradora.razonSocial}"
+									value="#{beanOperacionControlDocumentacion.listaDeCatalogoAseguradora}" />
+							</h:selectOneMenu>
+						</h:panelGrid>
+					</p:panel>
+
+
+					<p:panel header="Reporte de Robo - Datos Obligatorios"
+						styleClass="forma_un_tercio2"
+						rendered="#{beanOperacionControlDocumentacion.actualTerminalReporte.poliza.esReporteDeRobo}">
+						<h:panelGrid columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto"
+							styleClass="tabla_captura">
+
+
+
+
+							<p:outputLabel for="reporte_robo_codigo_entidad"
+								value="Codigo de Entidad" />
+							<p:inputText id="reporte_robo_codigo_entidad"
+								value="#{beanOperacionControlDocumentacion.txtBusquedaCodigoEntidad}"
+								title="Escriba aqui el nombre, parte del nombre, la clave o parte de la clave de entidad a buscar" />
+							<p:commandButton value="-&#62;" update="ub_ent"
+								title="Haga click aqui para buscar en el catalogo de claves de entidad. Los resultados se desplegaran a la derecha" />
+							<h:selectOneMenu id="ub_ent"
+								title="Catalogo de Claves de Entidad"
+								value="#{beanOperacionControlDocumentacion.idCodigoEntidadSeleccionado}">
+								<f:selectItems var="catalogoClaveDeEntidad"
+									itemValue="#{catalogoClaveDeEntidad.id}"
+									itemLabel="#{catalogoClaveDeEntidad.descripcion}"
+									value="#{beanOperacionControlDocumentacion.listaDeCatalogoClaveDeEntidad}" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="reporte_robo_codigo_municipio"
+								value="Codigo de Municipio" />
+
+							<p:inputText id="reporte_robo_codigo_municipio"
+								value="#{beanOperacionControlDocumentacion.txtBusquedaCodigoMunicipio}"
+								title="Escriba aqui el nombre, parte del nombre, la clave o parte de la clave de municipio a buscar" />
+							<p:commandButton value="-&#62;" update="ub_mun"
+								title="Haga click aqui para buscar en el catalogo de claves de municipio Los resultados se desplegaran a la derecha" />
+							<h:selectOneMenu id="ub_mun"
+								title="Catalogo de Claves de Municipio"
+								value="#{beanOperacionControlDocumentacion.idCodigoMunicipioSeleccionado}">
+								<f:selectItems var="catalogoClaveDeEntidad"
+									itemValue="#{catalogoClaveDeEntidad.id}"
+									itemLabel="#{catalogoClaveDeEntidad.descripcion}"
+									value="#{beanOperacionControlDocumentacion.listaDeCatalogoClaveDeEntidadMunicipio}" />
+							</h:selectOneMenu>
+
+
+							<p:outputLabel for="reporte_robo_aver_previa_num"
+								value="Numero Averiguacion Previa" />
+							<p:inputText id="reporte_robo_aver_previa_num"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.averiguacionPreviaNumero}" />
+
+							<p:outputLabel for="reporte_robo_aver_previa_fecha"
+								value="Fecha Averiguacion Previa DD/MM/AAAA" />
+							<p:inputText id="reporte_robo_aver_previa_fecha"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.averiguacionPreviaFecha}" />
+
+							<p:outputLabel for="reporte_robo_codigo_causa"
+								value="Codigo de Causa" />
+							<h:outputText id="reporte_robo_codigo_causa"
+								value="#{beanOperacionControlDocumentacion.actualTerminalReporte.catalogoCodigoDeCausa.descripcion}" />
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel header="Guardar Datos" styleClass="forma_un_tercio2"
+						rendered="#{beanOperacionControlDocumentacion.resultadoExiste}">
+						<p:commandButton ajax="false" value="GUARDAR &#187;"
+							action="#{beanOperacionControlDocumentacion.doAccionConfirmarReporte}"
+							title="Haga click aquí para guardar los datos de este reporte. Primero revise bien que los datos sean los correctos." />
+					</p:panel>
+				</p:outputPanel>
+			</p:outputPanel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

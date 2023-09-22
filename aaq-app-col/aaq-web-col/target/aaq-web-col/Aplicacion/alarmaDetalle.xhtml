@@ -1,0 +1,290 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionAlarma}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Pertio-Abogado - Detalle de Reporte
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Aplicaciones</a></li>
+		<li><a href="alarma.siica">Perito-Abogado</a></li>
+		<li>Detalle</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<p:outputPanel rendered="#{!empty beanAplicacionAlarma.objetoABM}">
+			<div class="forma_mitad">
+
+				<p:panel header="Datos Generales" styleClass="panelesV">
+					<h:panelGrid styleClass="tabla_captura" columns="4"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+						<p:outputLabel for="fechasi" value="Fecha SIICA:" />
+						<h:outputText id="fechasi"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.fecha : beanAplicacionAlarma.objetoABM.reporteSise.fecha}">
+							<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+								pattern="dd/MM/yyyy HH:mm" />
+
+						</h:outputText>
+
+						<p:outputLabel for="poliza" value="Póliza:" />
+						<h:outputText id="poliza"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalNumeroPoliza : beanAplicacionAlarma.objetoABM.reporteSise.generalNumeroPoliza}" />
+
+						<p:outputLabel for="endoso" value="Endoso:" />
+						<h:outputText id="endoso"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalEndoso : beanAplicacionAlarma.objetoABM.reporteSise.generalEndoso}" />
+
+						<p:outputLabel for="inci" value="Inciso:" />
+						<h:outputText id="inci"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalInciso : beanAplicacionAlarma.objetoABM.reporteSise.generalInciso}" />
+
+						<p:outputLabel for="sini" value="Siniestro:" />
+						<h:outputText id="sini"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalNumeroSiniestro : beanAplicacionAlarma.objetoABM.reporteSise.generalNumeroSiniestro}" />
+
+						<p:outputLabel for="cabi" value="Cabinista:" />
+						<h:outputText id="cabi"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalUsuario : beanAplicacionAlarma.objetoABM.reporteSise.generalUsuario}" />
+
+						<p:outputLabel for="ocurre" value="Fecha Ocurrido:" />
+						<h:outputText id="ocurre"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalFechaOcurrido : beanAplicacionAlarma.objetoABM.reporteSise.generalFechaOcurrido}" />
+
+						<p:outputLabel for="ocurre_h" value="Hora Ocurrido:" />
+						<h:outputText id="ocurre_h"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise.generalHoraOcurrido == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalHoraOcurrido : beanAplicacionAlarma.objetoABM.reporteSise.generalHoraOcurrido}" />
+
+
+						<p:outputLabel for="aseg" value="Asegurado:" />
+						<h:outputText id="aseg"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise.generalNombreAsegurado == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalNombreAsegurado : beanAplicacionAlarma.objetoABM.reporteSise.generalNombreAsegurado}" />
+
+
+						<p:outputLabel for="qrep" value="Quién Reporto:" />
+						<h:outputText id="qrep"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise.generalReporto == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalReporto : beanAplicacionAlarma.objetoABM.reporteSise.generalReporto}" />
+
+						<p:outputLabel for="como" value="Cómo Ocurrió:" />
+						<h:outputText id="como"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalComoOcurrio : beanAplicacionAlarma.objetoABM.reporteSise.generalComoOcurrio}" />
+
+						<p:outputLabel for="gobs" value="Observaciones:" />
+						<h:outputText id="gobs"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalObservacion : beanAplicacionAlarma.objetoABM.reporteSise.generalObservacion}" />
+
+						<p:outputLabel for="email" value="Correo Electronico:" />
+						<h:outputText id="email"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.generalCorreoAsegurado : beanAplicacionAlarma.objetoABM.reporteSise.generalCorreoAsegurado}" />
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel header="Datos Conductor" styleClass="panelesV">
+					<h:panelGrid styleClass="tabla_captura" columns="4"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+						<p:outputLabel for="cnom" value="Nombre:" />
+						<h:outputText id="cnom"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.conductorNombre : beanAplicacionAlarma.objetoABM.reporteSise.conductorNombre}" />
+						<p:outputLabel for="ctel" value="Teléfono Contacto" 
+										rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"/>
+						<h:outputText id="ctel"
+							rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.conductorTelefonoContacto : beanAplicacionAlarma.objetoABM.reporteSise.conductorTelefonoContacto}" />
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel header="Datos Ubicación" styleClass="panelesV">
+					<h:panelGrid styleClass="tabla_captura" columns="4"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+						<p:outputLabel for="udir" value="Dirección:" />
+						<h:outputText id="udir"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ubicacionDireccion : beanAplicacionAlarma.objetoABM.reporteSise.ubicacionDireccion}" />
+
+						<p:outputLabel for="udes" value="Departamento:" />
+						<h:outputText id="udes"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ubicacionEntidad : beanAplicacionAlarma.objetoABM.reporteSise.ubicacionEntidad} #{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ubicacionEntidad : beanAplicacionAlarma.objetoABM.reporteSise.estado}" />
+
+					</h:panelGrid>
+				</p:panel>
+
+				<p:panel header="Datos Vehiculo" styleClass="panelesV">
+					<h:panelGrid columns="4"
+						columnClasses="cuarto,cuarto,cuarto,cuarto"
+						styleClass="tabla_captura">
+
+						<p:outputLabel for="vmar" value="Marca:" />
+						<h:outputText id="vmar"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoMarca : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoMarca}" />
+
+						<p:outputLabel for="vti" value="Tipo:" />
+						<h:outputText id="vti"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoTipo : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoTipo}" />
+
+						<p:outputLabel for="vmo" value="Modelo:" />
+						<h:outputText id="vmo"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoModelo : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoModelo}" />
+
+						<p:outputLabel for="vmco" value="Color:" />
+						<h:outputText id="vmco"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoColor : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoColor}" />
+
+						<p:outputLabel for="vpla" value="Placas:" rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"/>
+						<h:outputText id="vpla" rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoPlacas : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoPlacas}" />
+
+						<p:outputLabel for="vse" value="Serie:" rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"/>
+						<h:outputText id="vse" rendered="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador != null || beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador != null}"
+							value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.vehiculoSerie : beanAplicacionAlarma.objetoABM.reporteSise.vehiculoSerie}" />
+
+
+					</h:panelGrid>
+				</p:panel>
+			</div>
+			<h:form>
+				<div class="forma_mitad">
+
+					<p:panel header="Datos Ajuste" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+							<p:outputLabel for="ajca" value="Causa:" />
+							<h:outputText id="ajca"
+								value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteCodigoCausa : beanAplicacionAlarma.objetoABM.reporteSise.catalogoCodigoDeCausa.descripcion}" />
+
+							<p:outputLabel for="aj" value="Perito-Abogado" />
+							<h:outputText id="aj"
+								value="#{beanAplicacionAlarma.objetoABM.nombre}" />
+
+
+							<p:outputLabel for="ajpr" value="Perito-Abogado Radio / Proveedor:" />
+							<h:outputText id="ajpr"
+								value="#{beanAplicacionAlarma.objetoABM.numeroradio} / #{beanAplicacionAlarma.objetoABM.numeroproveedor}" />
+
+							<p:outputLabel for="ajtel" value="Ajustador Teléfono:" />
+							<h:outputText id="ajtel"
+								value="#{beanAplicacionAlarma.objetoABM.telefono}" />
+
+							<p:outputLabel for="ajof" value="Ajustador Oficina:" />
+							<h:outputText id="ajof"
+								value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteAjustadorOficina : beanAplicacionAlarma.objetoABM.reporteSise.ajusteAjustadorOficina}" />
+
+							<p:outputLabel for="ajfp" value="Fecha Pasado:" />
+							<h:outputText id="ajfp"
+								value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaPasadoAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaPasadoAjustador} 
+										#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteHoraPasadoAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteHoraPasadoAjustador}" />
+
+
+							<p:outputLabel for="ajfa" value="Fecha Arribo:" />
+							<h:outputText id="ajfa"
+								value="#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaArriboAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaArriboAjustador} 
+										#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteHoraArriboAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteHoraArriboAjustador}" />
+
+
+							<p:outputLabel for="ajft" value="Fecha Termino:" />
+							<h:outputText id="ajft"
+
+								value="#{beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaTerminoAjustador == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteFechaTerminoAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteFechaTerminoAjustador} 
+										#{beanAplicacionAlarma.objetoABM.reporteSise == null ? beanAplicacionAlarma.objetoABM.reporteSac.ajusteHoraTerminoAjustador : beanAplicacionAlarma.objetoABM.reporteSise.ajusteHoraTerminoAjustador}" />
+
+
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel header="Consulta de Cobranza" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+							<p:outputLabel for="txtramo" value="Ramo:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="txtramo"
+								value="#{beanAplicacionAlarma.txtRamo}" />
+
+							<p:outputLabel for="txtp" value="Póliza:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="txtp"
+								value="#{beanAplicacionAlarma.txtPoliza}" />
+
+							<p:outputLabel for="txtin" value="Inciso:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="txtin"
+								value="#{beanAplicacionAlarma.txtInciso}" />
+
+							<p:outputLabel for="finicio" value="Fecha:" />
+
+							<p:outputPanel>
+								<p:calendar id="finicio" locale="es_MX" 
+									value="#{beanAplicacionAlarma.txtFecha}" mode="popup"
+									pattern="yyyy/MM/dd" />
+
+								<p:commandButton id="btnConsulta" value="Consultar"
+									actionListener="#{beanAplicacionAlarma.doAccionDetalleCobranza}"
+									update="panelCoberturas" />
+							</p:outputPanel>
+
+						</h:panelGrid>
+
+						<h:panelGrid styleClass="tabla_captura" columns="1"
+							id="panelCoberturas" columnClasses="cuarto,tres_cuartos">
+
+							<ui:repeat var="cobertura"
+								value="#{beanAplicacionAlarma.edoCta.coberturas}">
+								<p>
+									<B>C:</B> #{cobertura.clave} <B>N:</B> #{cobertura.nombre} 
+									<B>SA:</B> #{cobertura.sumAseg} <B>D:</B> #{cobertura.deducible} <br />
+								</p>
+							</ui:repeat>
+						
+							<p:outputLabel for="txtTelefono" value="Teléfono:"
+								rendered="#{beanAplicacionAlarma.puedeEnviarSMS}" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);"
+								rendered="#{beanAplicacionAlarma.puedeEnviarSMS}"
+								id="txtTelefono" value="#{beanAplicacionAlarma.txtTelefono}" />
+							<p:commandButton value="Enviar SMS"
+								rendered="#{beanAplicacionAlarma.puedeEnviarSMS}"
+								actionListener="#{beanAplicacionAlarma.doAccionEnviarSMS}" />
+
+						</h:panelGrid>
+					</p:panel>
+
+					<p:panel header="Detalle de Folios" styleClass="panelesV">
+						<p:dataTable var="reporteSolicitado" id="tabla_detalle"
+							styleClass="tabla_captura"
+							value="#{beanAplicacionAlarma.listaReporteSolicitado}"
+							emptyMessage="Sin Datos"
+							currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+							paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+							rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+
+							<f:facet name="header">Detalle de Folios</f:facet>
+
+							<p:column headerText="Ticket">
+								<h:outputText value="#{reporteSolicitado.id}" />
+							</p:column>
+							<p:column headerText="Fecha">
+								<h:outputText value="#{reporteSolicitado.fechaInsertado}" />
+							</p:column>
+							<p:column headerText="Servicio">
+								<h:outputText value="#{reporteSolicitado.tipoDeServicio}" />
+							</p:column>
+							<p:column headerText="Proveedor">
+								<h:outputText value="#{reporteSolicitado.claveProveedor}" />
+							</p:column>
+							<p:column headerText="Folio">
+								<h:outputText value="#{reporteSolicitado.siseRespuestaFolio}" />
+							</p:column>
+						</p:dataTable>
+					</p:panel>
+				</div>
+			</h:form>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

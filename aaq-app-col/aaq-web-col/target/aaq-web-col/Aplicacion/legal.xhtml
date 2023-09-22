@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionLegal}" />
+
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Servicios Legales 
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li>Monitoreo de Servicios Legales</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanAplicacionLegal}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{reporteAbogado.columnas}" />
+			<ui:param name="listaDe" value="Monitoreo de Servicios" />
+			<ui:param name="listaAutoActualizable" value="true" />
+			<ui:param name="listaAutoActualizableIntervalo" value="60" />
+			<ui:define name="contenidoAdicional">
+
+				<p:column style="text-align:center; width:30px" headerText="Info">
+					<h:graphicImage id="imagen_detalle_reporte" alt="Información"
+						url="/diseno/imagenes/logos/qlogo.jpg" />
+					<p:tooltip for="imagen_detalle_reporte">
+						<h:outputText value="Bitacora: #{objeto.id}" />
+						<br />
+						<h:outputText value=" Lesionados NA: #{objeto.numeroLesionadosNa}" />
+						<br />
+						<h:outputText value="Lesionados TS: #{objeto.numeroLesionadosTs}" />
+						<br />
+						<h:outputText value="Muertos NA: #{objeto.numeroMuertosNa}" />
+						<br />
+						<h:outputText value="Muertos TS: #{objeto.numeroMuertosTs}" />
+						<br />
+						<h:outputText
+							value="Conductor Detenido: #{objeto.conductorDetenido? 'Si':'No'}" />
+						<br />
+						<h:outputText
+							value="Vehiculo Retenido: #{objeto.vehiculoRetenido? 'Si':'No'}" />
+						<br />
+						<h:outputText
+							value="Lugar a Presentarse: #{objeto.lugarAPresentarse}" />
+					</p:tooltip>
+				</p:column>
+			</ui:define>
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

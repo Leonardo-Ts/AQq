@@ -1,0 +1,173 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="forma_tabla">
+		<div class="forma_completa" style="margin-top: 5px" >
+			<p:poll id="poll" interval="60" partialSubmit="true"
+				listener="#{componente.actualizarListado}" update="tabla"
+				rendered="#{listaAutoActualizable}" process="@this" />
+			
+			<p:dataTable id="tabla" var="objeto" value="#{listaObjetos}"
+				emptyMessage="Sin Datos"
+				currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+				paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+				rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+
+				<f:facet name="header">
+					<h:outputText value="Lista de #{listaDe}" />
+					<h:outputText
+						value=" -  Actualizado: #{componente.fechaHoraActual}"
+						rendered="#{listaAutoActualizable}" />
+				</f:facet>
+
+				<ui:insert name="contenidoPrevio" />
+				<p:columns value="#{listaColumnas}" var="columna"
+					sortBy="#{objeto[columna.valor]}"
+					styleClass="#{objeto[columna.claseCss]}"
+					headerText="#{columna.nombre}">
+					<h:outputText value="#{objeto[columna.valor]}" id="valor"
+						rendered="#{!columna.tieneFormato}">
+					</h:outputText>
+
+					<h:outputText value="#{objeto[columna.valor]}"
+						rendered="#{columna.tieneFormato}">
+						<f:convertDateTime 
+							pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+					<p:tooltip rendered="#{columna.tieneToolTip}" showEffect="clip"
+						for="valor" escape="false" value="#{objeto[columna.toolTip]}"
+						hideEffect="explode" />
+				</p:columns>
+
+				<ui:insert name="contenidoAdicional" />
+				
+				<ui:insert name="contenidoAdicional2" />
+				
+				<ui:insert name="contenidoAdicional3" />
+				
+				<ui:insert name="contenidoAdicional4" />
+				
+
+				<p:column style="text-align:center; width:30px" headerText="Editar"
+					rendered="#{mostrarBotonEditarRegistro and componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panel').show()"
+						rendered="#{mostrarPanel}" update=":formaPanel:contenidoPanel"
+						actionListener="#{componente.doAccionRegistroEditar}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</p:commandLink>
+					<h:commandLink rendered="#{!mostrarPanel}"
+						action="#{componente.doAccionRegistroEditar}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</h:commandLink>
+				</p:column>
+				
+				<p:column style="text-align:center; width:30px" headerText="Editar Hora"
+					rendered="#{mostrarBotonEditarRegistroHorario and componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelhora').show()"
+						rendered="#{mostrarPanel}" update=":formaPanel2:contenidoPanel2"
+						actionListener="#{componente.doAccionRegistroEditarHora}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</p:commandLink>
+					<h:commandLink rendered="#{!mostrarPanel}"
+						action="#{componente.doAccionRegistroEditar}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</h:commandLink>
+				</p:column>
+
+				<p:column style="text-align:center; width:40px"
+					headerText="Eliminar"
+					rendered="#{mostrarBotonEliminarRegistro and componente.permisoABM}">
+					<p:commandLink update="tabla"
+						actionListener="#{componente.doAccionRegistroEliminar}">
+						<h:graphicImage alt="Eliminar"
+							value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+						<f:param name="id" value="#{riv}" />
+						<p:confirm header="Confirmación de Eliminado"
+							message="Por favor confirme que desea eliminar el registro #{componente.objetoABM}"
+							icon="ui-icon-alert" />
+
+					</p:commandLink>
+					<p:confirmDialog global="true" header="Confirmación de Eliminado">
+						<p:commandButton value="Si" type="button"
+							update=":forma_tabla:tabla" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check">
+							<f:param name="id" value="#{componente.objetoABM.id}" />
+
+						</p:commandButton>
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
+				</p:column>
+				
+								<!-- 			 Editar  Avisos resumen ajustador  -->
+				<p:column style="text-align:center; width:30px" headerText="Editar Avisos"
+					rendered="#{mostrarBotonEditarRegistroAvisos and componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelAvisos').show()"
+						rendered="#{mostrarPanel}" update=":formaPanel4:contenidoPanel4"
+						actionListener="#{componente.doAccionRegistroEditarAvisos}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</p:commandLink>
+					<h:commandLink rendered="#{!mostrarPanel}"
+						action="#{componente.doAccionRegistroEditar}">
+						<h:graphicImage alt="Editar"
+							value="/diseno/imagenes/acciones/icono16Editar.png" />
+						<f:param name="id" value="#{riv}" />
+					</h:commandLink>
+				</p:column>
+				
+<!-- 				Eliminar Avisos Resumen Ajustador -->
+			<p:column style="text-align:center; width:40px"
+					headerText="Eliminar"
+					rendered="#{mostrarBotonEliminarRegistroAvisos and componente.permisoABM}">
+					<p:commandLink update="tabla"
+						actionListener="#{componente.doAccionRegistroEliminarAvisos}">
+						<h:graphicImage alt="Eliminar"
+							value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+						<f:param name="id" value="#{riv}" />
+						<p:confirm header="Confirmación de Eliminado"
+							message="Por favor confirme que desea eliminar el registro"
+							icon="ui-icon-alert" />
+
+					</p:commandLink>
+					<p:confirmDialog global="true" header="Confirmación de Eliminado">
+						<p:commandButton value="Si" type="button"
+							update=":forma_tabla:tabla" styleClass="ui-confirmdialog-yes"
+							icon="ui-icon-check">
+							<f:param name="id" value="#{componente.objetoABM.id}" />
+
+						</p:commandButton>
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
+				</p:column>
+				
+<!-- 				//////////////////////////////////// -->
+
+				<ui:insert name="contenidoPosterior" />
+
+				<f:facet name="footer">
+					<ui:insert name="contenidoPie" />
+					<ui:insert name="contenidoPie2" />
+				</f:facet>
+			</p:dataTable>
+		</div>
+
+	</h:form>
+</ui:component>

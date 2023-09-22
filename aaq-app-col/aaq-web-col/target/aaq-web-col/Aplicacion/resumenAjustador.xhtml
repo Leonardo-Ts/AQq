@@ -1,0 +1,71 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanHistoricoResumenAjustador}" />
+
+	<ui:define name="tituloPagina">
+		<h:outputText value="AQ Aplicaciones - Resumen Perito-Abogado" />
+		<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li><h:outputText value="Resumen Perito-Abogado" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanHistoricoResumenAjustador}" />
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:param name="mostrarFiltroComboEstado" value="false" />
+			<ui:param name="mostrarFiltroComboBase" value="false" />
+			<ui:param name="mostrarFiltroComboTerminal" value="false" />
+			<ui:param name="mostrarTxtNumeroReporte" value="true" />
+			<ui:param name="mostrarEtiquetaNumeroReporte" value="true" />
+			<ui:param name="mostrarBotonReporte" value="true" />	
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="txt_clav" value="Clave Perito-Abogado" />
+				<p:inputText onkeyup="permitirSoloNumeros(this);" id="txt_clav"
+					value="#{componente.txtClaveAjustador}" />
+			</ui:define>		
+		</ui:decorate>
+		
+		<div class="forma_mitad">
+			<h:form id="forma_exportacion">
+				<p:panel header="Bajar Reportes" styleClass="panelesV">
+					<h:panelGrid style="text-align:center" columns="3" columnClasses="tercio,tercio,tercio"
+						styleClass="tabla_captura">
+						<p:outputLabel value="" />
+						<p:outputLabel value="" />
+						<h:commandLink id="ExportPDF" title="Listado PDF"
+							action="#{componente.doAccionDescargaPDF}">
+							<f:param name="id" value="pdf" />
+							<h:graphicImage url="/diseno/imagenes/reportes/iconExportPdf.png" alt="PDF"/>
+						</h:commandLink>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</div>
+		
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanHistoricoResumenAjustador}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{componente.columnas}" />
+			<ui:param name="listaDe" value="Resumen Perito-Abogado" />
+			<ui:define name="contenidoAdicional">
+				<p:column headerText="Detalles" style="text-align:center" >
+					<h:commandLink title="Ver Detalle" 
+						action="#{beanHistoricoResumenAjustador.doAccionDetalleReporte}">
+						<f:param value="#{riv}" name="id" />
+						<h:graphicImage url="/diseno/imagenes/logos/qlogo.jpg" alt="Detalle"/>
+					</h:commandLink>
+				</p:column>
+			</ui:define>
+		</ui:decorate>
+		
+	</ui:define>
+</ui:composition>

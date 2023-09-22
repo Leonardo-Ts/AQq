@@ -1,0 +1,373 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/funciones.js"></script>
+	<ui:param name="componente" value="#{beanAplicacionMonitor}" />
+	
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Monitor
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Aplicaciones</a></li>
+		<li>Monitor</li>
+	</ui:define>  
+	
+	<ui:define name="cuerpoPagina" >
+		
+		<div class="forma_completa" >
+			<h:form id="forma_panel"   >	
+					<p:panel styleClass="panel_morado" >	
+							<br/>
+							<h:outputLabel id="d1" value="#{beanAplicacionMonitor.est.ajusDisponibles}" styleClass="numero_blanco"  />
+							<br/>
+							<p:commandButton  id="bDisponibles" styleClass="bMorado"
+								disabled = "#{beanAplicacionMonitor.bDisponibles}"
+								value="Peritos-Abogados Disponibles"
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"
+								actionListener="#{beanAplicacionMonitor.setEstatus(1)}"
+								update="bDisponibles,bDesconectados,bOcupados,bTodos,:formaMapa:marcadoresActualizacionAutomatica" 
+								 />
+					</p:panel>
+					
+					<p:panel styleClass="panel_verde" >	
+							<br/>
+							<h:outputLabel id="d2" value="#{beanAplicacionMonitor.est.ajusOcupados}"  styleClass="numero_blanco" />
+							<br/>
+							<p:commandButton id="bOcupados" styleClass="bVerde"
+								disabled = "#{beanAplicacionMonitor.bOcupados}"
+								value="Peritos-Abogados Ocupados"
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"
+								actionListener="#{beanAplicacionMonitor.setEstatus(2)}" 
+								update="bDisponibles,bDesconectados,bOcupados,bTodos,:formaMapa:marcadoresActualizacionAutomatica" 
+								 />
+					</p:panel>
+					
+					<p:panel styleClass="panel_morado">	
+							<br/>
+							<h:outputLabel id="d3" value="#{beanAplicacionMonitor.est.ajusDesconectados}" styleClass="numero_blanco" />
+							<br/>
+							<p:commandButton id="bDesconectados" styleClass="bMorado"
+								disabled = "#{beanAplicacionMonitor.bDesconectados}"
+								value="Peritos-Abogados Desconectados"
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();" 
+								actionListener="#{beanAplicacionMonitor.setEstatus(3)}"
+								update="bDisponibles,bDesconectados,bOcupados,bTodos, :formaMapa:marcadoresActualizacionAutomatica" 
+								 />
+					</p:panel>
+					
+					<p:panel styleClass="panel_verde">	
+							<br/> 
+							<h:outputLabel styleClass="numero_blanco"/>
+							<h:outputLabel id="d4" value="#{beanAplicacionMonitor.est.repsDia}" styleClass="numero_blanco" />
+							<br/>
+							<h:outputLabel value="Total de reportes al día" styleClass="texto_blanco" />
+							<br/>
+							<p:commandButton id="bTodos" styleClass="bVerde"
+								disabled = "#{beanAplicacionMonitor.bTodos}"
+								value="Todos los Peritos-Abogados"
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"
+								actionListener="#{beanAplicacionMonitor.setEstatus(0)}"
+								update="bDisponibles,bDesconectados,bOcupados,bTodos,:formaMapa:marcadoresActualizacionAutomatica" 
+								 />
+					</p:panel>
+			</h:form>
+		</div>
+		
+		<div class="forma_un_tercio" >
+
+			<h:form id="formamonitorfrecuencia" rendered="#{!beanAplicacionMonitor.permisoTodosEstados and !beanAplicacionMonitor.permisoTodosBases}">
+				<p:poll id="poll_monitor" partialSubmit="true"
+					listener="#{beanAplicacionMonitor.actualizarListado}"
+					update="hora,tabla_ajustadores,:forma_panel"
+					interval="60" >
+					</p:poll>
+
+				<p:panel header="Monitoreo" styleClass="panelesV" >
+					<h:panelGrid columns="2" styleClass="tabla_captura "
+						columnClasses="cuarto,tres_cuartos">
+						<p:outputLabel for="hora" value="Hora" />
+						<h:outputText id="hora"
+							value="#{beanAplicacionMonitor.fechaHoraActual}" />
+						<p:outputLabel for="op" value="Operador" />
+						<h:outputText id="op" value="#{beanAplicacionMonitor.usuarioActual.nombre}" />
+						
+						<p:outputLabel for="estado" value="Departamento:" />
+						<h:selectOneMenu id="estado"
+							value="#{beanAplicacionMonitor.idEstado}"
+							title="Lista de Departamentos" styleClass="combo" >
+
+							<f:selectItems value="#{beanAplicacionMonitor.listaEstadosFrecuencia}"
+								var="estado" itemValue="#{estado.id}"
+								itemLabel="#{estado.nombre}" />
+								
+								<p:ajax event="valueChange" listener="#{beanAplicacionMonitor.onSelectEdoListener}"
+								update="tabla_ajustadores,selectBase, :forma_panel,:formaMapa:marcadoresActualizacionAutomatica" 
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"  />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="selectBase" value="Base" />
+						<h:selectOneMenu 
+							id="selectBase" 
+							value="#{beanAplicacionMonitor.idBase}" 
+						 	title="Lista de Bases" styleClass="combo"  >
+						 	<f:selectItem itemLabel="--Bases--" itemValue="0"  noSelectionOption="true"  />
+							<f:selectItems value="#{beanAplicacionMonitor.listaDeBasesPorFrecuencia}" 
+							 var="base" itemValue="#{base.id}" 
+							 itemLabel="#{base.id}: #{base.nombre}"/>	
+							<p:ajax event="valueChange" listener="#{beanAplicacionMonitor.onSelectBaseListener}"
+								update="tabla_ajustadores,:forma_panel,:formaMapa:marcadoresActualizacionAutomatica" 
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"    />							 							 							
+						</h:selectOneMenu>
+						
+						<p:outputLabel for="rp" value="Radio / Proveedor" />
+						<p:outputPanel>
+							<p:inputText id="rp"
+								value="#{beanAplicacionMonitor.txtRadioProveedor}"
+								title="Numero de Proveedor o Radio" style="width:50%">
+							</p:inputText>
+							<p:commandButton value="Ubicar"
+								oncomplete="localizarPunto($('#formamonitorfrecuencia\\:obj_terminal').val())"
+								actionListener="#{beanAplicacionMonitor.doAccionBuscarAjustador}"
+								update="panelLocalizar" />
+								
+						</p:outputPanel>
+					</h:panelGrid>
+
+					<p:outputPanel id="panelLocalizar">
+						<h:panelGrid columns="2" styleClass="tabla_captura " 
+							columnClasses="cuarto,tres_cuartos"
+							rendered="#{!empty beanAplicacionMonitor.objetoTerminal}">
+							<h:outputLabel for="btnTraza"
+								value="Perito-Abogado #{beanAplicacionMonitor.objetoTerminal.nombre}, R: #{beanAplicacionMonitor.objetoTerminal.numeroradio}, P: #{beanAplicacionMonitor.objetoTerminal.numeroproveedor}" />
+							<p:commandButton ajax="false" id="btnTraza"
+								value="Trazar en Mapa"
+								action="#{beanAplicacionMonitorTraza.doAccionTrazarAjustador(beanAplicacionMonitor.objetoTerminal)}" />
+							<h:inputHidden id="obj_terminal"
+								value="#{beanAplicacionMonitor.objetoTerminal.id}" />
+						</h:panelGrid>
+					</p:outputPanel>
+				</p:panel>
+
+				<p:panel header="Peritos Abogados" styleClass="panelesV">
+					<div style="height: 400px; overflow: auto;">
+						<p:outputPanel id="tabla_ajustadores">
+                           
+                           <c:if test="#{not empty beanAplicacionMonitor.idBase }">
+								    <c:choose>
+								    	<c:when test="${beanAplicacionMonitor.entreEstado or beanAplicacionMonitor.idBase eq 0}">
+								    		<p:accordionPanel id="panel_unidades" var="base" activeIndex="-1"
+												value="#{beanAplicacionMonitor.listaDeBasesPorFrecuencia}"  >
+												<p:tab title="#{base.nombre}" closable="false"> 
+													<ui:repeat var="terminal" value="#{beanAplicacionMonitor.getListaDeTerminalesParaPanel(base.id)}">									
+														<h:panelGrid columns="1" style="width:100%;clear:both;"
+															styleClass="tabla_captura"  >
+															<h:outputLink rendered="#{!terminal.coordenadasValidas}"
+																title="Ultima fecha: #{terminal.ultimoLocalizacionFecha}"
+																onclick="alert('La unidad #{terminal.nombre} no tiene coordenadas validas para mostrarse en el mapa'); return false;">
+																<h:graphicImage url="#{terminal.imagenListado}"
+																	alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+																<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+															<h:outputText value="#{terminal.nombre}" />
+															</h:outputLink>
+				
+															<p:commandLink onclick="localizarPunto(#{terminal.id});"
+																title="#{terminal.nombre} Localizada: #{terminal.ultimoLocalizacionFecha}"
+																rendered="#{terminal.coordenadasValidas}">
+																<h:graphicImage url="#{terminal.imagenListado}"
+																	alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+																<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+																<h:outputText value="#{terminal.nombre}" />
+															</p:commandLink>
+														</h:panelGrid>
+													</ui:repeat>
+											 	</p:tab>
+											</p:accordionPanel>
+								    	</c:when>
+								    	<c:when test="${beanAplicacionMonitor.entreBase}">
+								    		<ui:repeat var="terminal" value="#{beanAplicacionMonitor.listaDeTerminalesParaPanelB}">
+												<h:panelGrid columns="1" style="width:100%;clear:both;"
+													styleClass="tabla_captura">
+													<h:outputLink rendered="#{!terminal.coordenadasValidas}"
+														title="Ultima fecha: #{terminal.ultimoLocalizacionFecha}"
+														onclick="alert('La unidad #{terminal.nombre} no tiene coordenadas validas para mostrarse en el mapa'); return false;">
+														<h:graphicImage url="#{terminal.imagenListado}"
+															alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+														<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+													<h:outputText value="#{terminal.nombre}" />
+													</h:outputLink>
+		
+													<p:commandLink onclick="localizarPunto(#{terminal.id});"
+														title="#{terminal.nombre} Localizada: #{terminal.ultimoLocalizacionFecha}"
+														rendered="#{terminal.coordenadasValidas}">
+														<h:graphicImage url="#{terminal.imagenListado}"
+															alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+														<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+													<h:outputText value="#{terminal.nombre}" />
+													</p:commandLink>
+												</h:panelGrid>
+											</ui:repeat>
+								    	</c:when>
+								    </c:choose>
+						   </c:if>
+						
+						</p:outputPanel>
+					</div>
+				</p:panel>
+				
+			</h:form>
+			
+			<h:form id="formamonitor" rendered="#{beanAplicacionMonitor.permisoTodosEstados and beanAplicacionMonitor.permisoTodosBases}">
+				<p:poll id="poll_monitor" partialSubmit="true"
+					listener="#{beanAplicacionMonitor.actualizarListado}"
+					update="hora,tabla_ajustadores,:forma_panel"
+					interval="60" >
+					</p:poll>
+
+				<p:panel header="Monitoreo" styleClass="panelesV">
+					<h:panelGrid columns="2" styleClass="tabla_captura "
+						columnClasses="cuarto,tres_cuartos">
+						<p:outputLabel for="hora" value="Hora" />
+						<h:outputText id="hora"
+							value="#{beanAplicacionMonitor.fechaHoraActual}" />
+						<p:outputLabel for="op" value="Operador" />
+						<h:outputText id="op" value="#{beanAplicacionMonitor.usuarioActual.nombre}" />
+						
+						<p:outputLabel for="estado" value="Departamento" />
+						<h:selectOneMenu id="estado"
+							value="#{beanAplicacionMonitor.idEstado}"
+							valueChangeListener="#{beanAplicacionMonitor.onSelectEdo}"
+							title="Lista de Departamentos" styleClass="combo"  >
+							
+								
+							<f:selectItem itemLabel="-- Requerido --" itemValue="9" />
+							<f:selectItems value="#{beanAplicacionMonitor.listaDeEstados}"
+								var="estado" itemValue="#{estado.id}"
+								itemLabel="#{estado.nombre}" />
+								
+								<p:ajax event="valueChange" 
+								update="tabla_ajustadores,selectBase, :forma_panel,:formaMapa:marcadoresActualizacionAutomatica" 
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();"/>
+						</h:selectOneMenu>
+
+						<p:outputLabel for="selectBase" value="Base" />
+						<h:selectOneMenu id="selectBase" var="base" value="#{beanAplicacionMonitor.idBase}" title="Lista de Bases" styleClass="combo" 
+						valueChangeListener="#{beanAplicacionMonitor.onSelectBase}" >
+							<p:ajax event="valueChange" 
+								update="tabla_ajustadores,:forma_panel,:formaMapa:marcadoresActualizacionAutomatica" 
+								oncomplete="reCargarListaPuntosActualizacionAutomatica();" />
+							
+							<f:selectItem itemLabel="--Bases--" itemValue="0" noSelectionOption="true" />
+							<f:selectItems value="#{beanAplicacionMonitor.listaDeBases}" var="base" itemValue="#{base.id}" itemLabel="#{base.nombre}" />		
+						</h:selectOneMenu>
+
+						<p:outputLabel for="rp" value="Radio / Proveedor" />
+						<p:outputPanel>
+							<p:inputText id="rp"
+								value="#{beanAplicacionMonitor.txtRadioProveedor}"
+								title="Numero de Proveedor o Radio" style="width:50%">
+							</p:inputText>
+							<p:commandButton value="Ubicar"
+								oncomplete="localizarPunto($('#formamonitor\\:obj_terminal').val())"
+								actionListener="#{beanAplicacionMonitor.doAccionBuscarAjustador}"
+								update="panelLocalizar" />
+						</p:outputPanel>
+					</h:panelGrid>
+
+					<p:outputPanel id="panelLocalizar">
+						<h:panelGrid columns="2" styleClass="tabla_captura " 
+							columnClasses="cuarto,tres_cuartos"
+							rendered="#{!empty beanAplicacionMonitor.objetoTerminal}">
+							<h:outputLabel for="btnTraza"
+								value="Perito-Abogado #{beanAplicacionMonitor.objetoTerminal.nombre}, R: #{beanAplicacionMonitor.objetoTerminal.numeroradio}, P: #{beanAplicacionMonitor.objetoTerminal.numeroproveedor}" />
+							<p:commandButton ajax="false" id="btnTraza"
+								value="Trazar en Mapa"
+								action="#{beanAplicacionMonitorTraza.doAccionTrazarAjustador(beanAplicacionMonitor.objetoTerminal)}" />
+							<h:inputHidden id="obj_terminal"
+								value="#{beanAplicacionMonitor.objetoTerminal.id}" />
+						</h:panelGrid>
+					</p:outputPanel>
+				</p:panel>
+
+				<p:panel header="Peritos Abogados" styleClass="panelesV">
+					<div style="height: 400px; overflow: auto;">
+						<p:outputPanel id="tabla_ajustadores">
+                           
+                           <c:if test="#{not empty beanAplicacionMonitor.idBase }">
+								    <c:choose>
+								    	<c:when test="${beanAplicacionMonitor.entreEstado or beanAplicacionMonitor.idBase eq 0 or beanAplicacionMonitor.idBase }">
+								    		<p:accordionPanel id="panel_unidades" var="base" activeIndex="-1"
+												value="#{beanAplicacionMonitor.listaDeBases}"  >
+												<p:tab title="#{base.nombre}" closable="false"> 
+													<ui:repeat var="terminal" value="#{beanAplicacionMonitor.getListaDeTerminalesParaPanel(base.id)}">									
+														<h:panelGrid columns="1" style="width:100%;clear:both;"
+															styleClass="tabla_captura"  >
+															<h:outputLink rendered="#{!terminal.coordenadasValidas}"
+																title="Ultima fecha: #{terminal.ultimoLocalizacionFecha}"
+																onclick="alert('La unidad #{terminal.nombre} no tiene coordenadas validas para mostrarse en el mapa'); return false;">
+																<h:graphicImage url="#{terminal.imagenListado}"
+																	alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+																<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+															<h:outputText value="#{terminal.nombre}" />
+															</h:outputLink>
+				
+															<p:commandLink onclick="localizarPunto(#{terminal.id});"
+																title="#{terminal.nombre} Localizada: #{terminal.ultimoLocalizacionFecha}"
+																rendered="#{terminal.coordenadasValidas}">
+																<h:graphicImage url="#{terminal.imagenListado}"
+																	alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+																<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+															<h:outputText value="#{terminal.nombre}" />
+															</p:commandLink>
+														</h:panelGrid>
+													</ui:repeat>
+											 	</p:tab>
+											</p:accordionPanel>
+								    	</c:when>
+								    	<c:when test="${ beanAplicacionMonitor.entreBase}">
+								    		<ui:repeat var="terminal" value="#{beanAplicacionMonitor.listaDeTerminalesParaPanelB}">
+												<h:panelGrid columns="1" style="width:100%;clear:both;"
+													styleClass="tabla_captura">
+													<h:outputLink rendered="#{!terminal.coordenadasValidas}"
+														title="Ultima fecha: #{terminal.ultimoLocalizacionFecha}"
+														onclick="alert('La unidad #{terminal.nombre} no tiene coordenadas validas para mostrarse en el mapa'); return false;">
+														<h:graphicImage url="#{terminal.imagenListado}"
+															alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+														<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+													<h:outputText value="#{terminal.nombre}" />
+													</h:outputLink>
+		
+													<p:commandLink onclick="localizarPunto(#{terminal.id});"
+														title="#{terminal.nombre} Localizada: #{terminal.ultimoLocalizacionFecha}"
+														rendered="#{terminal.coordenadasValidas}">
+														<h:graphicImage url="#{terminal.imagenListado}"
+															alt="Ultima fecha: #{terminal.ultimoLocalizacionFecha}" />
+														<h:outputText value="#{terminal.numeroradio}" />&#160;-&#160;
+													<h:outputText value="#{terminal.nombre}" />
+													</p:commandLink>
+												</h:panelGrid>
+											</ui:repeat>
+								    	</c:when>
+								    </c:choose>
+						   </c:if>
+						
+						</p:outputPanel>
+					</div>
+				</p:panel>
+				
+			</h:form>
+		</div>
+
+		<div class="forma_dos_tercios">
+			<ui:decorate template="/Comun/comunMapa.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionMonitor}" />
+				<ui:param name="metodo" value="imagenSatelital" />
+			</ui:decorate>
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,201 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="forma_completa" style="margin-top: 5px" >
+		<h:form id="forma_catalogo_freq" rendered="#{!beanAplicacionMonitor.permisoTodosEstados and !beanAplicacionMonitor.permisoTodosBases}">
+			<p:panel header="Acciones y Filtros" styleClass="panelesV">
+				<h:panelGrid columns="10" styleClass="tabla_captura">
+
+					<p:outputLabel for="finicio" value="Fecha Inicio:"
+						rendered="#{mostrarFiltroFecha}" />
+					<p:calendar id="finicio" rendered="#{mostrarFiltroFecha}"
+						locale="es_MX" mode="popup" pattern="yyyy/MM/dd"
+						value="#{componente.txtFechaInicio}" />
+
+					<p:outputLabel for="ffin" value="Fecha Término:"
+						rendered="#{mostrarFiltroFecha}" />
+
+					<p:calendar id="ffin" value="#{componente.txtFechaFin}"
+						rendered="#{mostrarFiltroFecha}" mode="popup" locale="es_MX"
+						pattern="yyyy/MM/dd" />
+
+
+					<p:outputLabel for="estado" value="Departamento:"
+					rendered="#{mostrarFiltroComboEstado}" />
+						
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboEstado}"
+						id="estado" value="#{componente.idEstado}"
+						title="Lista de Departamentos">
+						<f:selectItems value="#{componente.listaEstadosFrecuenciaTerm}" var="estado"
+							itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+						<p:ajax event="valueChange"
+							update="base, municipio"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+
+
+					<p:outputLabel for="municipio" value="Municipio:"
+						rendered="#{mostrarFiltroComboMunicipio and componente.permisoSIICAGlobalEstados}" />
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboMunicipio and componente.permisoSIICAGlobalEstados}"
+						id="municipio" value="#{componente.idMunicipio}"
+						title="Lista de Municipios">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="-- Seleccione --" />
+						<f:selectItems value="#{componente.listaDeMunicipios}"
+							var="municipio" itemValue="#{municipio.id}"
+							itemLabel="#{municipio.nombre}" />
+						<p:ajax event="valueChange" update=":forma_tabla_nueva:tabla_nueva"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+
+					<p:outputLabel for="base" value="Base:"
+						rendered="#{mostrarFiltroComboBase}" />
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboBase}"
+						id="base" value="#{componente.idBase}" title="Lista de Bases">
+						<f:selectItem itemValue="-9999" itemLabel="-- Todos --" />
+						<f:selectItems value="#{componente.listaDeBasesPorFrecuencia}" var="base"
+							itemValue="#{base.id}" itemLabel="#{base.descripcion}" />
+						<p:ajax event="valueChange" update="terminal"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+				
+
+
+					<p:outputLabel for="terminal" value="Perito-abogado:"
+						rendered="#{mostrarFiltroComboTerminal}" />
+					<h:selectOneMenu rendered="#{mostrarFiltroComboTerminal}"
+						id="terminal" value="#{componente.idTerminal}">
+						<f:selectItem noSelectionOption="true"
+							itemDescription="-- Opcional --" itemLabel="-- Opcional --" />
+						<f:selectItems
+							value="#{componente.listaDeTerminalesParaSeleccion}"
+							var="terminal" itemLabel="#{terminal.nombreCombo}"
+							itemValue="#{terminal.id}" />
+					</h:selectOneMenu>
+					
+					<p:outputLabel for="txt_rep" value="Reporte:"
+						rendered="#{mostrarTxtNumeroReporte and mostrarEtiquetaNumeroReporte}" />
+					<p:inputText onkeyup="permitirSoloNumeros(this);"
+						rendered="#{mostrarTxtNumeroReporte}" id="txt_rep"
+						value="#{componente.txtNumeroReporte}" />
+
+					<ui:insert name="contenidoAdicional" />
+				</h:panelGrid>
+				<h:panelGrid columns="3" styleClass="tabla_captura" />
+				<ui:insert name="contenidoAdicionalBotones" />
+
+				<p:commandButton id="botonGraficaED" value="Filtrar"
+					rendered="#{mostrarBotonReporteGraficaED}"
+					actionListener="#{componente.actualizarGrafica}"
+					update=":forma_grafica2:graficaPastel2, :forma_panel_contador, :forma_tabla_nueva:tabla_nueva" />
+<!-- 					update=":forma_grafica2:graficaPastel2, :forma_panel_contador, :forma_tabla_nueva:tabla_nueva, :forma_panel_contador_metrica" /> -->
+						
+			</p:panel>
+
+		</h:form>
+		
+		<h:form id="forma_catalogo_" rendered="#{beanAplicacionMonitor.permisoTodosEstados and beanAplicacionMonitor.permisoTodosBases}">
+			<p:panel header="Acciones y Filtros" styleClass="panelesV">
+				<h:panelGrid columns="10" styleClass="tabla_captura">
+
+					<p:outputLabel for="finicio" value="Fecha Inicio:"
+						rendered="#{mostrarFiltroFecha}" />
+					<p:calendar id="finicio" rendered="#{mostrarFiltroFecha}"
+						locale="es_MX" mode="popup" pattern="yyyy/MM/dd"
+						value="#{componente.txtFechaInicio}" />
+
+					<p:outputLabel for="ffin" value="Fecha Término:"
+						rendered="#{mostrarFiltroFecha}" />
+
+					<p:calendar id="ffin" value="#{componente.txtFechaFin}"
+						rendered="#{mostrarFiltroFecha}" mode="popup" locale="es_MX"
+						pattern="yyyy/MM/dd" />
+
+
+					<p:outputLabel for="estado" value="Departamento:"
+					rendered="#{mostrarFiltroComboEstado}" />
+						
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboEstado}"
+						id="estado" value="#{componente.idEstado}"
+						title="Lista de Departamento">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="-- Seleccione --" />
+						<f:selectItem itemValue="9999" itemLabel="-- Todos --" />
+						<f:selectItems value="#{componente.listaDeEstados}" var="estado"
+							itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+						<p:ajax event="valueChange"
+							update="base, municipio"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+
+					<p:outputLabel for="municipio" value="Municipio:"
+						rendered="#{mostrarFiltroComboMunicipio and componente.permisoSIICAGlobalEstados}" />
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboMunicipio and componente.permisoSIICAGlobalEstados}"
+						id="municipio" value="#{componente.idMunicipio}"
+						title="Lista de Municipios">
+						<f:selectItem noSelectionOption="true"
+							itemLabel="-- Seleccione --" />
+						<f:selectItems value="#{componente.listaDeMunicipios}"
+							var="municipio" itemValue="#{municipio.id}"
+							itemLabel="#{municipio.nombre}" />
+						<p:ajax event="valueChange"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+
+					<p:outputLabel for="base" value="Base:"
+						rendered="#{mostrarFiltroComboBase}" />
+					<h:selectOneMenu
+						rendered="#{mostrarFiltroComboBase}"
+						id="base" value="#{componente.idBase}" title="Lista de Bases">
+						<f:selectItems value="#{componente.listaDeBasesTodas}" var="base"
+							itemValue="#{base.id}" itemLabel="#{base.descripcion}" />
+						<p:ajax event="valueChange" update="terminal"
+							listener="#{componente.actualizarListado}" />
+					</h:selectOneMenu>
+					
+					<p:outputLabel for="terminal" value="Perito-abogado:"
+						rendered="#{mostrarFiltroComboTerminal}" />
+					<h:selectOneMenu rendered="#{mostrarFiltroComboTerminal}"
+						id="terminal" value="#{componente.idTerminal}">
+						<f:selectItem noSelectionOption="true"
+							itemDescription="-- Opcional --" itemLabel="-- Opcional --" />
+						<f:selectItems
+							value="#{componente.listaDeTerminalesParaSeleccion}"
+							var="terminal" itemLabel="#{terminal.nombreCombo}"
+							itemValue="#{terminal.id}" />
+					</h:selectOneMenu>
+					
+					<p:outputLabel for="txt_rep" value="Reporte:"
+						rendered="#{mostrarTxtNumeroReporte and mostrarEtiquetaNumeroReporte}" />
+					<p:inputText onkeyup="permitirSoloNumeros(this);"
+						rendered="#{mostrarTxtNumeroReporte}" id="txt_rep"
+						value="#{componente.txtNumeroReporte}" />
+
+					<ui:insert name="contenidoAdicional" />
+					
+				</h:panelGrid>
+				<h:panelGrid columns="3" styleClass="tabla_captura" />
+				<ui:insert name="contenidoAdicionalBotones" />
+
+				<p:commandButton id="botonGraficaED" value="Filtrar"
+					rendered="#{mostrarBotonReporteGraficaED}"
+					actionListener="#{componente.actualizarGrafica}"
+					update=":forma_grafica2:graficaPastel2, :forma_panel_contador, :forma_tabla_nueva:tabla_nueva" />
+					
+<!-- 					update=":forma_grafica2:graficaPastel2, :forma_panel_contador, :forma_tabla_nueva:tabla_nueva, :forma_panel_contador_metrica" /> -->
+							
+					
+			</p:panel>
+
+		</h:form>
+
+	</div>
+</ui:component>

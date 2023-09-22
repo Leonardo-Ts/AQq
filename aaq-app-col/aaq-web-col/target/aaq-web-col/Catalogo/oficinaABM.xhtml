@@ -1,0 +1,52 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoOficina}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Oficinas
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li><a href="oficina.siica">Oficinas</a></li>
+		<li>Mapa</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<div class="forma_un_tercio">
+			<h:form id="formaBusqueda">
+
+				<p:panel header="ABM Oficina" styleClass="panelesV">
+					<h:panelGrid columns="2" styleClass="tabla_captura"
+						columnClasses="cuarto,tres_cuartos">
+
+						<p:outputLabel for="satelitalOX" value="Coordenada X" />
+						<p:inputText onkeyup="permitirSoloNumeros(this);" id="satelitalOX"
+							value="#{beanCatalogoOficina.objetoABM.latitud}" />
+
+						<p:outputLabel for="satelitalOY" value="Coordenada Y" />
+						<p:inputText onkeyup="permitirSoloNumeros(this);" id="satelitalOY"
+							value="#{beanCatalogoOficina.objetoABM.longitud}" />
+
+						<p:commandButton ajax="false" value="Aceptar"
+							action="#{beanCatalogoOficina.doAccionRegistroGuardar}"
+							title="Aceptar Datos" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+			<ui:decorate template="/Comun/comunBusquedaGeografica.xhtml">
+				<ui:param name="componente" value="#{beanCatalogoOficina}" />
+			</ui:decorate>
+		</div>
+		<div class="forma_dos_tercios">
+			<ui:decorate template="/Comun/comunMapa.xhtml">
+				<ui:param name="componente" value="#{beanCatalogoOficina}" />
+				<ui:param name="metodo" value="imagenSatelital" />
+			</ui:decorate>
+		</div>
+	</ui:define>
+</ui:composition>

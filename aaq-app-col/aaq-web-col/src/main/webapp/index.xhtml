@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanAplicacionFirma}" />
+
+    <ui:define name="tituloPagina">
+        <h:outputText value="Inicio de Sesion" />
+        <ui:param name="clase_pagina" value="firma" />
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><h:outputText value="Inicio de Sesion" /></li>
+    </ui:define>
+    <ui:define name="cuerpoPagina">
+        <h:form id="formaLogin">
+            <div class="forma_mitad">
+                <p:panel header="Inicio de Sesion">
+                    <h:panelGrid columns="2" styleClass="tabla_captura"
+                                 columnClasses="cuarto,tres_cuartos">
+
+                        <p:outputLabel value="Usuario:" for="username" />
+                        <p:inputText value="#{beanAplicacionFirma.txtUsername}"
+                                     id="username" title="Nombre de Usuario" />
+
+                        <p:outputLabel value="Contrasena:" for="passwd" />
+                        <p:password value="#{beanAplicacionFirma.txtPasswd}" id="passwd"
+                                     />
+
+                        <p:commandButton ajax="false" value="Iniciar Sesion"
+                                         action="#{beanAplicacionFirma.doAccionLogin}"
+                                         title="Iniciar Sesion en el sistema" />
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

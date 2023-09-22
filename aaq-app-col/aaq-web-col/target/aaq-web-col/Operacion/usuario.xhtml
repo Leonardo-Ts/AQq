@@ -1,0 +1,29 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionFirma}" />
+	<ui:define name="tituloPagina">AQ Operaciones - Usuarios Conectados
+			<ui:param name="clase_pagina" value="operacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Operaciones</a></li>
+		<li>Usuarios Conectados</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<div class="forma_completa">
+			<ui:decorate template="/Comun/comunTabla.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionFirma}" />
+				<ui:param name="listaObjetos" value="#{componente.listaDeSessiones}" />
+				<ui:param name="listaColumnas" value="#{sessionSistema.columnas}" />
+				<ui:param name="listaDe" value="Usuarios Activos en el Sistema" />
+				<ui:param name="listaAutoActualizableIntervalo" value="60" />
+				<ui:param name="listaAutoActualizable" value="true" />
+			</ui:decorate>
+		</div>
+	</ui:define>
+</ui:composition>

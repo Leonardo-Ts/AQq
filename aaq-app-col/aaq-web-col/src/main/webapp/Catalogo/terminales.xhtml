@@ -1,0 +1,718 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+    <ui:param name="componente" value="#{beanCatalogoTerminal}"/>
+
+    <ui:define name="tituloPagina">AQ Catálogos - ABM Terminales
+        <ui:param name="clase_pagina" value="catalogo"/>
+    </ui:define>
+    <ui:define name="navegacionDeFlechas">
+        <li><a href="inicio.siica">Catálogos</a></li>
+        <li>Terminales</li>
+    </ui:define>
+
+    <ui:define name="cuerpoPagina">
+    
+        <ui:decorate template="/Comun/comunFiltro.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoTerminal}"/>
+            <ui:param name="mostrarFiltroComboEstado" value="true"/>
+            <ui:param name="mostrarFiltroComboBase" value="true"/>
+            
+            <ui:param name="listaDe" value="Terminal"/>
+            <ui:param name="mostrarBotonAgregarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+
+            <ui:define name="contenidoAdicional">
+            	
+                <p:outputLabel for="txtFiltroNombre" value="Nombre:"/>
+                <p:inputText id="txtFiltroNombre" value="#{componente.txtTerminalNombre}"/>
+                <p:outputLabel for="txtFiltroRadio" value="Radio:"/>
+                <p:inputText id="txtFiltroRadio" value="#{componente.txtTerminalNumeroRadio}"/>
+                <p:outputLabel for="txtFiltroProveedor" value="Proveedor:"/>
+                <p:inputText id="txtFiltroProveedor" value="#{componente.txtTerminalNumeroProveedor}"/>
+                <p:outputLabel for="txtFiltroEstatus" value="Estatus"/>
+                <h:selectOneMenu id="txtFiltroEstatus" value="#{componente._filtroEstatus}">
+
+                    <f:selectItem itemLabel="ACTIVO" itemValue="DISPONIBLE"/>
+                    <f:selectItem itemLabel="INACTIVO" itemValue="NO DISPONIBLE"/>
+                    <f:selectItem itemLabel="AUTOPISTA" itemValue="AUTOPISTA"/>
+                </h:selectOneMenu>
+                <p:outputLabel for="txtFiltroCoordBase" value="Coordenadas desde Base"/>
+                <p:selectBooleanButton id="txtFiltroCoordBase" onLabel="Si" offLabel="No"
+                                       value="#{componente._filtroCoordenadasBase}">
+                    <p:ajax listener="#{componente.actualizarListado}"
+                            update=":forma_tabla:tabla"/>
+                </p:selectBooleanButton>
+
+                <p:outputLabel for="txtFiltroCoordWS" value="Coordenadas desde Servicio Web"/>
+                <p:selectBooleanButton id="txtFiltroCoordWS" onLabel="Si" offLabel="No"
+                                       value="#{componente._filtroCoordenadasWS}">
+                    <p:ajax listener="#{componente.actualizarListado}"
+                            update=":forma_tabla:tabla"/>
+                </p:selectBooleanButton>
+
+                <p:commandButton value="Filtrar" actionListener="#{componente.actualizarListado}"
+                                 update=":forma_tabla:tabla"/>
+                                 
+                                 <p:row></p:row>
+                                 
+                <p:commandButton value="Actualizar Telefonos Ajustadores SISE" 
+                				 actionListener="#{componente.doAccionActualizaTelefonosSISE}"
+                				  rendered="#{componente.permisoActualizarAjustadoresSise}"
+                                 />                 
+
+            </ui:define>
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunExportacion.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoTerminal}"/>
+            <ui:param name="descripcion" value="Terminales"/>
+
+        </ui:decorate>
+        <ui:decorate template="/Comun/comunTabla.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoTerminal}"/>
+            <ui:param name="listaObjetos" value="#{componente.listado}"/>
+            <ui:param name="listaColumnas" value="#{componente.columnas}"/>
+            <ui:param name="listaDe" value="Terminales de Ajustador"/>
+            <ui:param name="mostrarBotonEditarRegistro" value="true"/>
+            <ui:param name="mostrarBotonEliminarRegistro" value="true"/>
+            <ui:param name="mostrarPanel" value="true"/>
+            <ui:param name="mostrarFiltro" value="true"/>
+            <ui:define name="contenidoAdicional">
+
+				<p:column headerText="Guardia">
+					<h:selectOneMenu id="terminal_estatus" value="#{objeto.estatus}"
+						style="width: 100px"
+						disabled="#{!beanAplicacionAlarma.permisoCheckBox}" 
+						widgetVar="terminal_estatus"
+						onchange="estatusInactivo(this)" >
+						<f:selectItem itemLabel="ACTIVO" itemValue="DISPONIBLE" />
+						<f:selectItem itemLabel="INACTIVO" itemValue="NO DISPONIBLE"/>
+						<f:selectItem itemLabel="AUTOPISTA" itemValue="AUTOPISTA" />
+						<p:ajax event="valueChange" 
+								update=":forma_tabla:tabla"
+								disabled="#{!beanAplicacionAlarma.permisoCheckBox}"
+								listener="#{beanCatalogoTerminal.doAccionCambiarEstatusTerminal}"
+							>
+						</p:ajax>
+						<f:param name="id" value="#{riv}" />
+					</h:selectOneMenu>
+				</p:column>
+
+				
+                <p:column style="text-align:center" headerText="Agregar Comentario">
+                    <p:commandLink oncomplete="PF('panelComentario').show()"
+                                   actionListener="#{componente.doAccionRegistroTerminalComentario}">
+                        <h:graphicImage url="/diseno/imagenes/acciones/comentario.png"/>
+                        <f:param name="id" value="#{riv}"/>
+                    </p:commandLink>
+                </p:column>
+                <p:column style="text-align:center" headerText="Comentarios">
+                    <p:commandLink oncomplete="PF('panelListaComentariosTerminal').show()"
+                    				update=":formaListaComentario:contenidoListaComentario, :forma_tabla:tabla"
+                                   actionListener="#{componente.doAccionListaComentariosTerminal}">
+                        <f:param name="id" value="#{riv}"/>
+                        <h:graphicImage value="#{componente.doAccionComentariosVisto(objeto) ?'/diseno/imagenes/acciones/newComentario.png':'/diseno/imagenes/acciones/icons8-comentarios-50.png'}" />
+                    </p:commandLink>
+                </p:column>
+            </ui:define>
+        </ui:decorate>
+        
+        
+        
+        <ui:decorate template="/Comun/comunPanelDos.xhtml">
+            <ui:param name="componente" value="#{beanCatalogoTerminal}"/>
+            <ui:param name="mostrarFiltroComboEstado" value="true"/>
+            <ui:param name="mostrarFiltroComboBase" value="true"/>
+            <ui:param name="mostrarFiltroComboOficina" value="true"/>
+            <ui:param name="mostrarBotonAceptar" value="true"/>
+            <ui:param name="mostrarBotonCerrar" value="true"/>
+             <ui:param name="mostrarTituloTerminal" value="true"/>
+				
+            <ui:param name="validador" value="Terminal"/>
+            <ui:param name="listaDe" value="Ajustadores"/>
+            <ui:define name="contenidoAdicionalExtendido">
+            
+            	<h:panelGrid colums = "1" styleClass="formato_titulo2">
+            		<h2>Identificación</h2>
+            	</h:panelGrid>
+            	
+                <h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura">
+	                    <p:outputLabel for="nombre" value="Nombre perito-abogado"/>
+	                    <p:inputText id="nombre" value="#{componente.objetoABM.nombre}"/>
+	
+	                    <p:outputLabel for="prov" value="Número de Proveedor"/>
+	                    <p:inputText id="prov"
+	                                 value="#{componente.objetoABM.numeroproveedor}"/>
+	
+	                    <p:outputLabel for="pass" value="Contraseña"/>
+	                    <p:inputText id="pass" value="#{componente.objetoABM.passwd}"/>
+	
+	                    <p:outputLabel for="tel" value="Número Telefónico"/>
+	                    <p:outputPanel>
+	                        <p:inputText onkeyup="permitirSoloNumeros(this);" id="tel"
+	                                     value="#{componente.objetoABM.telefono}" maxlength="10"/>
+	                        <h:outputText value="(10 dígitos sin 044, 045, 01)"/>
+	                    </p:outputPanel>
+						
+						
+						<p:outputLabel for="radio" value="Número de Radio"/>
+	                    <p:inputText id="radio" value="#{componente.objetoABM.numeroradio}"/>
+	                    
+	                    <p:outputLabel for="mail" value="Correo Electrónico"/>
+	                    <p:inputText id="mail"
+	                                 value="#{componente.objetoABM.correoElectronico}"/>
+	                    
+	                    
+	                    <p:outputLabel for="terminal_proveedor_comunicaciones"
+	                                   value="Proveedor de Comunicaciones"/>
+	                    <h:selectOneMenu id="terminal_proveedor_comunicaciones"
+	                                     value="#{componente.objetoABM.proveedorTelefonia}">
+	                        <f:selectItem itemLabel="--Seleccionar--" itemValue=""/>
+	                        <f:selectItem itemLabel="TELCEL" itemValue="TELCEL"/>
+	                        <f:selectItem itemLabel="IUSACELL" itemValue="IUSACELL"/>
+	                        <f:selectItem itemLabel="NEXTEL" itemValue="NEXTEL"/>
+	                        <f:selectItem itemLabel="MOVISTAR" itemValue="MOVISTAR"/>
+	                        <f:selectItem itemLabel="OTRO" itemValue="OTRO"/>
+	                    </h:selectOneMenu>    
+	                    
+	                    <p:outputLabel for="telPersonal" value="Teléfono Personal"/>
+	                    <p:inputText id="telPersonal" 
+	                                 value="#{componente.objetoABM.telefonoPersonal}"/>             
+	                                 
+	                    <p:outputLabel for="noEmpleado" value="No. Empleado"/>
+	                    <p:inputText id="noEmpleado" value="#{componente.objetoABM.noEmpleado}"/>
+	                                 
+	                    <p:outputLabel for="supervisor" value="Supervisor"/>
+	                    <p:inputText id="supervisor" value="#{componente.objetoABM.supervisor}"/>  
+	                    
+	                    <p:outputLabel for="fechaIngreso" value="Fecha de Ingreso"/>
+	                    <p:inputText id="fechaIngreso" value="#{componente.objetoABM.fechaIngreso}" placeholder="dd/MM/yyyy"/> 
+	                    
+	                    <p:outputLabel for="noLicencia" value="No. Licencia"/>
+	                    <p:inputText id="noLicencia" value="#{componente.objetoABM.noLicencia}"/> 
+	                    
+	                    <p:outputLabel for="vigenciaLicencia" value="Vigencia de Licencia"/>
+	                    <p:inputText id="vigenciaLicencia" value="#{componente.objetoABM.vigenciaLicencia}" placeholder="Escribir dd/MM/yyy o PERMANENTE"/> 
+	                    
+	                    <p:outputLabel for="noTarjetaGasolina" value="No. de Tarjeta de Gasolina"/>
+	                    <p:inputText id="noTarjetaGasolina" value="#{componente.objetoABM.noTarjetaGasolina}"/> 
+	                    
+	                    <p:outputLabel for="gps" value="GPS (FLLETUP)"/>
+	                    <p:inputText id="gps" value="#{componente.objetoABM.gps}"/> 
+	                    
+	                    <p:outputLabel for="rfc" value="Cedula identidad"/>
+	                    <p:inputText id="rfc" value="#{componente.objetoABM.rfc}"/>  
+	                                               
+                    </h:panelGrid>
+                    
+                    <h:panelGrid colums = "1" styleClass="formato_titulo2">
+            			<h2>Domicilio</h2>
+            			</h:panelGrid>
+	                    <h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura">          
+	                    
+	                    <p:outputLabel for="dirCalle" value="Calle:" />
+						<p:inputText id="dirCalle"
+	                                 value="#{componente.objetoABM.dirCalle}"/>
+	
+	                    <p:outputLabel for="dirNo" value="Número:"/>
+	                    <p:inputText id="dirNo"
+	                                 value="#{componente.objetoABM.dirNumero}"/>
+	                                 
+	                    <p:outputLabel for="dirColonia" value="Barrio:"/>
+	                    <p:inputText id="dirColonia"
+	                                 value="#{componente.objetoABM.dirColonia}"/>
+	                                 
+	                    <p:outputLabel for="dirEstado" value="Departamento:"/>
+	                    <h:selectOneMenu id="dirEstado"
+							value="#{componente.objetoABM._dirEstado}"
+							title="Lista de Departamentos">
+							<f:selectItem itemLabel="--Seleccione -- " itemValue=""
+	                                      noSelectionOption="true"/>
+							<f:selectItems value="#{componente.listaEstados}"
+								var="dirEstado" itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+						</h:selectOneMenu>
+						
+	                </h:panelGrid> 
+                    
+                    <h:panelGrid colums = "1" styleClass="formato_titulo2" rendered="#{componente.objetoABM.grupo != null}">
+            				<h2>Horarios</h2>
+            			</h:panelGrid>
+            			
+           			<h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura" rendered="#{componente.objetoABM.grupo != null}">	
+            		
+            			<p:outputLabel for="grupo" value="Grupo: "/>
+                    	<p:outputLabel id="grupo" value="#{componente.objetoABM.grupo.nombre}"></p:outputLabel>
+                    	
+                    	<p:outputLabel for="subgrupo" value="Sub Grupo: "/>
+                    	<h:selectOneMenu id="subgrupo"
+	                                     value="#{componente.objetoABM.subGrupo}">
+	                        <f:selectItem itemLabel="--Selecionar--" itemValue="" />
+	                        <f:selectItem itemLabel="A" itemValue="A"/>
+	                        <f:selectItem itemLabel="B" itemValue="B"/>
+	                        <f:selectItem itemLabel="C" itemValue="C"/>
+	                    </h:selectOneMenu> 
+                    	
+                    	<p:outputLabel for="descanso" value="Dia de descanso: "/>                    	
+                    	<h:selectOneMenu id="descanso"
+	                                     value="#{componente.objetoABM.diaDescanso}">
+                            <f:selectItem itemLabel="--Selecionar--" itemValue="" />
+	                        <f:selectItem itemLabel="Lunes" itemValue="1"/>
+	                        <f:selectItem itemLabel="Martes" itemValue="2"/>
+	                        <f:selectItem itemLabel="Miércoles" itemValue="3"/>
+	                        <f:selectItem itemLabel="Jueves" itemValue="4"/>
+	                        <f:selectItem itemLabel="Viernes" itemValue="5"/>
+	                        <f:selectItem itemLabel="Sábado" itemValue="6"/>
+	                        <f:selectItem itemLabel="Domingo" itemValue="7"/>
+	                         <p:ajax event="valueChange" 
+								listener="#{beanCatalogoTerminal.doAccionUsuarioPermiso}"
+							>
+						</p:ajax>
+	                    </h:selectOneMenu> 
+                    	
+                    	<p:outputLabel for="guardia" value="Guardia: "/>
+                    	<p:selectBooleanButton id="guardia"  onLabel="Si" offLabel="No" 
+                    			value="#{componente.objetoABM.guardia}" disabled="#{beanCatalogoTerminal.guardiaGrupoActiva}"/>
+						
+                     </h:panelGrid>
+                     
+                     <h:panelGrid columns="3" columnClasses="tercio,tercio,tercio" styleClass="tabla_captura"  rendered="#{not empty componente.objetoABM.listaHorario}">
+                    	<p:outputLabel  value="Dia: "/>
+                    	<p:outputLabel  value="Hora entrada: "/>
+                    	<p:outputLabel  value="Hora salida: "/>
+
+                    	<ui:repeat value="#{componente.objetoABM.listaHorario}" var="horario">
+                    		<p:outputLabel value="#{horario.dia_semana} "/> <br />
+                    	</ui:repeat>
+                    	
+                    	<ui:repeat value="#{componente.objetoABM.listaHorario}" var="horario">
+                    	
+                    		<p:outputLabel value="#{horario.horarioEntrada} "/><br />
+                    	
+                    	</ui:repeat>
+
+						<ui:repeat value="#{componente.objetoABM.listaHorario}" var="horario">
+                    		
+                    		<p:outputLabel value="#{horario.horarioSalida} "/><br />
+                    		
+                    	</ui:repeat>
+  
+                   	</h:panelGrid> 
+                   	
+                   	<h:panelGrid columns="3" columnClasses="tercio,tercio,tercio" styleClass="tabla_captura"  rendered="#{empty componente.objetoABM.listaHorario}">
+                    	<p:outputLabel value="No tiene horario asignado "/> 
+                    	<p:outputLabel value="No tiene horario asignado "/>
+                    	<p:outputLabel value="No tiene horario asignado "/>
+					</h:panelGrid> 
+					
+<!-- 					Agregar incapacidad y vacaciones -->
+	              <h:panelGrid id="permisos" columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura"  rendered="#{not empty componente.objetoABM.listaHorario}">          
+					<p:outputLabel for="conceptosH" value="Conceptos: "/>
+                    	<h:selectOneMenu id="conceptosH"
+	                                     value="#{componente.objetoABM.conceptos}">
+	                        <f:selectItem itemLabel="--Selecionar--" itemValue="" />
+	                        <f:selectItem itemLabel="Medico Q" itemValue="Medico Q"/>
+	                        <f:selectItem itemLabel="Permiso" itemValue="Permiso"/>
+	                        <f:selectItem itemLabel="Desvelo" itemValue="Desvelo"/>
+	                        <f:selectItem itemLabel="Sin Auto" itemValue="Sin Auto"/>
+	                         <p:ajax event="valueChange" 
+								listener="#{beanCatalogoTerminal.doAccionUsuarioPermiso}"
+							>
+							</p:ajax>
+					 	</h:selectOneMenu>
+					 
+					 <h:panelGrid columns="2" columnClasses="mitad,tercio" styleClass="tabla_captura" 
+					 	 rendered="#{not empty componente.objetoABM.usuarioModif}">
+					 		<p:outputLabel value="Dia de descanso modificado por:" />  
+					 		<p:outputLabel  value="#{componente.objetoABM.usuarioModif}" />  
+					 	</h:panelGrid>
+					 				
+					 </h:panelGrid> 
+                            
+                    <h:panelGrid colums = "1" styleClass="formato_titulo2">
+            				<h2>Inventario</h2>
+            			</h:panelGrid>
+	                    <h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura">          
+	                    <p:outputLabel for="moto" value="Moto"/>
+						<p:selectBooleanButton onLabel="Si" offLabel="No" id="moto"
+							value="#{componente.objetoABM.moto}" >
+						</p:selectBooleanButton>
+						
+						<p:row></p:row><p:row></p:row>
+	                    
+	                    <p:outputLabel for="vehiculoMar" value="Vehiculo Marca" />
+						<h:selectOneMenu id="vehiculoMar"
+							value="#{componente.objetoABM._idVehiculoMar}"
+							title="Lista de Vehiculos">
+							<f:selectItem itemLabel="--Seleccione -- " itemValue=""
+	                                      noSelectionOption="true"/>
+							<f:selectItems value="#{componente.listaDeCatalogoVehiculoAjus}"
+								var="vehiculoMar" itemValue="#{vehiculoMar.id}"
+								itemLabel="#{vehiculoMar.marca}  #{vehiculoMar.tipo}"  />
+						</h:selectOneMenu> 
+	
+	                    <p:outputLabel for="umod" value="Vehículo Modelo"/>
+	                    <p:inputText id="umod"
+	                                 value="#{componente.objetoABM.unidadModelo}"/>
+	                    <p:outputLabel for="upla" value="Vehículo Placas"/>
+	                    <p:inputText id="upla"
+	                                 value="#{componente.objetoABM.unidadPlacas}"/>
+	                    <p:outputLabel for="user" value="Vehículo Serie VIN"/>
+	                    <p:inputText id="user"
+	                                 value="#{componente.objetoABM.unidadSerie}"/>
+	                    
+	                   <p:outputLabel for="disMqp" value="Dispositivo Móvil Quálitas Primario" />
+						<h:selectOneMenu id="disMqp"
+							value="#{componente.objetoABM._idDisMqp}"
+							title="Lista de Dispositivos Movil">
+							<f:selectItem itemLabel="--Seleccione -- " itemValue=""
+	                                      noSelectionOption="true"/>
+							<f:selectItems value="#{componente.listaDeCatalogoMovil}"
+								var="disMqp" itemValue="#{disMqp.id}"
+								itemLabel="#{disMqp.modelo}" />
+						</h:selectOneMenu> 
+	                    
+	                  	<p:outputLabel for="numSdmqp" value=" Número de Serie Dispositivo Móvil Quálitas Primario"/>
+	                    <p:inputText id="numSdmqp"
+	                                 value="#{componente.objetoABM.numSdmqp}"/>
+	                                 
+	                    <p:outputLabel for="disMqs" value="Dispositivo Móvil Quálitas Secundario" />
+						<h:selectOneMenu id="disMqs"
+							value="#{componente.objetoABM._idDisMqs}"
+							title="Lista de Dispositivos Movil Dos">
+							<f:selectItem itemLabel="--Seleccione -- " itemValue=""
+	                                      noSelectionOption="true"/>
+							<f:selectItems value="#{componente.listaDeCatalogoMovil}"
+								var="disMqs" itemValue="#{disMqs.id}"
+								itemLabel="#{disMqs.modelo}" />
+						</h:selectOneMenu>
+	                    
+	                  	<p:outputLabel for="numSerieDmqs" value=" Número de Serie Dispositivo Móvil Quálitas Secundario"/>
+	                    <p:inputText id="numSerieDmqs"
+	                                 value="#{componente.objetoABM.numSerieDmqs}"/>
+	                    
+	                    <p:outputLabel for="impreMarca" value="Impresora Marca"/>
+	                    <p:inputText id="impreMarca"
+	                                 value="#{componente.objetoABM.impreMarca}"/>
+	                     
+	                    <p:outputLabel for="impreSerie" value="Impresora Serie"/>
+	                    <p:inputText id="impreSerie"
+	                                 value="#{componente.objetoABM.impreSerie}"/>
+	                                 
+	                     <p:outputLabel for="camFotoMarca" value="Cámara Fotográfica Marca"/>
+	                    <p:inputText id="camFotoMarca"
+	                                 value="#{componente.objetoABM.camFotoMarca}"/>
+	                     
+	                    <p:outputLabel for="camFotoSerie" value=" Cámara Fotográfica Serie"/>
+	                    <p:inputText id="camFotoSerie"
+	                                 value="#{componente.objetoABM.camFotoSerie}"/>
+	                                 
+	                    <p:outputLabel for="otrosDisp" value="Otros Dispositivos"/>
+	                    <p:inputText id="otrosDisp"
+	                                 value="#{componente.objetoABM.otrosDisp}"/>
+	                    
+	                    <p:outputLabel for="numeroEcon" value="Número Economico"/>
+	                    <p:inputText id="numeroEcon"
+	                                 value="#{componente.objetoABM.numeroEcon}"/>
+	                </h:panelGrid>
+	                
+	                <h:panelGrid colums = "1" styleClass="formato_titulo2">
+            				<h2>Configuración</h2>
+            		</h:panelGrid>
+	                <h:panelGrid columns="4" columnClasses="cuarto,cuarto,cuarto,cuarto" styleClass="tabla_captura">                 
+                                 
+	                   <p:outputLabel for="mostEnAsig" value="Mostrar En Cercania"/>
+	                    <p:selectBooleanButton onLabel="Si" offLabel="No" id="mostEnAsig"
+	                                           value="#{componente.objetoABM.mostrarEnCercania}"/>
+	
+	                    <p:outputLabel for="coordBase" value="Coordenadas desde Base"/>
+	                    <p:selectBooleanButton onLabel="Si" offLabel="No" id="coordBase"
+	                                           disabled="#{empty componente.objetoABM.base.latitud or empty componente.objetoABM.base.longitud}"
+	                                           value="#{componente.objetoABM.coordenadasDesdeBase}"/>
+	
+	                    <p:outputLabel for="coordWs" value="Coordenadas desde Servicio Web"/>
+	                    <p:selectBooleanButton onLabel="Si" offLabel="No" id="coordWs"
+	                                           disabled="#{empty componente.objetoABM.unidadSerie}"
+	                                           value="#{componente.objetoABM.coordenadasDesdeServicioWeb}"/>
+	
+						<p:outputLabel for="asiVial" value="Asistencia Vial" rendered="#{componente.tienePermisoEditarAv}"/>
+						<p:selectBooleanButton onLabel="Si" offLabel="No" id="asiVial"
+						    rendered="#{componente.tienePermisoEditarAv}"
+							value="#{componente.objetoABM.asistenciaVial}" onchange="isAsistenciaVial(this);" widgetVar="asiVial">	
+						</p:selectBooleanButton>
+						
+						<p:row></p:row><p:row></p:row><p:row></p:row>
+						<p:panelGrid id="test" rendered="#{componente.tienePermisoEditarAv}">
+								<p:selectCheckboxMenu rendered="#{componente.tienePermisoEditarAv}" 
+									id="tipoAv" value="#{componente.tipoAv}" 
+														label="Tipo Asistencia Vial" multiple="true"
+							                            filter="false" panelStyle="width:250px"
+														widgetVar="tipoAv">
+					            <f:selectItem itemLabel="Carro Taller- Suministro de Gasolina" itemValue="54" itemDescription="Auxilio vial básico suministro de gasolina."/>
+					            <f:selectItem itemLabel="Carro Taller- Cambio de Llanta" itemValue="56" itemDescription="Auxilio vial básico de cambio de llanta"/>
+					            <f:selectItem itemLabel="Carro Taller- Paso Corriente" itemValue="58" itemDescription="Paso de corriente."/>
+							</p:selectCheckboxMenu>
+					    </p:panelGrid>   
+					    
+					</h:panelGrid>
+                   
+            </ui:define>       
+        </ui:decorate>
+     
+        <p:dialog closeOnEscape="true" closable="true" widgetVar="panelAlerta"
+                  header="ABM de Alertas">
+
+            <h:form id="formaAlerta">
+                <p:outputPanel id="contenidoAlerta">
+                    <p:panel>
+                        <p>Seleccione una opcián de alerta. Puede ser, por punto de
+                            interés, por geocerca entra, por geocerca sale, por tiempo de
+                            parado en minutos o por velocidad superior en kilémetros por
+                            hora.</p>
+
+                        <h:panelGrid columns="2" styleClass="tabla_captura"
+                                     columnClasses="cuarto,tres_cuartos">
+                            <p:outputLabel for="porPuntoInteres" value="Por Punto de Interés"/>
+                            <h:selectOneMenu id="porPuntoInteres"
+                                             value="#{beanCatalogoTerminal.idPuntoInteresSeleccionado}">
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel=" -- Opcional --"/>
+                                <f:selectItems
+                                        value="#{beanCatalogoTerminal.listaDePuntoInteres}"
+                                        var="puntoInteres" itemValue="#{puntoInteres.id}"
+                                        itemLabel="#{puntoInteres.descripcion}"/>
+                            </h:selectOneMenu>
+                            <p:outputLabel for="metrosPuntoInteres"
+                                           value="Distancia en Metros del Punto de Interés"/>
+                            <p:inputText onkeyup="permitirSoloNumeros(this);"
+                                         id="metrosPuntoInteres"
+                                         value="#{beanCatalogoTerminal.objetoABMAlterta.porIdPuntoInteresDistanciaMetros}"/>
+                            <p:outputLabel for="geocercaEntra" value="Por Geocerca Entra"/>
+                            <h:selectOneMenu id="geocercaEntra"
+                                             value="#{beanCatalogoTerminal.idGeocercaEntraSeleccionado}">
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel=" -- Opcional --"/>
+                                <f:selectItems value="#{beanCatalogoTerminal.listaDeGeocerca}"
+                                               var="geocerca" itemValue="#{geocerca.id}"
+                                               itemLabel="#{geocerca.descripcion}"/>
+                            </h:selectOneMenu>
+                            <p:outputLabel for="geocercaSale" value="Por Geocerca Sale"/>
+                            <h:selectOneMenu id="geocercaSale"
+                                             value="#{beanCatalogoTerminal.idGeocercaSaleSeleccionado}">
+                                <f:selectItem noSelectionOption="true"
+                                              itemLabel=" -- Opcional --"/>
+                                <f:selectItems value="#{beanCatalogoTerminal.listaDeGeocerca}"
+                                               var="geocerca" itemValue="#{geocerca.id}"
+                                               itemLabel="#{geocerca.descripcion}"/>
+                            </h:selectOneMenu>
+                            <p:outputLabel for="velocidadKMH"
+                                           value="Por velocidad mayor a KMH"/>
+                            <p:inputText onkeyup="permitirSoloNumeros(this);"
+                                         id="velocidadKMH"
+                                         value="#{beanCatalogoTerminal.objetoABMAlterta.porVelocidadMayorKmh}"/>
+                            <p:outputLabel for="minutosTiempoParado"
+                                           value="Por tiempo de parado mayor a Minutos"/>
+                            <p:inputText onkeyup="permitirSoloNumeros(this);"
+                                         id="minutosTiempoParado"
+                                         value="#{beanCatalogoTerminal.objetoABMAlterta.porTiempoDeParadoMayorMinutos}"/>
+                            <p:outputLabel for="mail_alerta" value="Dirección de Correo Electrónico"/>
+                            <p:inputText id="mail_alerta"
+                                         value="#{beanCatalogoTerminal.objetoABMAlterta.direccionCorreo}"/>
+                            <p:outputLabel for="telefonosms" value="Teléfono para SMS"/>
+                            <p:inputText onkeyup="permitirSoloNumeros(this);"
+                                         id="telefonosms"
+                                         value="#{beanCatalogoTerminal.objetoABMAlterta.telefonoSms}"/>
+
+                            <p:commandButton ajax="false" value="Aceptar"
+                                             actionListener="#{beanCatalogoTerminal.doAccionRegistroAlertaGuardar}"/>
+
+                        </h:panelGrid>
+                    </p:panel>
+
+
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+
+
+        <p:dialog closeOnEscape="true" closable="true"
+                  widgetVar="panelListaAlerta" header="Lista de Alertas">
+
+            <h:form id="formaListaAlerta">
+                <p:outputPanel id="contenidoListaAlerta">
+                    <p:dataTable value="#{beanCatalogoTerminal.listaDeTerminalAlerta}"
+                                 id="tabla_alertas" var="terminalAlerta" emptyMessage="Sin Datos"
+                                 currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+                                 paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+                                 rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+                        <f:facet name="header">Lista de Alertas</f:facet>
+
+                        <p:column headerText="Por Velocidad">
+                            <h:outputText value="#{terminalAlerta.porVelocidadMayorKmh}"/>
+                        </p:column>
+                        <p:column headerText="Por Tiempo Parado">
+                            <h:outputText
+                                    value="#{terminalAlerta.porTiempoDeParadoMayorMinutos}"/>
+                        </p:column>
+                        <p:column headerText="Por Punto Interés">
+                            <h:outputText
+                                    value="#{terminalAlerta.puntoInteres.nombre}  #{terminalAlerta.porIdPuntoInteresDistanciaMetros} mts."/>
+                        </p:column>
+                        <p:column headerText="Por Geocerca Entra">
+                            <h:outputText
+                                    value="#{terminalAlerta.geocercaByPorIdGeocercaEntra.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Por Geocerca Sale">
+                            <h:outputText
+                                    value="#{terminalAlerta.geocercaByPorIdGeocercaSale.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Correo">
+
+                            <div style="width: 150px; overflow: hidden;">
+                                <h:outputText value="#{terminalAlerta.direccionCorreo}"/>
+                            </div>
+                        </p:column>
+                        <p:column headerText="Teléfono">
+                            <h:outputText value="#{terminalAlerta.telefonoSms}"/>
+                        </p:column>
+                        <p:column headerText="Eliminar">
+                            <p:commandLink update="tabla_alertas"
+                                           actionListener="#{beanCatalogoTerminal.doAccionRegistroAlertaEliminar}">
+                                <f:param name="id" value="#{terminalAlerta.id}"/>
+                                <h:graphicImage
+                                        url="/diseno/imagenes/acciones/icono16NoValidar.png"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog closeOnEscape="true" closable="true" 
+                  widgetVar="panelListaComentariosTerminal" header="Lista de Comentarios" >
+
+            <h:form id="formaListaComentario">
+                <p:outputPanel id="contenidoListaComentario" >
+                    <p:dataTable value="#{componente.comentarios}"
+                                 id="tabla_comentario" var="terminalComentario" emptyMessage="Sin Datos"
+                                 currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+                                 paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+                                 rowsPerPageTemplate="10,20,30,40,50" lazy="true" >
+
+                        <f:facet name="header">Lista de Comentarios</f:facet>
+
+                        <p:column headerText="Comentario">
+                            <h:outputText value = "#{terminalComentario.comentario}" />
+                        </p:column>
+                        <p:column headerText="Fecha y Hora">
+                            <h:outputText value = "#{terminalComentario.fecha}">
+                            	<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <h:outputText value = "#{terminalComentario.usuario}"/>
+                        </p:column> 
+                         <p:column headerText="Visto Por">
+                            <h:outputText value = "#{terminalComentario.usuarioVisto}"/>
+                        </p:column> 
+                        <p:column headerText="Eliminar">
+							<p:commandLink update="tabla_comentario"
+								actionListener="#{componente.doAccionRegistroEliminarComentario}">
+								<h:graphicImage alt="Eliminar"
+									value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+								<f:param name="terminalComentario.id" value="#{riv}" />
+								<p:confirm header="Confirmación de Eliminado"
+									message="Por favor confirme que desea eliminar el comentario."
+									icon="ui-icon-alert" />
+							</p:commandLink>
+							<p:confirmDialog global="true" header="Confirmación de Eliminado">
+								<p:commandButton value="Si" type="button"
+									update=":formaListaComentario:tabla_comentario" styleClass="ui-confirmdialog-yes"
+									icon="ui-icon-check">
+									<f:param name="id" value="#{componente.objetoABMComentario.id}" />
+		
+								</p:commandButton>
+								<p:commandButton value="No" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+		
+						</p:column>
+                    </p:dataTable>
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+        
+		
+		<p:dialog closeOnEscape="true" closable="true" widgetVar="panelComentario"
+                  header="Comentarios">
+
+            <h:form id="formaComentario">
+                <p:outputPanel id="contenidoComentario">                    
+                        <h:panelGrid columns="2" styleClass="tabla_captura"
+                                     columnClasses="cuarto,tres_cuartos">                            
+                            <p:outputLabel value = "Usuario:" styleClass="formato_titulo"/>
+                            <h:outputText value=" #{componente.usuarioActual}"
+										rendered="#{componente.tieneSesion}" styleClass="formato_usuario" />							
+						</h:panelGrid>	
+									
+                        <h:panelGrid columns="1" styleClass="tabla_captura"
+                        			 columnClasses = "cuarto,tres_cuartos">
+                            <p:outputLabel for="comentario"
+                                           value="Agrega Comentario:" styleClass="formato_coment"/>
+                            <p:inputTextarea id = "comentario"
+                            				value = "#{beanCatalogoTerminal.objetoABMComentario.comentario}"/>                            
+						</h:panelGrid> 
+
+						<h:panelGrid columns="2" columnClasses="mitad,mitad"
+						styleClass="tabla_captura">
+						
+							<p:commandButton value="Aceptar" ajax="false"
+								actionListener="#{beanCatalogoTerminal.doAccionRegistroTerminalComentarioBtn}"
+								oncomplete="PF('panel').hide();"  update=":forma_tabla:tabla"/>
+								
+							<p:commandButton value="Cerrar" ajax="false"
+								actionListener="#{componente.doAccionRegistroCerrar}" />
+							
+						</h:panelGrid>                     
+                    
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+        
+					<!--  Dialog de catálogo -->
+                           <p:dialog id="dlg" closeOnEscape="false" closable="false" widgetVar="dlg" header="Motivos: ">
+                             <h:form id="formaInactivo">
+                              <p:outputPanel id="contenidoInactivo"> 
+                                        <h:panelGrid columns="1" styleClass="tabla_captura"  >
+                                               <p:outputLabel value ="" styleClass="formato_titulo"></p:outputLabel>
+                                       <p:selectOneMenu id="console" value="#{beanCatalogoTerminal.estatusInactivo}" style="width:150px">
+                                        <f:selectItem itemLabel="Selecionar una opción..." itemValue="" />
+                                       <f:selectItem itemLabel="Cita en oficina" itemValue="Cita en oficina" />
+                                       <f:selectItem itemLabel="Permiso especial" itemValue="Permiso especial" />
+                                       <f:selectItem itemLabel="Cita C/asegurado/tercero" itemValue="Cita C/asegurado/tercero" />
+                                       <f:selectItem itemLabel="Traslado PT" itemValue="Traslado PT" />
+                                       <f:selectItem itemLabel="Falla de Qualicoche" itemValue="Falla de Qualicoche" />
+                                        <f:selectItem itemLabel="Incapacidad" itemValue="Incapacidad" />
+                                       <f:selectItem itemLabel="Vacaciones" itemValue="Vacaciones"/>
+                                      		 <p:ajax  event="valueChange" 
+                                                      listener="#{beanCatalogoTerminal.doAccionCambiarRazonEstatus}"
+                                                      oncomplete="PF('dlg').hide();"
+                                                      update=":forma_tabla:tabla">
+                                               </p:ajax>
+                                               <f:param name="id" value="#{riv}" />
+                                         </p:selectOneMenu>
+                                        </h:panelGrid>
+                                         			<h:panelGrid columns="1" 
+														styleClass="tabla_captura"> 
+												</h:panelGrid>   
+                                  </p:outputPanel>
+                             </h:form>
+                           </p:dialog>
+                           
+                           
+    </ui:define>
+</ui:composition>

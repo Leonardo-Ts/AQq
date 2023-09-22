@@ -1,0 +1,559 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanHistoricoResumenAjustador}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Resumen Perito-Abogado - Detalle de Reporte
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Aplicaciones</a></li>
+		<li><a href="resumenAjustador.siica">Resumen Perito-Abogado</a></li>
+		<li>Detalle</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<p:outputPanel >
+			<div class="forma_mitad">
+
+				<p:panel header="Datos del Reporte" styleClass="panelesV">
+					<h:panelGrid styleClass="tabla_captura" columns="4"
+						columnClasses="sexto,tercio,sexto,tercio">
+						
+						<p:outputLabel for="reporte" value="Reporte:" />
+						<h:outputText id="reporte"
+							value="#{componente.objetoABM.generalNumeroReporte}" />
+							
+						<p:outputLabel for="fechasi" value="Fecha:" />
+						<h:outputText id="fechasi"
+							value="#{componente.reporteMovilSacObj.fechaOcurrido}">
+							<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+								pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						
+						<p:outputLabel for="clave" value="Clave Perito-Abogado" />
+						<h:outputText id="clave"
+							value="#{componente.objetoABM.claveAjustador}" />
+							
+						<p:outputLabel for="nombreAjus" value="Perito-Abogado" />
+						<h:outputText id="nombreAjus"
+							value="#{componente.objetoABM.nombreAjustador}" />
+							
+						<p:outputLabel for="codCau" value="Cod. Causa:" />
+						<h:outputText id="codCau"
+							value="#{componente.reporteMovilSacObj.ajusteCodigoCausa}" />
+						
+					</h:panelGrid>
+				</p:panel>
+				
+				<p:panel header="Información del Perito-Abogado" styleClass="panelesV">
+					<h:panelGrid styleClass="tabla_captura" columns="4"
+						columnClasses="sexto,tercio,sexto,tercio">
+					
+						<p:outputLabel for="nombreAseg" value="Nombre:" />
+						<h:outputText id="nombreAseg"
+							value="#{componente.reporteMovilSacObj.generalNombreAsegurado}" />
+							
+						<p:outputLabel value="" />
+						<h:outputText value="" />
+						
+						<p:outputLabel for="nombreConduc" value="Conductor:" />
+						<h:outputText id="nombreConduc"
+							value="#{componente.reporteMovilSacObj.conductorNombre}" />
+						
+						<p:outputLabel for="correo" value="Correo:" />
+						<h:outputText id="correo"
+							value="#{componente.reporteMovilSacObj.generalCorreoAsegurado}" />
+						
+						<p:outputLabel for="telefonoAseg" value="Telefono:" />
+						<h:outputText id="telefonoAseg"
+							value="#{componente.reporteMovilSacObj.conductorTelefonoContacto}" />
+							
+						<p:outputLabel value="" />
+						<h:outputText value="" />
+							
+						<p:outputLabel for="poliza" value="Poliza:" />
+						<h:outputText id="poliza"
+							value="#{componente.reporteMovilSacObj.generalNumeroPoliza}" />
+							
+						<p:outputLabel for="inciso" value="Certificado:" />
+						<h:outputText id="inciso"
+							value="#{componente.reporteMovilSacObj.generalInciso}" />
+							
+						<p:outputLabel for="estpoliza" value="Estatus Poliza:" />
+						<h:outputText id="estpoliza" value="#{componente.reporteMovilSacObj.generalPolizaEstatus}" />
+						<p:outputLabel value="" />
+						<h:outputText value="" />
+							
+						<p:outputLabel for="marca" value="Marca:" />
+						<h:outputText id="marca"
+							value="#{componente.reporteMovilSacObj.vehiculoMarca}" />
+							
+						<p:outputLabel value="" />
+						<h:outputText value="" />
+							
+						<p:outputLabel for="modelo" value="Modelo:" />
+						<h:outputText id="modelo"
+							value="#{componente.reporteMovilSacObj.vehiculoModelo}" />
+							
+						<p:outputLabel for="serie" value="Serie:" />
+						<h:outputText id="serie"
+							value="#{componente.reporteMovilSacObj.vehiculoSerie}" />
+					</h:panelGrid>
+				</p:panel>
+				
+				<p:panel header="Tiempos" styleClass="panelesV">					
+		            		
+            		<ui:repeat var="hist" value="#{componente.historicos}">
+            		
+            			<h:panelGrid colums = "1" styleClass="formato_titulo3" rendered="#{hist.actividad=='Asignación Reporte'}">
+	            			<h4>Asignación de Reporte</h4>		            						            				
+	            		</h:panelGrid>
+	            		
+	            		<h:panelGrid styleClass="tabla_captura" columns="4" rendered="#{hist.actividad=='Asignación Reporte'}"
+							columnClasses="sexto,tercio,sexto,tercio">
+							<p:outputLabel value="Origen:" />
+							<h:outputText value="#{hist.fuente}" />
+								
+							<p:outputLabel value="Fecha:" />
+							<h:outputText value="#{hist.fechaActividad}">
+								<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+									pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+							
+							<p:outputLabel value="Usuario:" />
+							<h:outputText value="#{hist.actividadObj['usuario']}" />
+							
+							<p:outputLabel value="Ambulancia:" />
+							<h:outputText value="#{hist.actividadObj['servicioAmbulancia'] == null ? 'No' : 
+								hist.actividadObj['servicioAmbulancia'] == 'true' ? 'Si' :
+								hist.actividadObj['servicioAmbulancia'] == 'false' ? 'No' : 'No'}" />
+							
+							<p:outputLabel value="Proximidad:" />
+							<h:outputText rendered="#{componente.reporteMovilSacObj.proximidad == 'true'}" value="SI" />
+							<h:outputText rendered="#{componente.reporteMovilSacObj.proximidad == 'false'}" value="NO" />
+           				</h:panelGrid>
+	            		
+	            		<h:panelGrid colums = "1" styleClass="formato_titulo3" rendered="#{hist.actividad=='Insertar Arribo'}">
+	            			<h4>Arribo de Reporte</h4>		            						            				
+	            		</h:panelGrid>
+	            		
+	            		<h:panelGrid styleClass="tabla_captura" columns="4" rendered="#{hist.actividad=='Insertar Arribo'}"
+							columnClasses="sexto,tercio,sexto,tercio">
+							<p:outputLabel value="Origen:" />
+							<h:outputText value="#{hist.fuente}" />
+								
+							<p:outputLabel value="Fecha:" />
+							<h:outputText value="#{hist.fechaActividad}">
+								<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+									pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+           				</h:panelGrid>
+	            		
+	            		<h:panelGrid colums = "1" styleClass="formato_titulo3" rendered="#{hist.actividad=='Insertar Término'}">
+	            			<h4>Termino de Reporte</h4>		            						            				
+	            		</h:panelGrid>
+	            		
+	            		<h:panelGrid styleClass="tabla_captura" columns="4" rendered="#{hist.actividad=='Insertar Término'}"
+							columnClasses="sexto,tercio,sexto,tercio">
+							<p:outputLabel value="Origen:" />
+							<h:outputText value="#{hist.fuente}" />
+								
+							<p:outputLabel value="Fecha:" />
+							<h:outputText value="#{hist.fechaActividad}">
+								<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+									pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+           				</h:panelGrid>
+           				
+           				<h:panelGrid styleClass="tabla_captura" columns="2" rendered="#{hist.actividad=='Insertar Término'}"
+							columnClasses="cuarto,tres_cuartos">
+								<p:outputLabel value="Observaciones:" />
+								<h:outputText  value="#{hist.actividadObj['observaciones']}" />
+						</h:panelGrid>								
+					
+						<h:panelGrid styleClass="tabla_captura" columns="2" rendered="#{hist.actividad=='Insertar Término'}"
+							columnClasses="cuarto,tres_cuartos">
+								<p:outputLabel value="Cod. Responsabilidad:" />
+								<h:outputText value="#{hist.actividadObj['codigoResp']} - #{hist.actividadObj['descCodigoResp']}" />
+						</h:panelGrid>	
+						
+            		</ui:repeat>
+					
+				</p:panel>
+				
+				<p:panel header="Cuentas Especiales" styleClass="panelesV">
+					<ui:repeat var="hist" value="#{componente.historicos}">
+						
+						<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+							rendered="#{hist.actividad=='Insertar Término'}">
+		            			<h4>Datos Preexistentes</h4>			            				            				            						            				
+		            	</h:panelGrid>
+		            		
+		            	<h:panelGrid styleClass="tabla_captura" columns="2" rendered="#{hist.actividad=='Insertar Término'}"
+							columnClasses="cuarto,tres_cuartos">
+								<p:outputLabel value="Descripción:" />
+								<h:outputText  value="#{hist.actividadObj['descDaniosPre']}" />
+						</h:panelGrid>	
+						
+						<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+							rendered="#{hist.actividad=='Insertar Término'
+							and hist.actividadObj['datosRobo'] != null}">
+		            			<h4>Datos de Robo</h4>			            				            				            						            				
+		            	</h:panelGrid>
+		            		
+	            		<h:panelGrid styleClass="tabla_captura" columns="4" 
+	            			rendered="#{hist.actividad=='Insertar Término' 
+	            			and hist.actividadObj['datosRobo'] != null}"
+							columnClasses="sexto,tercio,sexto,tercio">
+						
+							<p:outputLabel value="Placas:" />
+							<h:outputText value="#{hist.actividadObj['datosRobo']['placasAsegurado']}" />
+								
+							<p:outputLabel value="Color:" />
+							<h:outputText value="#{hist.actividadObj['datosRobo']['color']}" />
+							
+							<p:outputLabel value="Num. Serie:" />
+							<h:outputText value="#{hist.actividadObj['datosRobo']['serieAsegurado']}" />
+							
+							<p:outputLabel value="Motor:" />
+							<h:outputText value="#{hist.actividadObj['datosRobo']['motor']}" />
+							
+							<p:outputLabel value="Averiguación:" />
+							<h:outputText value="#{hist.actividadObj['datosRobo']['averiguacionPrev']}" />
+           				</h:panelGrid>
+					</ui:repeat>
+				</p:panel>
+			</div>
+
+			<div class="forma_mitad">
+			
+				<p:panel header="Actividades" styleClass="panelesV">
+					<h:panelGrid columns="4"
+						columnClasses="sexto,tercio,sexto,tercio"
+						styleClass="tabla_captura">
+
+						<ui:repeat var="hist" value="#{componente.historicos}">
+						
+							<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Insertar Gestión' 
+								and hist.actividadObj['terceros'] != null
+								and not empty hist.actividadObj['terceros']
+								and not hist.resultado.contains('ERROR')}">
+			            			<h4>Tercero</h4>		            						            				
+			            	</h:panelGrid>
+			            		
+		            		<ui:repeat var="ter" value="#{hist.actividadObj['terceros']}">
+		            			<h:panelGrid rendered="#{hist.actividad=='Insertar Gestión' 
+									and hist.actividadObj['terceros'] != null
+									and not empty hist.actividadObj['terceros']
+									and not hist.resultado.contains('ERROR')}" 
+				            			styleClass="tabla_captura" columns="4"
+									columnClasses="sexto,tercio,sexto,tercio">	
+										
+										<p:outputLabel value="Fecha:" />
+										<h:outputText value="#{hist.fechaActividad}">
+											<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+												pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+										<p:outputLabel value="" />
+										<h:outputText value="" />
+									
+										<p:outputLabel value="Número:" />
+										<h:outputText value="#{ beanHistoricoResumenAjustador.getNumeroTercero(ter['numeroTercero'])}" />
+											
+										<p:outputLabel value="Conductor:" />
+										<h:outputText value="#{ter['vehiculo']['conductor']}" />
+																	
+					            		<p:outputLabel value="Tipo:" />
+										<h:outputText value="#{ beanHistoricoResumenAjustador.getTipoTercero(ter['tipoTercero'])}" />
+											
+										<p:outputLabel value="Telefono:" />
+										<h:outputText value="#{ter['telefono']}" />
+										
+										<p:outputLabel value="Correo:" />
+										<h:outputText value="#{ter['correo']}" />
+											
+										<p:outputLabel value="Marca Vehiculo:" />
+										<h:outputText value="#{ter['vehiculo']['marca']}" />
+										
+										<p:outputLabel value="Modelo Vehiculo:" />
+										<h:outputText value="#{ter['vehiculo']['modelo']}" />
+										
+										<p:outputLabel value="Placas Vehiculo:" />
+										<h:outputText value="#{ter['vehiculo']['placas']}" />
+										
+										<p:outputLabel value="Serie Vehiculo:" />
+										<h:outputText value="#{ter['vehiculo']['serie']}" />
+										
+										<h:outputText value="&lt;br/&gt;" escape="false" />
+								</h:panelGrid>
+		            		</ui:repeat>
+		            		
+		            		<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Insertar Gestión' 
+								and hist.actividadObj['recuperos'] != null
+								and not empty hist.actividadObj['recuperos']
+								and not hist.resultado.contains('ERROR')}">
+				            			<h4>Intercambio de Órdenes</h4>		            						            				
+		            		</h:panelGrid>
+		            		
+		            		<ui:repeat var="rec" value="#{hist.actividadObj['recuperos']}">
+		            			<h:panelGrid rendered="#{hist.actividad=='Insertar Gestión' 
+									and hist.actividadObj['recuperos'] != null
+									and not empty hist.actividadObj['recuperos']
+									and not hist.resultado.contains('ERROR')}"
+				            			styleClass="tabla_captura" columns="4"
+									columnClasses="sexto,tercio,sexto,tercio">
+									
+										<p:outputLabel value="Fecha:" />
+										<h:outputText value="#{hist.fechaActividad}">
+											<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+												pattern="dd/MM/yyyy HH:mm" />
+										</h:outputText>
+										<p:outputLabel value="" />
+										<h:outputText value="" />
+										
+										<p:outputLabel value="Tercero:" />
+										<h:outputText value="#{beanHistoricoResumenAjustador.getNumeroTercero(rec['numeroTercero'])}" />
+										<p:outputLabel value="" />
+										<h:outputText value="" />
+																		
+					            		<p:outputLabel value="Clave Recupero:" />
+										<h:outputText value="#{rec['cveRecupero']}" />
+										
+										<p:outputLabel value="Recupero:" />
+										<h:outputText value="#{rec['descClaveRecupero']}" />
+										
+										<p:outputLabel value="Aseguradora:" />
+										<h:outputText value="#{rec['nombreAseguradora']}" />																		
+											
+										<h:outputText value="&lt;br/&gt;" escape="false" />
+								</h:panelGrid>
+		            		</ui:repeat>
+			            		
+			            	<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Solicitar Folio'}">
+			            			<h4>Folio</h4>		            						            				
+			            	</h:panelGrid>
+			            		
+			            	<h:panelGrid rendered="#{hist.actividad=='Solicitar Folio'}" 
+		            			styleClass="tabla_captura" columns="4"
+								columnClasses="sexto,tercio,sexto,tercio">	
+							
+								<p:outputLabel value="Fecha:" />
+								<h:outputText value="#{hist.fechaActividad}">
+									<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+										pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+								
+								<p:outputLabel value="Nombre:"  rendered="#{hist.actividadObj['servicioSolicitado'] == 'Hospital'? true :
+										hist.actividadObj['servicioSolicitado'] == 'Ambulancia' ? true : false}"/>
+								<h:outputText value="#{beanHistoricoResumenAjustador.getTipoAfectado(hist.actividadObj['nombreAfectado'])}" 
+										rendered="#{hist.actividadObj['servicioSolicitado'] == 'Hospital'? true : hist.actividadObj['servicioSolicitado'] == 'Ambulancia' ? true : false}" />
+								
+								<p:outputLabel value="" rendered="#{hist.actividadObj['servicioSolicitado'] == 'Hospital'? true :
+										hist.actividadObj['servicioSolicitado'] == 'Ambulancia' ? true : false}"/>
+								<h:outputText value="" rendered="#{hist.actividadObj['servicioSolicitado'] == 'Hospital'? true :
+										hist.actividadObj['servicioSolicitado'] == 'Ambulancia' ? true : false}"/>
+								
+								<p:outputLabel value="Afectado:" />
+								<h:outputText value="#{beanHistoricoResumenAjustador.getTipoAfectado(hist.actividadObj['tipoAfectado'])}" />
+								
+								<p:outputLabel value="No. Folio:" />
+								<h:outputText value="#{hist.resultado}" />
+															
+			            		<p:outputLabel value="Cve.Perito-Abogado:" />
+								<h:outputText value="#{hist.actividadObj['claveProveedor']}" />
+								
+								<p:outputLabel value="Nombre Perito-Abogado:" />
+								<h:outputText value="#{hist.actividadObj['nombreProveedor'] == null ? ' ' : hist.actividadObj['nombreProveedor']}" />
+								
+								<p:outputLabel value="Servicio:" />
+								<h:outputText value="#{hist.actividadObj['servicioSolicitado']}" />									
+									
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+							</h:panelGrid>
+			            		
+		            		<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Insertar Cobertura - Estimación'}">
+		            			<h4>Estimación</h4>		            						            				
+		            		</h:panelGrid>
+			            		
+			            	<ui:repeat var="cob" value="#{hist.actividadObj['coberturas']}">
+			            		
+			            		<h:panelGrid rendered="#{hist.actividad=='Insertar Cobertura - Estimación' 
+									and hist.actividadObj['coberturas'] != null
+									and not empty hist.actividadObj['coberturas']
+									}"
+				            			styleClass="tabla_captura" columns="4"
+									columnClasses="sexto,tercio,sexto,tercio">	
+							
+									<p:outputLabel value="Fecha:" />
+									<h:outputText value="#{hist.fechaActividad}">
+										<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+											pattern="dd/MM/yyyy HH:mm" />
+									</h:outputText>
+									<p:outputLabel value="" />
+									<h:outputText value="" />
+									
+																
+				            		<p:outputLabel value="Cobertura:" />
+									<h:outputText value="#{cob['decClaveCobertura']}" />
+										
+									<p:outputLabel value="Estimación:" />
+									<h:outputText value="#{cob['monto']}" />
+										
+									<h:outputText value="&lt;br/&gt;" escape="false" />
+								</h:panelGrid>
+							</ui:repeat>
+							
+							<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Solicitar Grua'}">
+			            			<h4>Grúa</h4>		            						            				
+			            	</h:panelGrid>
+			            					            		
+		            		<h:panelGrid rendered="#{hist.actividad=='Solicitar Grua'}"
+			            			styleClass="tabla_captura" columns="4"
+									columnClasses="sexto,tercio,sexto,tercio">	
+						
+								<p:outputLabel value="Fecha:" />
+								<h:outputText value="#{hist.fechaActividad}">
+									<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+										pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+								
+								<p:outputLabel value="Clave Proveedor:" />
+								<h:outputText value="#{beanHistoricoResumenAjustador.reporteGrua.proveedorClave}" />
+								
+								<p:outputLabel value="Proveedor:" />
+								<h:outputText value="#{beanHistoricoResumenAjustador.reporteGrua.proveedorNombre}" />
+								
+								<p:outputLabel value="Código:" />
+								<h:outputText value="#{hist.actividadObj['codigoGrua']}" />
+															
+			            		<p:outputLabel value="Tipo Afectado:" />
+								<h:outputText value="#{beanHistoricoResumenAjustador.getTipoAfectado(hist.actividadObj['tipoAfectado'])}" />
+									
+								<p:outputLabel value="Folio de atención:" />
+								<h:outputText value="#{hist.resultado}" />
+									
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+							</h:panelGrid>
+							
+							<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Cobro Bancario'}">
+			            			<h4>Cobro en Línea</h4>		            						            				
+			            	</h:panelGrid>
+			            					            		
+		            		<h:panelGrid rendered="#{hist.actividad=='Cobro Bancario'}"
+		            			styleClass="tabla_captura" columns="4"
+								columnClasses="sexto,tercio,sexto,tercio">
+							
+								<p:outputLabel value="Fecha:" />
+								<h:outputText value="#{hist.fechaActividad}">
+									<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+										pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+									
+								<p:outputLabel value="Estatus:" />
+								<h:outputText value="#{hist.resultadoObj['estatus']}" />
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+															
+			            			<p:outputLabel value="Autorización:" />
+								<h:outputText value="#{hist.resultadoObj['numeroAutorizacion']}" />
+								
+								<p:outputLabel value="Operación:" />
+								<h:outputText value="#{hist.resultadoObj['numeroOperacion']}" />	
+						
+								<p:outputLabel value="Tipo Cobro:" />
+								<h:outputText value="#{hist.actividadObj['tipoCobro']}" />
+															
+			            			<p:outputLabel value="Monto:" />
+								<h:outputText value="#{hist.actividadObj['monto']}" />
+									
+								<p:outputLabel value="MSI:" />
+								<h:outputText value="#{hist.actividadObj['mesesSinIntereses']}" />
+								
+								<p:outputLabel value="Cobertura:" />
+								<h:outputText value="#{hist.actividadObj['coberturaAfectada']}" />
+									
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+							</h:panelGrid>
+							
+							<h:panelGrid colums = "1" styleClass="formato_titulo3" 
+								rendered="#{hist.actividad=='Insertar Abogado'}">
+			            			<h4>Abogado</h4>		            						            				
+			            	</h:panelGrid>
+			            					            		
+		            		<h:panelGrid rendered="#{hist.actividad=='Insertar Abogado'}"
+		            			styleClass="tabla_captura" columns="4"
+								columnClasses="sexto,tercio,sexto,tercio">
+							
+								<p:outputLabel value="Fecha:" />
+								<h:outputText value="#{hist.fechaActividad}">
+									<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+										pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+									
+								<p:outputLabel value="Lugar a presentarse:" />
+								<h:outputText value="#{hist.actividadObj['descripPresentarse'] == null ? ' ' : hist.actividadObj['descripPresentarse']}" />
+								
+			            			<p:outputLabel value="Conductor detenido:" />
+								<h:outputText rendered="#{hist.actividadObj['conductorDetenido'] == 'true'}" value="SI" />
+								<h:outputText rendered="#{hist.actividadObj['conductorDetenido'] == 'false'}" value="NO" />
+								
+								<p:outputLabel value="Vehículo detenido:" />
+								<h:outputText rendered="#{hist.actividadObj['vehiculoDetenido'] == 'true'}" value="SI" />
+								<h:outputText rendered="#{hist.actividadObj['vehiculoDetenido'] == 'false'}" value="NO" />
+								<p:outputLabel value="" />
+								<h:outputText value="" />
+						
+								<p:outputLabel value="Lesionados asegurado:" />
+								<h:outputText value="#{hist.actividadObj['numLesa']}" >
+									<f:convertNumber minFractionDigits="0" />
+								</h:outputText>
+															
+			            			<p:outputLabel value="Lesionados Terceros:" />
+								<h:outputText value="#{hist.actividadObj['numLest']}">
+									<f:convertNumber minFractionDigits="0" />
+								</h:outputText>
+									
+								<p:outputLabel value="Muertos asegurado:" />
+								<h:outputText value="#{hist.actividadObj['numHoma']}">
+									<f:convertNumber minFractionDigits="0" />
+								</h:outputText>
+								
+								<p:outputLabel value="Muertos tercero:" />
+								<h:outputText value="#{hist.actividadObj['numHomt']}">
+									<f:convertNumber minFractionDigits="0" />
+								</h:outputText>
+									
+								<h:outputText value="&lt;br/&gt;" escape="false" />
+							</h:panelGrid>
+			            		
+						</ui:repeat>
+						
+												
+					</h:panelGrid>
+				</p:panel>
+								
+			</div>				
+				
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

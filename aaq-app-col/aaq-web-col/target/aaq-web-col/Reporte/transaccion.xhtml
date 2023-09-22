@@ -1,0 +1,110 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanReporteTransaccion}" />
+
+	<ui:define name="tituloPagina">
+		<h:outputText value="AQ Reportes - Bancario" />
+		<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Reportes</a></li>
+		<li><h:outputText value="Bancario" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanReporteTransaccion}" />
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:param name="mostrarFiltroComboTerminal" value="false" />
+			<ui:param name="mostrarTxtNumeroReporte" value="false" />
+			<ui:param name="mostrarBotonFiltrar" value="true" />
+			
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="fi_txt_estado" value="Estado:" />
+				<h:selectOneMenu id="fi_txt_estado" value="#{componente._idEstado}"
+					title="Lista de Estados">
+					<f:selectItem noSelectionOption="true"
+						itemDescription="-- TODOS --" itemLabel="-- TODOS --" itemValue="9999"/>
+					<f:selectItems value="#{componente.listaDeEstados}" var="estado"
+						itemValue="#{estado.id}" itemLabel="#{estado.nombre}" />
+					<p:ajax event="valueChange"
+						update="fi_txt_base,fi_txt_terminal, :forma_tabla:tabla"
+						listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+
+
+				<p:outputLabel for="fi_txt_base" value="Base:" />
+				<h:selectOneMenu id="fi_txt_base" value="#{componente._idBase}"
+					title="Lista de Bases">
+					<f:selectItem noSelectionOption="true"
+						itemDescription="-- Todas --" itemLabel="-- Todas --" itemValue="-1"/>
+					<f:selectItems
+						value="#{componente.getListaDeBases(componente._idEstado)}"
+						var="base" itemValue="#{base.id}" itemLabel="#{base.descripcion}" />
+					<p:ajax event="valueChange"
+						update="fi_txt_terminal, :forma_tabla:tabla"
+						listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+
+
+				<p:outputLabel for="fi_txt_terminal" value="Ajustador:" />
+				<h:selectOneMenu id="fi_txt_terminal"
+					value="#{componente._idTerminal}">
+					<f:selectItem noSelectionOption="true"
+						itemDescription="-- Opcional --" itemLabel="-- Opcional --" />
+					<f:selectItems
+						value="#{componente.getListaDeTerminalesParaEstadoYBase(componente._idEstado,componente._idBase)}"
+						var="terminal" itemLabel="#{terminal.nombreCombo}"
+						itemValue="#{terminal.id}" />
+					<p:ajax event="valueChange" update=":forma_tabla:tabla"
+						listener="#{componente.actualizarListado}" />
+				</h:selectOneMenu>
+				
+				<p:outputLabel for="txt_reporte" value="Reporte:" />
+					<p:inputText onkeyup="permitirSoloNumeros(this);"
+						id="txt_reporte" value="#{componente.txtNumeroReporte}" />
+				
+				<p:outputLabel  value="Estatus Transaccion"/>		
+				<h:selectOneMenu id="edo_transaccion" value="#{componente.edoTransaccion}" >
+                    <f:selectItem itemLabel="-- TODOS --" itemValue="todos" />
+                    <f:selectItem itemLabel="APROBADA" itemValue="aprobado"/>
+                    <f:selectItem itemLabel="DECLINADA" itemValue="declinada"/> 
+                    <f:selectItem itemLabel="ERROR" itemValue="error"/>  
+                 <p:ajax event="valueChange" update=":forma_tabla:tabla"
+                 listener="#{componente.actualizarListado}"/>   
+                </h:selectOneMenu>
+				
+			</ui:define>
+			
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanReporteTransaccion}" />
+			<ui:param name="descripcion" value="Transacciones Bancarias" />
+			<ui:define name="contenidoAdicional">
+				<h:commandLink value="Bajar Autorización Técnica (PD, PR)"
+					action="#{componente.doAccionGenerarReporteAutorizacionTecnica}" />
+			</ui:define>
+		</ui:decorate>
+		
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanReporteTransaccion}" />
+			<ui:param name="listaObjetos"
+				value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{transaccion.columnas}" />
+			<ui:param name="listaDe" value="Transacciones Bancarias" />
+			<ui:define name="contenidoAdicional">
+				<p:column styleClass="#{objeto.claseCSSFila}" headerText="Voucer">
+					<h:commandLink value="Ver"
+						action="#{beanReporteTransaccion.doAccionVoucherPDF}">
+						<f:param name="id" value="#{riv}" />
+					</h:commandLink>
+				</p:column>
+			</ui:define>
+		</ui:decorate>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2018-09-20T11:56:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ajustador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="58d09674-d0a5-4c11-86c7-8a75da2fcc23">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="path" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="titulo1" class="java.lang.String"/>
+	<parameter name="titulo2" class="java.lang.String"/>
+	<parameter name="titulo3" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<title>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="125" y="1" width="300" height="26" uuid="c7180511-52fe-4c15-b81a-0c2371672949"/>
+				<textElement textAlignment="Center">
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Resumen Actividad del Ajustador]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="80" height="70" uuid="dd81607c-8354-4205-ba6e-2ad975d311b8"/>
+				<imageExpression><![CDATA[$P{path}+"logo_aaq.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="470" y="0" width="60" height="70" uuid="c60b00b8-5ad6-41fb-9c9c-edf3a8844fe5"/>
+				<imageExpression><![CDATA[$P{path}+"logo_q.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="115" y="28" width="320" height="22" uuid="70025f00-d187-4946-a435-f2cfc6c83d1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="52" width="320" height="22" uuid="820b9d28-0242-4279-9c8a-7fb71a08f367"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="52" width="320" height="22" uuid="d642e34f-1c94-460d-a46c-494d26adeb57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{titulo3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="598" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="2" width="550" height="588" uuid="a02d4ea3-7168-41fc-be54-79241d2ba031"/>
+				<dataSourceExpression><![CDATA[$F{dataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path}+"resumen_ajustador.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="52">
+			<textField>
+				<reportElement x="461" y="10" width="36" height="30" uuid="e4ae8f90-0ed1-4740-9076-0866a90dfc3b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="519" y="10" width="36" height="30" uuid="c78c3593-2b5f-414c-8752-4da2ce77b024"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="501" y="10" width="14" height="22" uuid="21562393-807e-4649-a2fc-ba949ebe324b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[de]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

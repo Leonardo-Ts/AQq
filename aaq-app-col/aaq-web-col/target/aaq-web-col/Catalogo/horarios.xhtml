@@ -1,0 +1,227 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoHorarios}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Horarios
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li>Horarios</li>
+	</ui:define>
+	
+		
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltroFrec.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoHorarios}" />
+			<ui:param name="mostrarFiltroComboEstado" value="true"/>
+			<ui:param name="mostrarFiltroComboHorario" value="true"/>
+			<ui:param name="listaDe" value="Horarios" />
+			<ui:param name="mostrarBotonAgregarRegistro" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+		</ui:decorate>
+	
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoHorarios}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{componente.columnas}" />
+			<ui:param name="listaDe" value="Horarios" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:param name="mostrarBotonEditarRegistroHorario" value="true" />
+<!-- 			<ui:param name="mostrarBotonEliminarRegistro" value="false" /> -->
+			<ui:param name="mostrarBotonEliminarRegistro" value="true" />
+
+		</ui:decorate>
+		
+		<ui:decorate template="/Comun/comunPanelHorario.xhtml">
+			<ui:param name="componente1" value="#{beanCatalogoHorarios}" />
+			<ui:param name="mostrarFiltroComboEstado" value="true" />
+			<ui:param name="listaDe" value="Horarios" />
+			<ui:param name="validador" value="Horarios" />
+			<ui:param name="mostrarBotonAceptar" value="true" />
+			<ui:param name="mostrarBotonCerrar" value="true" />
+
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="claveHorario" value="Nombre de horario" />
+				<p:inputText id="claveHorario"
+					value="#{beanCatalogoHorarios.clave_horarioS}" required="true"/>
+				
+			</ui:define>
+			
+			<ui:define name="contenidoAdicionalHorarios">
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Día:" />
+				<p:outputLabel value="Entrada:" />
+				<p:outputLabel value="Salida:" />
+				<p:outputLabel value="Descanso:" />
+				<p:outputLabel value="Más:" />
+						
+				<p:outputLabel value="Lunes:" />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaL}" pattern="HH:mm" timeOnly="true" />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaL}" pattern="HH:mm" timeOnly="true"/>
+				<p:selectBooleanCheckbox value="#{beanCatalogoHorarios.descansoL}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraL"  
+						value="#{beanCatalogoHorarios.extraL}"  onchange="isExtraLunes(this);" widgetVar="extraL">
+						</p:selectBooleanButton>
+			</h:panelGrid>
+						
+        	<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">
+				<p:calendar id="entradaL" value="#{beanCatalogoHorarios.hora_entradaLx}" 
+						widgetVar="entradaL" pattern="HH:mm" timeOnly="true" required="#{beanCatalogoHorarios.extraL}"/>
+				<p:calendar id="salidaL" value="#{beanCatalogoHorarios.hora_salidaLx}"
+						widgetVar="salidaL" pattern="HH:mm" timeOnly="true" requiered="#{beanCatalogoHorarios.extraL}" />
+			</h:panelGrid>
+						
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Martes: " />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaM}" pattern="HH:mm" timeOnly="true"  />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaM}" pattern="HH:mm" timeOnly="true"   />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoM}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraM" 
+						value="#{beanCatalogoHorarios.extraM}" onchange="isExtraMartes(this);" widgetVar="extraM">
+						</p:selectBooleanButton>
+			</h:panelGrid>
+							
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">
+				<p:calendar id="entradaM" value="#{beanCatalogoHorarios.hora_entradaMx}" 
+						widgetVar="entradaM" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaM" value="#{beanCatalogoHorarios.hora_salidaMx}"
+						widgetVar="salidaM" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Miércoles:" />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaMi}" pattern="HH:mm" timeOnly="true"   />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaMi}" pattern="HH:mm" timeOnly="true"  />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoMi}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraMi" 
+						value="#{beanCatalogoHorarios.extraMi}" onchange="isExtraMiercoles(this);" widgetVar="extraMi">
+						</p:selectBooleanButton>
+				
+			</h:panelGrid>
+						
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura" id="lunes">		
+				<p:calendar id="entradaMi" value="#{beanCatalogoHorarios.hora_entradaMix}" 
+						widgetVar="entradaMi" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaMi" value="#{beanCatalogoHorarios.hora_salidaMix}"
+						widgetVar="salidaMi" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>			
+			
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Jueves " />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaJ}" pattern="HH:mm" timeOnly="true"    />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaJ}" pattern="HH:mm" timeOnly="true"   />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoJ}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraJ" 
+						value="#{beanCatalogoHorarios.extraJ}" onchange="isExtraJueves(this);" widgetVar="extraJ">
+						</p:selectBooleanButton>
+						
+			</h:panelGrid>
+				
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">
+				<p:calendar id="entradaJ" value="#{beanCatalogoHorarios.hora_entradaJx}" 
+						widgetVar="entradaJ" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaJ" value="#{beanCatalogoHorarios.hora_salidaJx}"
+						widgetVar="salidaJ" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Viernes: " />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaV}" pattern="HH:mm" timeOnly="true"    />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaV}" pattern="HH:mm" timeOnly="true"   />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoV}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraV" 
+						value="#{beanCatalogoHorarios.extraV}" onchange="isExtraViernes(this);" widgetVar="extraV">
+						</p:selectBooleanButton>
+						
+			</h:panelGrid>
+							
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">
+				<p:calendar id="entradaV" value="#{beanCatalogoHorarios.hora_entradaVx}" 
+						widgetVar="entradaV" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaV" value="#{beanCatalogoHorarios.hora_salidaVx}"
+						widgetVar="salidaV" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>
+						
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Sábado: " />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaS}" pattern="HH:mm" timeOnly="true"    />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaS}" pattern="HH:mm" timeOnly="true"   />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoS}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraS" 
+						value="#{beanCatalogoHorarios.extraS}" onchange="isExtraSabado(this);" widgetVar="extraS">
+						</p:selectBooleanButton>	
+						
+			</h:panelGrid>
+						
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">
+				<p:calendar id="entradaS" value="#{beanCatalogoHorarios.hora_entradaSx}" 
+						widgetVar="entradaS" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaS" value="#{beanCatalogoHorarios.hora_salidaSx}"
+						widgetVar="salidaS" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>
+						
+			<h:panelGrid columns="5" columnClasses="quinto,quinto,quinto,quinto,quinto"
+						styleClass="tabla_captura" >
+				<p:outputLabel value="Domingo: " />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entradaD}" pattern="HH:mm" timeOnly="true"     />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salidaD}" pattern="HH:mm" timeOnly="true"   />
+				<p:selectBooleanCheckbox  value="#{beanCatalogoHorarios.descansoD}" />
+				<p:selectBooleanButton onLabel="-" offLabel="+" id="extraD" 
+						value="#{beanCatalogoHorarios.extraD}" onchange="isExtraDomingo(this);" widgetVar="extraD">
+						</p:selectBooleanButton>	
+			</h:panelGrid>
+			
+			<h:panelGrid  columns ="5"  columnClasses="quinto,quinto,quinto,quinto,quinto"
+        	 		styleClass="tabla_captura">				
+				<p:calendar id="entradaD" value="#{beanCatalogoHorarios.hora_entradaDx}" 
+						widgetVar="entradaD" pattern="HH:mm" timeOnly="true" />
+				<p:calendar id="salidaD" value="#{beanCatalogoHorarios.hora_salidaDx}"
+						widgetVar="salidaD" pattern="HH:mm" timeOnly="true" />
+			</h:panelGrid>
+				
+						
+		</ui:define>
+			
+			<ui:define name="contenidoAdicionalHorarios2">
+				<p:outputLabel value="Nombre:" />
+				<p:outputLabel value="Día:" />
+				<p:outputLabel value="Entrada:" />
+				<p:outputLabel value="Salida:" />
+				<p:outputLabel value="Descanso:" />
+				
+				<p:inputText value="#{beanCatalogoHorarios.objetoABM.clave_horario}" />
+				<p:outputLabel value="#{beanCatalogoHorarios.objetoABM.dia_semana}" />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_entrada}" pattern="HH:mm" timeOnly="true"   />
+				<p:calendar  value="#{beanCatalogoHorarios.hora_salida}" pattern="HH:mm" timeOnly="true"   />
+
+				<p:selectBooleanCheckbox value="#{beanCatalogoHorarios.objetoABM.descanso}" />
+				
+				
+					
+			</ui:define>
+			
+		</ui:decorate>
+		
+		
+
+	</ui:define>
+	
+
+	
+</ui:composition>

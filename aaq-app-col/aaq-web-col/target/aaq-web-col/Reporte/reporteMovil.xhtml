@@ -1,0 +1,37 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanReporteMovil}" />
+	<ui:define name="tituloPagina">
+		<h:outputText value="AQ Reportes - Control Calidad" />
+		<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Reportes</a></li>
+		<li><h:outputText value="Emergencia Q" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltro.xhtml">
+			<ui:param name="componente" value="#{beanReporteMovil}" />
+			<ui:param name="mostrarFiltroFecha" value="true" />
+			<ui:param name="mostrarBotonReporte" value="true" />
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunExportacion.xhtml">
+			<ui:param name="componente" value="#{beanReporteMovil}" />
+			<ui:param name="descripcion" value="Reportes Móviles" />
+
+		</ui:decorate>
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanReporteMovil}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{reporteMovil.columnas}" />
+			<ui:param name="listaDe" value="Reportes de Emergencia Q" />
+		</ui:decorate>
+
+	</ui:define>
+</ui:composition>

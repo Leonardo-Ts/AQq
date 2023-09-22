@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16844449680920" configfile="/aaq-web-col/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf16851299031750" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf16851299031751 pf16851299031862" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="Sistema/firma.xhtml" x="338" y="178" id="pf16851299031863" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf16851299031751 pf16851299031862" path="/Sistema/firma.xhtml"/>
+  <links id="pf16851299031751" target="pf16851299031863" source="pf16851299031750" outcome="salir"/>
+  <links id="pf16851299031862" target="pf16851299031863" source="pf16851299031750" outcome="sessionExpired"/>
+</pageflow:Pageflow>

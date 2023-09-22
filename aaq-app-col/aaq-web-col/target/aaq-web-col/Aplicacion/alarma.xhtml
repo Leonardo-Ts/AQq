@@ -1,0 +1,412 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionAlarma}" />
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Perito-Abogado
+	 		<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">AQ Aplicaciones</a></li>
+		<li>Peritos-Abogados</li>
+	</ui:define>
+	
+	<ui:define name="cuerpoPagina">
+	
+		<script
+			src="#{facesContext.externalContext.requestContextPath}/diseno/javascript/soundmanager/soundmanager2-nodebug-jsmin.js"></script>
+		<script>
+			soundManager.url = '#{facesContext.externalContext.requestContextPath}/diseno/flash/soundmanager/';
+			soundManager.flashVersion = 9;
+			soundManager.useFlashBlock = false;
+		</script>
+	
+		<div class="forma_completa">
+			<h:form id="forma_filtros">
+				<p:panel header="Filtros" styleClass="forma_mitad panelesV"
+					rendered="#{beanAplicacionAlarma.permisoVistaClasica}">
+					<h:panelGrid columns="4" styleClass="tabla_captura"
+						columnClasses="cuarto,cuarto,cuarto,cuarto">
+						<p:outputLabel for="estado" value="Departamento:" rendered="#{beanAplicacionAlarma.permisoSIICAGlobalEstados}" />
+						<h:selectOneMenu
+							rendered="#{beanAplicacionAlarma.permisoSIICAGlobalEstados}"
+							id="estado" value="#{beanAplicacionAlarma.txtFiltroEstado}"
+							title="Lista de Departamentos">
+							<f:selectItem noSelectionOption="true" itemLabel="-- TODOS --" />
+							<f:selectItem itemValue="1000" itemLabel="-- FORANEO --" />
+							<f:selectItems value="#{beanAplicacionAlarma.listaDeEstados}"
+								var="estado" itemValue="#{estado.id}"
+								itemLabel="#{estado.nombre}" />
+							<p:ajax event="valueChange" process="@this"
+								listener="#{beanAplicacionAlarma.actualizarListado}"
+								update=":forma_tabla:tabla, base" />
+						</h:selectOneMenu>
+
+						<p:outputLabel for="base" value="Base:" rendered="#{beanAplicacionAlarma.permisoSIICAGlobalBases}" />
+						<h:selectOneMenu rendered="#{beanAplicacionAlarma.permisoSIICAGlobalBases}" id="base" value="#{beanAplicacionAlarma.idBase}" title="Lista de Bases">
+							<f:selectItems
+								value="#{beanAplicacionAlarma.getListaDeBases(beanAplicacionAlarma.txtFiltroEstado)}"
+								var="base" itemValue="#{base.id}"
+								itemLabel="#{base.descripcion}" />
+							<p:ajax event="valueChange" process="@this"
+								listener="#{beanAplicacionAlarma.actualizarListado}"
+								update=":forma_tabla:tabla" />
+						</h:selectOneMenu>
+
+					</h:panelGrid>
+				</p:panel>
+ 				
+				<p:panel header="Bases de la Frecuencia" styleClass="forma_mitad panelesV" rendered="#{!beanAplicacionAlarma.permisoVistaClasica}">
+					<h:panelGrid styleClass="tabla_captura" columns="3" columnClasses="cuarto,mitad,cuarto">
+						<p:outputLabel for="frecuencias" value="Frecuencia:" />
+						<h:selectOneMenu id="frecuencias" value="#{beanAplicacionAlarma.idFrecuenciaBase}">
+							<f:selectItem noSelectionOption="true" itemLabel="-- Seleccione Una --" />
+							<f:selectItems value="#{beanAplicacionAlarma.listaDeFrecuenciaBaseNoSeleccionada}" />
+						</h:selectOneMenu>
+
+						<p:commandButton value="Agregar" update="frecuencias,tabla_freq,:forma_tabla:tabla"
+							actionListener="#{beanAplicacionAlarma.doAccionAgregarFrecuenciaBaseALista}" />
+					</h:panelGrid>
+
+					<p:dataTable id="tabla_freq" var="usuarioFrecuencia"
+						value="#{beanAplicacionAlarma.listaFrecuenciaBaseSeleccionada}"
+						styleClass="tabla_captura" emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="20" rowKey="rkv"
+						rowIndexVar="riv" rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+						<f:facet name="header">Frecuencias / Bases</f:facet>
+
+						<p:column headerText="Bases Sekeccuibadas">
+							<h:outputText value="#{usuarioFrecuencia.frecuenciaBase.base.estado.nombre}" />&#160;
+							<h:outputText value="#{usuarioFrecuencia.frecuenciaBase.base.nombre}" />
+						</p:column>
+						<p:column style="text-align:center;width:40px"
+							headerText="Eliminar">
+							<p:commandLink ajax="true"
+								actionListener="#{beanAplicacionAlarma.doAccionQuitarFrecuenciaBaseALista}"
+								update="tabla_freq,:forma_filtros:frecuencias,:forma_tabla:tabla">
+								<h:graphicImage value="/diseno/imagenes/acciones/icono16Eliminar.png" />
+
+								<f:param name="id" value="#{usuarioFrecuencia.id}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</p:panel>
+			</h:form>
+		</div>
+		<div class="forma_completa">
+			<ui:decorate template="/Comun/comunTabla.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionAlarma}" />
+				<ui:param name="listaAutoActualizable" value="true" />
+				<ui:param name="listaAutoActualizableIntervalo" value="60" />
+				<ui:param name="listaObjetos" value="#{componente.listado}" />
+				<ui:param name="listaDe"
+					value="Monitoreo en Tiempo Real de Peritos-Abogados" />
+
+				<ui:define name="contenidoAdicional">
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column rowspan="2" headerText="Departamento / Base"/>
+							<p:column rowspan="2" headerText="Última Fecha y Hora"/>								
+							<p:column rowspan="2" headerText="Clave de Perito-Abogado"/>
+							<p:column rowspan="2" headerText="Horario"/>
+							<p:column colspan="2" headerText="Tiempo"/>								
+							<p:column rowspan="2" headerText="Disponible"/>
+							<p:column rowspan="2" headerText="Reporte"/>
+							<p:column colspan="2" headerText="Alerta"/>
+							<p:column rowspan="2" headerText="Leido"/>
+							<p:column rowspan="2" headerText="Asignación" />								
+							<p:column rowspan="2" headerText="Arribo" />
+							<p:column rowspan="2" headerText="Término"/>
+							<p:column rowspan="2" headerText="Desconectado"/>
+							<p:column rowspan="2" headerText="Herramientas"/>
+						</p:row>
+						<p:row>
+							<p:column headerText="En Atención"/>							
+							<p:column headerText="Sin Atención"/>							
+							<p:column headerText="SMS"/>
+							<p:column headerText="PUSH"/>								
+						</p:row>
+					</p:columnGroup>
+					
+					<!-- Estado/base -->
+					<p:column styleClass="#{beanAplicacionAlarma.getCSSClaseColumnaDescripcion(objeto)}">
+						<h:outputText value="#{objeto.estado.nombre}" />&#160;/&#160;
+						<h:outputText value="#{objeto.base.nombre}" />
+					</p:column>
+					<!-- Radio -->
+					<p:column styleClass="#{beanAplicacionAlarma.getCSSClaseColumnaDescripcion(objeto)}">
+						<b><h:outputText value="#{objeto.numeroradio}" /> </b>
+						<br />
+						<h:outputText value="#{objeto.ultimoLocalizacionFecha}">
+						<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					<!-- Clave Ajustador -->
+					<p:column styleClass="#{beanAplicacionAlarma.getCSSClaseColumnaDescripcion(objeto)}">
+						<h:graphicImage value="#{objeto.fechaEstatusDesconectado != null?'/diseno/imagenes/catalogo/if_status_no_online.png':
+                                     objeto.estatus == 'DISPONIBLE'?'/diseno/imagenes/catalogo/if_status_online.png':
+                                     objeto.estatus == 'NO DISPONIBLE'?'/diseno/imagenes/catalogo/if_status_no_online.png':
+                                     objeto.estatus == 'AUTOPISTA'?'/diseno/imagenes/catalogo/if_road_sign.png':''}"/>
+						<br />
+							
+						<h:outputText value="#{objeto.numeroproveedor}" />
+						<br />
+						<h:outputText value="#{objeto.nombre}" />
+					</p:column>
+					<!--Horario -->
+					<p:column >
+						<h:outputText value="#{beanAplicacionAlarma.getGrupoHorarioAjustador(objeto)}"/>
+						<br />
+					    <h:graphicImage rendered="#{beanAplicacionAlarma.getVigenciaGrupo(objeto) != 'NINGUNO'}"
+					    			 value="#{beanAplicacionAlarma.getVigenciaGrupo(objeto) == 'ROJO'?'/diseno/imagenes/catalogo/brojo.png':
+                                     beanAplicacionAlarma.getVigenciaGrupo(objeto) == 'AMARILLO'?'/diseno/imagenes/catalogo/bamarillo.png':
+                                     beanAplicacionAlarma.getVigenciaGrupo(objeto) == 'VERDE'?'/diseno/imagenes/catalogo/bverde.png':''}" 
+                                     alt="bandera" width="20" height="20"/>
+					</p:column>
+					<!-- Activo -->
+					<p:column id="columna_detalles" headerText="Tiempo de Atención"
+	                    styleClass="#{beanAplicacionAlarma.getCSSClaseTiempoAtencion(objeto)}">
+	                    <h:outputText value="#{objeto.tiempoDeAtencion}" id="tx_tiempo_atencion"/>
+	                    <p:tooltip for="tx_tiempo_atencion" value="#{objeto.tiempoAtencionTool}" rendered="#{!empty objeto.fechaEstatusAsignado}" escape="false"/>
+	                </p:column>
+					<!-- Inactivo -->
+					<p:column>
+						<h:outputText value="#{objeto.tiempoSinAtencion}" id="tx_tiempo_sin_atencion" />
+						<p:tooltip for="tx_tiempo_sin_atencion" value="#{objeto.tiempoSinAtencionTool}" rendered="#{!empty objeto.fechaEstatusDisponible}" escape="false" />
+					</p:column>
+					<!-- Disponible -->
+					<p:column>
+						<h:outputText value="#{objeto.fechaEstatusDisponible}">
+						<f:convertDateTime 
+										pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						&#160;<h:outputText value="(#{objeto.fuenteDisponible})" />
+					</p:column>
+					<!-- Reporte -->
+					<p:column>
+						<h:outputText value="#{objeto.reporteAtendiendo}" />
+						<br />
+						<h:outputText value="#{objeto.reporteSise != null ? objeto.reporteSise.ajusteFechaPasadoAjustador : objeto.reporteSac.ajusteFechaPasadoAjustador}">
+		                	<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+		                </h:outputText>
+						<br />
+						<h:outputText value="#{objeto.reporteSac.generalComoOcurrio}" />
+						<br />
+						<h:outputText value="(Segunda Atencion)" rendered="#{objeto.reporteSise.esSegundaAtencion}" />
+						<br />
+						<h:outputText value="(Reasignacion Num. #{objeto.reporteSise.esReasignadoNumero})" rendered="#{objeto.reporteSise.esReasignado}" />
+						<br />
+						<h:outputText value="#{objeto.ultimoSiniestroWs}" />
+						<br />
+						<h:graphicImage value="/diseno/imagenes/acciones/icono16Qualicoche.png" rendered="#{objeto.reporteSiicaAv}"/>
+					</p:column>
+					<!-- Fecha SMS -->
+					<p:column>
+						<h:outputText value="#{objeto.reporteSac.fechaReporteEnvioSms}">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column>
+						<h:outputText value="#{objeto.fechaPush}">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					<!-- Leido -->
+					<p:column style="text-align:center">
+						<h:graphicImage rendered="#{objeto.reporteSac.fechaReporteLecturaPorWs != null}" url="/diseno/imagenes/aplicativo/dc2.png" alt="Leido" width="20" height="20"/>
+					
+						<p:commandLink title="Cancelar alarma"  actionListener="#{componente.doAccionRegistroAlerta}" 
+	                  			 rendered="#{beanAplicacionAlarma.getMostrarBotonCancelar(objeto) and beanAplicacionAlarma.esAdministradorCabina}"
+	                  			 update=":forma_tabla:tabla" >
+	                  		<f:param name="id" value="#{riv}"/>
+	                        <h:graphicImage url="/diseno/imagenes/aplicativo/cancelar_alarma.png"  width="30" height="30"  />
+	                    </p:commandLink>
+					
+					</p:column>
+								
+					<!-- Asignacion -->
+					<p:column styleClass="#{beanAplicacionAlarma.getCSSClaseFechaAsignado(objeto)}">
+						<h:graphicImage value="#{objeto.proximidad ? '/diseno/imagenes/catalogo/if_map.png':
+									objeto.reporteSac.proximidad  ? '/diseno/imagenes/catalogo/if_map.png' :''}"/>
+						<h:graphicImage value="#{objeto.reporteSac.generalUsuario == 'QMOVIL' ? '/diseno/imagenes/catalogo/if_qmovil.png':''}"
+						/>
+						<!-- 		                motocicleta -->
+		                <h:graphicImage value="#{objeto.moto  ? '/diseno/imagenes/catalogo/if_moto.png':''}"
+						/>
+						<br />	
+						<!-- 						EQUIPO PESADO -->
+						  <h:graphicImage value="#{objeto.equipoPesado  ? '/diseno/imagenes/catalogo/equipo_pesado_morado.png':''}" />
+						<br />
+								<!-- 		                Segunda Atencion -->
+		                <h:graphicImage value="#{objeto.segundaAtencion ? '/diseno/imagenes/catalogo/if_2atencion.png':''}"
+						/>	
+						
+						<h:graphicImage value="#{objeto.asistenciaVial ? '/diseno/imagenes/catalogo/if_asistencia_vial.png':''}" />
+											
+						<h:outputText value="#{objeto.fechaEstatusAsignado}" id="tx_estatus_asignado">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						<br />				
+<!-- 						<h:outputText value="(#{(!objeto.proximidad ? objeto.fuenteAsignacion : 'PROXIMIDAD')})" rendered="#{objeto.reporteSise != null}"/> -->
+<!-- 						<h:outputText value="(#{!objeto.reporteSac.proximidad ? objeto.fuenteAsignacion : 'PROXIMIDAD'})" rendered="#{objeto.reporteSac != null}"/> -->
+						<h:outputText value="(#{objeto.reporteApartado != null ? beanAplicacionAlarma.obtenerDatosReporteApartado(objeto) : ''})" rendered="#{objeto.reporteSac != null}"/>
+		                <p:tooltip escape="false" value="#{objeto.fechaAsignadoTool}" for="tx_estatus_asignado"/>
+
+					</p:column>
+					<!-- Arribo -->
+					<p:column styleClass="#{beanAplicacionAlarma.getCSSClaseFechaArribo(objeto)}">
+						<h:outputText value="#{objeto.fechaEstatusArribo}">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						&#160;(<h:outputText value="#{objeto.fuenteArribo}" />)
+					</p:column>
+					<!-- Termino -->
+					<p:column>
+						<h:outputText value="#{objeto.fechaEstatusTermino}">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						&#160;(<h:outputText value="#{objeto.fuenteTermino}" />)
+					</p:column>
+					<!-- Desconectado -->
+					<p:column>
+						<h:outputText value="#{objeto.fechaEstatusDesconectado}">
+							<f:convertDateTime  pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+						&#160;(<h:outputText value="#{objeto.fuenteDesconectado}" />)
+					</p:column>
+					
+					<p:column>
+				    	<p:growl id="messages" showDetail="true"/>
+	 
+					    <p:menuButton value="Acción" style="text-align:center" styleClass="botonAccion">
+					        <p:menuitem  rendered="#{beanAplicacionAlarma.permisoAlarmaDetalle}" value="Información" action="#{beanAplicacionAlarma.doAccionDetalleReporte}"  styleClass="menuAlarma" >
+					        	<h:commandLink disabled="#{objeto.tieneMarcaAgua}" action="#{beanAplicacionAlarma.doAccionDetalleReporte}" style="text-decoration:none;width:5%" >
+									<f:param value="#{riv}" name="id"/>
+									<h:graphicImage url="/diseno/imagenes/logos/qlogo.jpg" alt="Detalle"  style="vertical-align: middle;" />
+									<h:outputText  value="    Detalles"  />								 
+								</h:commandLink>
+					        </p:menuitem>
+					        
+					       <p:menuitem rendered="#{beanAplicacionAlarma.permisoCobroWeb}" value="Cobro" actionListener="#{beanAplicacionCobroWeb.doAccionCobroWeb}"  styleClass="menuAlarma"  >
+					        	<h:commandLink action="#{beanAplicacionCobroWeb.doAccionCobroWeb}" actionListener="#{beanAplicacionCobroWeb.setEstatus(0)}"  disabled="#{objeto.tieneMarcaAgua}" rendered="#{objeto.tieneUltimoReporte}" style="text-decoration:none;width:5%" >
+								<h:graphicImage alt="Cobro Web" 
+									url="/diseno/imagenes/aplicativo/icono24Pagar.png"  style="vertical-align: middle;" />
+									<h:outputText  value="    Link de Pago Recupero" />
+									<f:param value="#{objeto.id}" name="id" />
+								</h:commandLink>							
+					        </p:menuitem>
+					        
+					    <p:menuitem rendered="#{beanAplicacionAlarma.permisoCobroWeb}" value="Cobro" actionListener="#{beanAplicacionCobroWeb.doAccionCobroWeb}"  styleClass="menuAlarma"  >
+								<h:commandLink action="#{beanAplicacionCobroWeb.doAccionCobroWeb}" actionListener="#{beanAplicacionCobroWeb.setEstatus(1)}"  disabled="#{objeto.tieneMarcaAgua}" rendered="#{objeto.tieneUltimoReporte}" style="text-decoration:none;width:5%" >
+									<h:graphicImage alt="Cobro Web"  
+										url="/diseno/imagenes/aplicativo/icono24Pagar.png"  style="vertical-align: middle;" />
+									<h:outputText  value="    Link de Pago Deducible" />
+									<f:param value="#{objeto.id}" name="id" />
+								</h:commandLink>							
+						</p:menuitem>       
+   					  
+									        
+					    <p:menuitem rendered="#{beanAplicacionAlarma.permisoCobroWeb}" value="Cobro" actionListener="#{beanAplicacionCobroWeb.doAccionCobroWeb}"  styleClass="menuAlarma"  >
+					       	<h:commandLink action="#{beanAplicacionCobroWeb.redirectPrima}" target="_blank"  disabled="#{objeto.tieneMarcaAgua}" rendered="#{objeto.tieneUltimoReporte}" style="text-decoration:none;width:5%" >
+							<h:graphicImage alt="Cobro Web"
+								url="/diseno/imagenes/aplicativo/icono24Pagar.png"  style="vertical-align: middle;" />
+								<h:outputText  value="    Link de Pago Prima" />
+								<f:param value="#{riv}" name="id" />
+							</h:commandLink>							
+					     </p:menuitem>
+							
+					        <p:menuitem rendered="#{beanAplicacionAlarma.permisoNotificacionPersonal}" value="Notificaciones" actionListener="#{beanAplicacionAlarma.doAccionNotificaciones}" styleClass="menuAlarma"  >
+					        	<h:commandLink action="#{beanAplicacionAlarma.doAccionNotificaciones}" disabled="#{objeto.tieneMarcaAgua}"
+					        	 style="text-decoration:none;width:5%;padding: 3px;" >
+								<h:graphicImage alt="Notificaciones"
+									url="/diseno/imagenes/menu/Aplicacionsms.png"  style="vertical-align: middle;" />
+									<h:outputText  value="    Notificaciones" />
+									<f:param value="#{riv}" name="id" />
+								</h:commandLink>							
+					        </p:menuitem>
+					        
+					        <p:menuitem  rendered="#{beanAplicacionAlarma.permisoNotas and beanAplicacionAlarma.getVerIconoNotas(objeto)}" actionListener="#{beanAplicacionNotaReporte.doAccionNotas}"  value="Notas"  styleClass="menuAlarma"  >
+					        	<h:commandLink   action="#{beanAplicacionNotaReporte.doAccionNotas}" disabled="#{objeto.tieneMarcaAgua}" actionListener="#{beanAplicacionNotaReporte.doAccionListaNotas}"
+					        	style="text-decoration:none;width:5%;padding: 3px;" >
+								<h:graphicImage alt="Notas"
+									url="/diseno/imagenes/menu/notas16.png"  style="vertical-align: middle;" />
+									<h:outputText  value=" Notas" />
+									<f:param value="#{objeto.id}" name="id" />
+								</h:commandLink>							
+					        </p:menuitem>
+					        
+					        
+					    </p:menuButton>
+					</p:column>				
+				</ui:define>
+
+				<ui:define name="contenidoPie">
+					<h:panelGrid columns="12" styleClass="pieBlanco">
+						<f:facet name="header" >Guía de Colores</f:facet>
+						<h:outputText styleClass="terminal_fecha_ok" value="OK: Dispostivo GPS en linea en los ultimos 15 minutos" />
+						<h:outputText styleClass="terminal_fecha_demora" value="Demora: Dispositivo GPS desconectado o inexistente" />
+						<h:outputText styleClass="css_verde" value="Valor en Tiempo Correcto" />
+						<h:outputText styleClass="css_amarillo" value="Valor en Tiempo Límite" />
+						<h:outputText styleClass="css_rojo" value="Valor en Tiempo Excedido" />
+					</h:panelGrid>
+				</ui:define>
+				
+				<ui:define name="contenidoPie2">
+					<p:outputPanel id="panel_sonido"
+						rendered="#{componente.tieneReportesNuevos}">
+						<script>
+							soundManager
+									.onready(function() {
+
+										soundManager
+												.createSound(
+														{
+															id : 'mySound',
+															url : '#{facesContext.externalContext.requestContextPath}/diseno/sonidos/chime.mp3',
+															autoLoad : true,
+															autoPlay : true,
+															volume : 50
+														}).play();
+									});
+						</script>
+					</p:outputPanel>
+
+				</ui:define>
+				
+			</ui:decorate>
+		</div>
+
+		<div class="forma_completa">
+			<h:form id="forma_filtros1">
+				<p:panel header="Estatus:" styleClass="forma_completa panelesV"
+					rendered="#{beanAplicacionAlarma.permisoAlarmaEstatusAjustador}">
+					
+				        <p:outputLabel for="_fil_estatus" rendered="#{beanAplicacionAlarma.permisoAlarmaEstatusAjustador}" />
+				        
+				        <p:selectOneRadio id="_fil_estatus" rendered="#{beanAplicacionAlarma.permisoAlarmaEstatusAjustador}" value="#{beanAplicacionAlarma.txtEstatus}" >
+				            <f:selectItem itemLabel="Ninguno" noSelectionOption="true" />
+				            <f:selectItem itemLabel="Disponibles" itemValue="filtroAlarmaDisponible" />
+				            <f:selectItem itemLabel="Ocupados" itemValue="filtroAlarmaOcupado" />
+				            <f:selectItem itemLabel="Desconectados" itemValue="filtroAlarmaDesconectado" />
+				            <f:selectItem itemLabel="Sin Arribo" itemValue="filtroAlarmaSinArribo" />
+				            <f:selectItem itemLabel="Sin Termino" itemValue="filtroAlarmaSinTermino" />
+				            <f:selectItem itemLabel="Asignados Proximidad" itemValue="filtroAlarmaProximidad" />
+				            <f:selectItem itemLabel="Ajustador Vial" itemValue="filtroAvqReporte" />
+				            <f:selectItem itemLabel="Sin Posicion Actual" itemValue="filtroSinPosicionActual" />
+				            
+				            <p:ajax event="valueChange" process="@this"
+								listener="#{beanAplicacionAlarma.actualizarListado}"
+								update=":forma_tabla:tabla" />
+				        </p:selectOneRadio>			
+					
+				</p:panel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

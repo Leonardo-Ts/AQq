@@ -1,0 +1,68 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="forma_tabla_nueva">
+		<div class="forma_completa" style="margin-top: 5px" >
+			<p:poll id="poll" interval="60" partialSubmit="true"
+				listener="#{componente.actualizarListadoNuevo}" update="tabla_nueva"
+				rendered="#{listaAutoActualizable}" process="@this" />
+			
+			<p:dataTable id="tabla_nueva" var="objeto" value="#{listaObjetos}"
+				emptyMessage="Sin Datos"
+				currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+				paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+				rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+
+				<f:facet name="header">
+					<h:outputText value="Lista de #{listaDe}" />
+					<h:outputText
+						value=" -  Actualizado: #{componente.fechaHoraActual}"
+						rendered="#{listaAutoActualizable}" />
+				</f:facet>
+
+				<ui:insert name="contenidoPrevio" />
+				<p:columns value="#{listaColumnas}" var="columna"
+					sortBy="#{objeto[columna.valor]}"
+					styleClass="#{objeto[columna.claseCss]}"
+					headerText="#{columna.nombre}">
+					<h:outputText value="#{objeto[columna.valor]}" id="valor"
+						rendered="#{!columna.tieneFormato}">
+					</h:outputText>
+					
+				<h:outputText value="#{objeto[columna.valor]}"
+						rendered="#{columna.tieneFormato}">
+						<f:convertDateTime timeZone="America/Mexico_City" locale="es_MX"
+							pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+					<p:tooltip rendered="#{columna.tieneToolTip}" showEffect="clip"
+						for="valor" escape="false" value="#{objeto[columna.toolTip]}"
+						hideEffect="explode" />	
+
+				</p:columns>
+
+				<ui:insert name="contenidoAdicional" />
+				
+				<ui:insert name="contenidoAdicional2" />
+				
+				<ui:insert name="contenidoAdicional3" />
+				
+				<ui:insert name="contenidoAdicional4" />
+				
+<!-- 				//////////////////////////////////// -->
+
+				<ui:insert name="contenidoPosterior" />
+
+				<f:facet name="footer">
+					<ui:insert name="contenidoPie" />
+					<ui:insert name="contenidoPie2" />
+				</f:facet>
+			</p:dataTable>
+		</div>
+
+	</h:form>
+</ui:component>

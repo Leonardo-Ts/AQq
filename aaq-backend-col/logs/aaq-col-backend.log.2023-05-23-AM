@@ -1,0 +1,101 @@
+[2023-05-23 11:03:44:132] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-23 11:03:44:171] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5e5792a0, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@26653222, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3532ec19, org.springframework.test.context.transaction.TransactionalTestExecutionListener@68c4039c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@ae45eb6]
+[2023-05-23 11:03:44:345] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-23 11:03:44:655] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-23 11:03:44:694] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-23 11:03:48:521] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:03:48 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:03:49:870] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:03:50:436] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:03:50:447] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-23 11:03:52:508] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-23 11:03:56:142] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-23 11:03:57:896] INFO   [sise                     : 128] Peticion [4100003301]:{fecha=15/02/2023, ramo=04, ultEndoso=, poliza=4100003301, inciso=0001}
+[2023-05-23 11:03:59:579] INFO   [sise                     : 140] Bandera para JNDI Respaldo: false
+[2023-05-23 11:03:59:603] ERROR  [sise                     : 174] SiseRutinaDao EXCEPCION! [4100003301]==> obtenerEdoCta(). Detalles: ==>[Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create JDBC driver of class 'com.ibm.u2.jdbc.UniJDBCDriver' for connect URL 'jdbc:rs-u2://11.50.0.45/CSISE']
+org.springframework.jdbc.CannotGetJdbcConnectionException: Could not get JDBC Connection; nested exception is org.apache.commons.dbcp.SQLNestedException: Cannot create JDBC driver of class 'com.ibm.u2.jdbc.UniJDBCDriver' for connect URL 'jdbc:rs-u2://11.50.0.45/CSISE'
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:1108)
+	at org.springframework.jdbc.core.JdbcTemplate.call(JdbcTemplate.java:1173)
+	at com.aaq.col.clases.database.repositorios.impl.SiseSP_Dao.obtenerEdoCta(SiseSP_Dao.java:154)
+	at com.aaq.col.database.dao.EdoCtaDaoTest.obtenerEdoCta(EdoCtaDaoTest.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:73)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:82)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:73)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:224)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: org.apache.commons.dbcp.SQLNestedException: Cannot create JDBC driver of class 'com.ibm.u2.jdbc.UniJDBCDriver' for connect URL 'jdbc:rs-u2://11.50.0.45/CSISE'
+	at org.apache.commons.dbcp.BasicDataSource.createConnectionFactory(BasicDataSource.java:1452)
+	at org.apache.commons.dbcp.BasicDataSource.createDataSource(BasicDataSource.java:1371)
+	at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:111)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:77)
+	... 33 more
+Caused by: java.sql.SQLException: No suitable driver
+	at java.sql.DriverManager.getDriver(Unknown Source)
+	at org.apache.commons.dbcp.BasicDataSource.createConnectionFactory(BasicDataSource.java:1437)
+	... 37 more
+[2023-05-23 11:03:59:666] INFO   [EdoCtaDaoTest            :  38] RESPUESTA: null
+[2023-05-23 11:03:59:682] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:03:48 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:03:59:714] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-23 11:07:05:143] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-23 11:07:05:168] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5e5792a0, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@26653222, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3532ec19, org.springframework.test.context.transaction.TransactionalTestExecutionListener@68c4039c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@ae45eb6]
+[2023-05-23 11:07:05:296] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-23 11:07:05:406] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-23 11:07:05:438] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-23 11:07:07:160] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:07:07 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:07:08:456] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:07:08:874] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:07:08:889] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-23 11:07:11:165] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-23 11:07:13:916] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-23 11:07:15:749] INFO   [sise                     : 128] Peticion [4100003301]:{fecha=15/02/2023, ramo=04, ultEndoso=, poliza=4100003301, inciso=0001}
+[2023-05-23 11:07:16:504] INFO   [sise                     : 140] Bandera para JNDI Respaldo: false
+[2023-05-23 11:07:16:905] INFO   [sise                     : 166] ARR=>
+[2023-05-23 11:07:16:905] ERROR  [sise                     :  35] Inconcistencia de datos: la cadena de respuesta tiene menos de 163 registros. [4100003301]
+[2023-05-23 11:07:16:916] INFO   [sise                     :  36] La póliza [4100003301] no existe.
+[2023-05-23 11:07:16:949] INFO   [EdoCtaDaoTest            :  38] RESPUESTA: null
+[2023-05-23 11:07:16:949] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:07:07 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:07:16:980] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-23 11:12:10:053] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-23 11:12:10:075] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5e5792a0, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@26653222, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3532ec19, org.springframework.test.context.transaction.TransactionalTestExecutionListener@68c4039c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@ae45eb6]
+[2023-05-23 11:12:10:202] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-23 11:12:10:454] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-23 11:12:10:470] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-23 11:12:12:209] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:12:12 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:12:13:491] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:12:13:867] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-23 11:12:13:875] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-23 11:12:15:918] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-23 11:12:18:727] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-23 11:12:20:681] INFO   [sise                     : 128] Peticion [4100003301]:{fecha=15/02/2023, ramo=04, ultEndoso=, poliza=4100003301, inciso=0001}
+[2023-05-23 11:12:21:125] INFO   [sise                     : 146] RESULT: {#result-set-1=[], ARR=}
+[2023-05-23 11:12:21:125] INFO   [sise                     : 158] ARR=>
+[2023-05-23 11:12:21:125] ERROR  [sise                     :  35] Inconcistencia de datos: la cadena de respuesta tiene menos de 163 registros. [4100003301]
+[2023-05-23 11:12:21:125] INFO   [sise                     :  36] La póliza [4100003301] no existe.
+[2023-05-23 11:12:21:156] INFO   [EdoCtaDaoTest            :  38] RESPUESTA: null
+[2023-05-23 11:12:21:156] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@148080bb: startup date [Tue May 23 11:12:12 GMT-06:00 2023]; root of context hierarchy
+[2023-05-23 11:12:21:171] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'

@@ -1,0 +1,36 @@
+<ui:component  xmlns="http://www.w3.org/1999/xhtml"  
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"  
+	xmlns:p="http://primefaces.org/ui">  
+	
+	<h:form id="forma_grafica_barra">	
+	<div class="forma_completa" align="center"  >
+		<p:outputPanel id ="graficaBarra" autoUpdate="true">
+			<h:body>  
+					<p:chart  id="barBarra" type="bar"  model="#{componente.barModel}"   />  
+					<h:outputScript>
+			         function chartExtender() {
+			             this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+			             this.cfg.axesDefaults = {
+					     axesDefaults: {
+					        tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+					        tickOptions: {
+					          angle: -30,
+					          fontSize: '10pt'
+					        }
+					    },
+					    axes: {
+					      xaxis: {
+					       min: 0,
+                        	max: 23,
+					        renderer: $.jqplot.CategoryAxisRenderer
+					      }
+					    }
+					   };
+			         }
+     </h:outputScript>
+			</h:body>  
+		</p:outputPanel>
+	</div>
+	</h:form>
+</ui:component>  

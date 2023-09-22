@@ -1,0 +1,296 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionAsistenciaVial}" />
+
+
+	<ui:define name="tituloPagina">AQ Aplicaciones - Asistencia Vial
+			<ui:param name="clase_pagina" value="aplicacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li>Aplicaciones</li>
+		<li>Asistencia Vial</li>
+	</ui:define>
+
+
+	<ui:define name="cuerpoPagina">
+
+		<p:outputPanel rendered="#{beanAplicacionAsistenciaVial.esPaso1}">
+			<h:form>
+				<div class="forma_mitad">
+					<p:panel header="Filtros" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+							<p:outputLabel for="estado" value="Departamento:" />
+							<h:selectOneMenu id="estado"
+								value="#{beanAplicacionAsistenciaVial.idEstado}"
+								title="Lista de Estados">
+								<f:selectItem noSelectionOption="true" itemLabel="-- Todos --" />
+								<f:selectItems
+									value="#{beanAplicacionAsistenciaVial.listaDeEstados}"
+									var="estado" itemValue="#{estado.id}"
+									itemLabel="#{estado.nombre}" />
+								<p:ajax event="valueChange" update=":forma_tabla:tabla" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="txtPoliza" value="Póliza:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="txtPoliza"
+								value="#{beanAplicacionAsistenciaVial.txtBusquedaPoliza}" />
+
+							<p:outputLabel for="txtFolio" value="Folio:" />
+							<p:inputText id="txtFolio"
+								value="#{beanAplicacionAsistenciaVial.txtBusquedaFolio}" />
+
+							<p:outputLabel for="txtTelefono" value="Teléfono" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);"
+								id="txtTelefono"
+								value="#{beanAplicacionAsistenciaVial.txtBusquedaTelefono}" />
+
+							<p:commandButton value="Filtrar" update=":forma_tabla:tabla"
+								actionListener="#{beanAplicacionAsistenciaVial.actualizarListado}" />
+							<p:commandButton ajax="false" id="boton_nuevo" value="Nuevo"
+								action="#{beanAplicacionAsistenciaVial.doAccionRegistroNuevo}"
+								onclick="this.value='Espere Por Favor';"
+								style="margin-bottom: 10px; float: left;" />
+						</h:panelGrid>
+					</p:panel>
+				</div>
+			</h:form>
+			<ui:decorate template="/Comun/comunTabla.xhtml">
+				<ui:param name="componente" value="#{beanAplicacionAsistenciaVial}" />
+				<ui:param name="listaObjetos" value="#{componente.listado}" />
+				<ui:param name="listaColumnas" value="#{reporteAsistencia.columnas}" />
+				<ui:param name="listaDe" value="Reportes de Asistencia Vial" />
+				<ui:param name="listaAutoActualizable" value="true" />
+				<ui:param name="listaAutoActualizableIntervalo" value="60" />
+				<ui:param name="mostrarBotonEditarRegistro" value="true" />
+			</ui:decorate>
+		</p:outputPanel>
+		<p:outputPanel rendered="#{beanAplicacionAsistenciaVial.esPaso2}">
+			<h:form id="forma_pagina_captura">
+				<div class="forma_mitad">
+					<p:panel header="Datos Generales" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+
+							<p:outputLabel for="rep_ra" value="Ramo:" style="width: 50px" />
+							<h:outputText id="rep_ra" value="04" />
+
+							<p:outputLabel for="rep_pol" value="Póliza:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="rep_pol"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.polizaNumero}" />
+
+							<p:outputLabel for="rep_in" value="Inciso:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="rep_in"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.polizaInciso}" />
+
+							<p:outputLabel for="rep_end" value="Endoso:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="rep_end"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.polizaEndoso}" />
+
+							<p:commandButton id="btn_datos_poliza" value="Buscar"
+								update="panel_datos_vehiculo"
+								actionListener="#{beanAplicacionAsistenciaVial.doAccionConsultarPoliza}" />
+
+						</h:panelGrid>
+					</p:panel>
+					<p:panel header="Datos del Reporte" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+							<p:outputLabel for="d_stat" value="Estatus:"
+								rendered="#{not empty beanAplicacionAsistenciaVial.objetoABM.id}" />
+							<h:selectOneMenu id="d_stat"
+								rendered="#{not empty beanAplicacionAsistenciaVial.objetoABM.id}"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.estatus}">
+								<f:selectItem itemValue="Confirmado" itemLabel="Confirmado" />
+								<f:selectItem itemValue="Cerrado" itemLabel="Cerrado" />
+								<f:selectItem itemValue="Cancelado" itemLabel="Cancelado" />
+							</h:selectOneMenu>
+
+
+							<p:outputLabel for="d_nomb" value="Nombre de Quién Reporta:" />
+							<p:inputText id="d_nomb"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.solicitaNombre}" />
+
+							<p:outputLabel for="d_tel" value="Teléfono:" />
+							<p:inputText onkeyup="permitirSoloNumeros(this);" id="d_tel"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.solicitaTelefono}" />
+
+							<p:outputLabel for="d_tip" value="Tipo Servicio Solicitado:" />
+							<h:selectOneMenu id="d_tip"
+								value="#{beanAplicacionAsistenciaVial.idCatalogoTipoAsistenciaSeleccionado}">
+								<f:selectItems var="catalogoTipoAsistencia"
+									itemValue="#{catalogoTipoAsistencia.id}"
+									itemLabel="#{catalogoTipoAsistencia.descripcion}"
+									value="#{beanAplicacionAsistenciaVial.listaDeCatalogoTipoAsistencia}" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="d_tip_desc"
+								value="Descripción de lo Ocurrido:" />
+							<p:inputText id="d_tip_desc"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.incidenteDescripcion}" />
+
+							<p:outputLabel for="d_tip_desc_com" value="Comentarios:" />
+							<p:inputTextarea id="d_tip_desc_com"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.incidenteComentarios}" />
+
+							<p:outputLabel for="eve_idprov" value="Cambiar Proveedor:" />
+							<h:selectOneMenu id="eve_idprov"
+								value="#{beanAplicacionAsistenciaVial.idProveedor}">
+								<f:selectItem noSelectionOption="true"
+									itemLabel="-- Opcional --" />
+								<f:selectItems var="catalogoProveedorAsistencia"
+									itemValue="#{catalogoProveedorAsistencia.id}"
+									itemLabel="#{catalogoProveedorAsistencia.nombreComercial}"
+									value="#{beanAplicacionAsistenciaVial.listaDeCatalogoProveedorAsistencia}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+							<h:outputText value="" />
+
+							<p:commandButton ajax="false" value="Enviar Folio"
+								rendered="#{empty beanAplicacionAsistenciaVial.objetoABM.id}"
+								action="#{beanAplicacionAsistenciaVial.doAccionRegistroGuardar}" />
+							<p:commandButton ajax="false" value="Actualizar Folio"
+								rendered="#{not empty beanAplicacionAsistenciaVial.objetoABM.id}"
+								action="#{beanAplicacionAsistenciaVial.doAccionRegistroGuardar}" />
+							<p:commandButton ajax="false" value="Cancelar"
+								action="#{beanAplicacionAsistenciaVial.doAccionRegistroCerrar}" />
+							<p:commandButton ajax="false" value="Reasignación"
+								style="float: right;"
+								action="#{beanAplicacionAsistenciaVial.doAccionReasignarReporte}" />
+
+						</h:panelGrid>
+					</p:panel>
+				</div>
+				<div class="forma_mitad">
+					<p:panel header="Datos Póliza" styleClass="panelesV">
+						<h:panelGrid styleClass="tabla_captura" columns="4"
+							id="panel_datos_vehiculo"
+							columnClasses="cuarto,cuarto,cuarto,cuarto">
+
+
+							<p:outputLabel for="rep_cond" value="Asegurado:" />
+							<h:outputText id="rep_cond"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.nomAseg}" />
+
+							<p:outputLabel for="rep_dire" value="Dirección Asegurado:" />
+							<p:outputPanel>
+								<h:outputText id="rep_dire"
+									value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.dirAseg}" />
+									&#160;
+									<h:outputText
+									value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.coloniaAseg}" />
+									&#160;
+									<h:outputText
+									value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.delMunAseg}" />
+									&#160;
+									<h:outputText
+									value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.estadoAseg}" />
+							</p:outputPanel>
+
+							<p:outputLabel for="proveedor_av_n"
+								value="Proveedor de Asistencia:" />
+							<h:outputText id="proveedor_av_n"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.nombreAV}" />
+									&#160;
+									<h:outputText id="proveedor_av_c"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.claveAV}" />
+
+							<p:outputLabel for="rep_ramo" value="Ramo:" />
+							<h:outputText id="rep_ramo"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.ramo}" />
+
+							<p:outputLabel for="rep_sub" value="Subramo:" />
+							<h:outputText id="rep_sub"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.subRamo}" />
+
+							<p:outputLabel for="rep_poliza" value="Póliza:" />
+							<h:outputText id="rep_poliza"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.poliza}" />
+
+							<p:outputLabel for="rep_inci" value="Inciso:" />
+							<h:outputText id="rep_inci"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.inciso}" />
+
+							<p:outputLabel for="rep_endo" value="Endoso:" />
+							<h:outputText id="rep_endo"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.endoso}" />
+
+							<p:outputLabel for="rep_est_cober" value="Estatus Cobertura:" />
+							<h:outputText id="rep_est_cober"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.statusCober}" />
+
+							<p:outputLabel for="rep_est_pol" value="Estatus Póliza:" />
+							<h:outputText id="rep_est_pol"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.statusPoliza}" />
+
+							<p:outputLabel for="rep_est_sim" value="Suma Asegurada:" />
+							<h:outputText id="rep_est_sim"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.sumaAseg}" />
+
+							<p:outputLabel for="rep_fini" value="Fecha Inicio:" />
+							<h:outputText id="rep_fini"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.fechaInic}" />
+
+							<p:outputLabel for="rep_fin" value="Fecha Fin:" />
+							<h:outputText id="rep_fin"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.fechaFin}" />
+
+							<p:outputLabel for="rep_renp" value="Renovada Por:" />
+							<h:outputText id="rep_renp"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.renovadaPor}" />
+
+							<p:outputLabel for="rep_incir" value="Inciso Renovado:" />
+							<h:outputText id="rep_incir"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.incisoRenovado}" />
+
+							<p:outputLabel for="rep_age" value="Agente:" />
+							<p:outputPanel>
+								<h:outputText id="rep_age"
+									value="Nom: #{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.nomAgte}" />
+								<h:outputText
+									value=", Cve: #{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.clveAgte}" />
+								<h:outputText
+									value=", Tel: #{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.telAgte}" />
+							</p:outputPanel>
+							<p:outputLabel for="rep_of" value="Oficina:" />
+							<p:outputPanel>
+								<h:outputText id="rep_of"
+									value="Nom: #{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.oficina}" />
+								<h:outputText
+									value=", Tel: #{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.telOficina}" />
+							</p:outputPanel>
+
+							<p:outputLabel for="rep_mar" value="Marca:" />
+							<h:outputText id="rep_mar"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.marca}" />
+
+							<p:outputLabel for="rep_mod" value="Modelo:" />
+							<h:outputText id="rep_mod"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.modelo}" />
+
+							<p:outputLabel for="rep_col" value="Color:" />
+							<h:outputText id="rep_col"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.color}" />
+
+							<p:outputLabel for="rep_pla" value="Placas:" />
+							<h:outputText id="rep_pla"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.placas}" />
+
+							<p:outputLabel for="rep_serie" value="Serie:" />
+							<h:outputText id="rep_serie"
+								value="#{beanAplicacionAsistenciaVial.objetoABM.datosPoliza.serie}" />
+						</h:panelGrid>
+					</p:panel>
+
+				</div>
+			</h:form>
+		</p:outputPanel>
+	</ui:define>
+</ui:composition>

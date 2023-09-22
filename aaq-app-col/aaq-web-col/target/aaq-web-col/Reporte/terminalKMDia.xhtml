@@ -1,0 +1,54 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanReporteKilometrajeDia}" />
+	<ui:define name="tituloPagina">
+
+		<h:outputText value="AQ Reportes - Reporte de Kilometros por dia" />
+		<ui:param name="clase_pagina" value="reporte" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Reportes</a></li>
+		<li><h:outputText value="Kilometros por Dia de Ajustador" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<ui:include src="/Comun/comunFiltro.xhtml">
+			<ui:param name="grafica"
+				value="#{beanReporteKilometrajeDia.graficaKilometrajeDia}" />
+			<ui:param name="reporte" value="doReporteKilometrajeDia" />
+			<ui:param name="mostrarCmbEstadoBaseAjustador" value="true" />
+			<ui:param name="mostrarBotonNormal" value="true" />
+		</ui:include>
+
+		<div class="forma_completa">
+			<h:form>
+				<p:outputPanel id="listado">
+					<p:dataTable id="tabla" var="obj"
+						value="#{beanReporteKilometrajeDia.listado}"
+						emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+						rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+						
+						<f:facet name="header">Kilómetros Por Día</f:facet>
+
+						<p:column headerText="Fecha">
+							<h:outputText value="#{obj.valor0}" />
+						</p:column>
+						<p:column headerText="Kilómetros">
+							<h:outputText value="#{obj.valor1}" />
+						</p:column>
+
+					</p:dataTable>
+				</p:outputPanel>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

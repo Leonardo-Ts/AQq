@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2019-02-07T16:32:31 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="abogado" pageWidth="595" pageHeight="842" columnWidth="589" leftMargin="3" rightMargin="3" topMargin="0" bottomMargin="0" uuid="a73a02ec-44ed-48c3-821e-c4fdfcbe14ce">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="motivoAsignacion" class="java.lang.String"/>
+	<field name="idEntidad" class="java.lang.String"/>
+	<field name="descripPresentarse" class="java.lang.String"/>
+	<field name="vehiculoDetenido" class="java.lang.String"/>
+	<field name="numLesa" class="java.lang.String"/>
+	<field name="numHoma" class="java.lang.String"/>
+	<field name="numLest" class="java.lang.String"/>
+	<field name="numHomt" class="java.lang.String"/>
+	<field name="conductorDetenido" class="java.lang.String"/>
+	<title>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="9" width="159" height="27" forecolor="#107986" uuid="83ad22e6-2be0-4133-9567-572aec697c60"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abogado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="156" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="31" width="157" height="20" uuid="2d4b0385-e18e-45e5-aec3-0c3c898c1b83"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar a Presentarse:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="52" width="149" height="20" uuid="0258e895-bece-4c0d-9e1b-07c148312158"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conductor Detenido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="73" width="140" height="20" uuid="50536887-cc6c-4384-b034-a245825fd780"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vehiculo Detenido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="103" width="157" height="20" uuid="6db8d411-0943-460d-9502-6dd222015587"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lesionados Asegurado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="124" width="140" height="20" uuid="0d722af2-23cb-4b7a-be80-2ac537c0d05e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fallecidos Asegurado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="103" width="140" height="20" uuid="4428821c-2e2d-4883-a5c6-f2f61a532b16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lesionados Tercero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="299" y="124" width="140" height="20" uuid="2a85d5c5-ca0b-452d-b5a2-04e8219d75eb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fallecidos Tercero:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="128" height="20" uuid="3d34e713-0484-4c71-9702-e78e51d06855"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement x="141" y="10" width="100" height="20" uuid="d04797e6-4cff-4d6c-a0dc-b4856135c4db"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="141" y="31" width="399" height="20" uuid="fdf2b404-aa02-47e8-8615-f83b999b69f7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripPresentarse}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="52" width="230" height="20" uuid="e8ff047a-42c4-4620-a383-285f8dd4788f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{conductorDetenido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="73" width="159" height="20" uuid="f5c7f91b-94b1-4e59-8ea9-0e326b4df27e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vehiculoDetenido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="156" y="103" width="100" height="20" uuid="71c91b2d-e0a9-48d8-835d-13d776d8a1b5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numLesa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="156" y="124" width="100" height="20" uuid="1a0ffb36-7685-458f-aada-ef5cfa97fd22"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numHoma}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="103" width="100" height="20" uuid="4e4b5f9c-af1d-4098-b863-3e1b3a408fb2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numLest}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="440" y="124" width="100" height="20" uuid="4ca4a57b-ac14-4185-890a-ff7f972902da"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numHomt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

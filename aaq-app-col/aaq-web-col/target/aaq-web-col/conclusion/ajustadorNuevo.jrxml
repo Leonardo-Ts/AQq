@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
+<!-- 2021-11-19T20:07:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ajustadorNuevo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="58d09674-d0a5-4c11-86c7-8a75da2fcc23">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="path" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="titulo1" class="java.lang.String"/>
+	<parameter name="titulo2" class="java.lang.String"/>
+	<parameter name="titulo3" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="dataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<title>
+		<band height="103" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="160" height="70" uuid="dd81607c-8354-4205-ba6e-2ad975d311b8"/>
+				<imageExpression><![CDATA[$P{path}+"logo_aaq.png"]]></imageExpression>
+			</image>
+			<rectangle radius="11">
+				<reportElement x="180" y="-29" width="373" height="90" backcolor="#008C99" uuid="748f4e90-3da0-4105-b1d9-9b4c0a199350"/>
+				<graphicElement>
+					<pen lineColor="#008C99"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="219" y="10" width="300" height="26" forecolor="#FFFFFF" uuid="c7180511-52fe-4c15-b81a-0c2371672949"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Double" lineColor="#008C99"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCLUSIÓN DEL AJUSTADOR]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="741" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="2" width="555" height="739" uuid="c3ca0efd-8fa2-4e50-9e78-336dcbfabf7a"/>
+				<dataSourceExpression><![CDATA[$F{dataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{path}+"resumen_ajustadorNuevo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="80">
+			<image scaleImage="FillFrame" isUsingCache="false">
+				<reportElement x="-21" y="-2" width="592" height="80" uuid="15d46041-76ec-438c-8c6d-c169776de284"/>
+				<imageExpression><![CDATA[$P{path}++"slogan_izq.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="-16" y="40" width="26" height="31" forecolor="#FFFFFF" uuid="e4ae8f90-0ed1-4740-9076-0866a90dfc3b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="24" y="40" width="26" height="31" forecolor="#FFFFFF" uuid="c78c3593-2b5f-414c-8752-4da2ce77b024"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="37" width="14" height="22" forecolor="#FFFFFF" uuid="21562393-807e-4649-a2fc-ba949ebe324b"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,86 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanOperacionSockets}" />
+	<ui:define name="tituloPagina">AQ Operaciones - Sockets de Conectividad 
+			<ui:param name="clase_pagina" value="operacion" />
+	</ui:define>
+
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Operaciones</a></li>
+		<li>Sockets de Conectividad</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<h:form id="formasocket">
+			<p:poll interval="30"
+				update="contenido_sms,contenido_servidor_tcp,contenido_servidor_udp" />
+
+			<div class="forma_mitad">
+				<p:panel header="Socket con AQ SMS" styleClass="panelesV" >
+					<h:panelGrid id="contenido_sms" columns="2"
+						columnClasses="cuarto,tres_cuartos" styleClass="tabla_captura">
+
+						<p:outputLabel for="smsstatus" value="Estatus" />
+						<h:outputText id="smsstatus"
+							value="#{beanOperacionSockets.estatusSMS}" />
+						<p:outputLabel for="smsfecha" value="Fecha Ultimo Registro" />
+						<h:outputText id="smsfecha"
+							value="#{beanOperacionSockets.ultimoFechaSMS}" />
+						<p:outputLabel for="smsstring"
+							value="Texto Ultimo Mensaje Enviado" />
+						<h:outputText id="smsstring"
+							value="#{beanOperacionSockets.ultimoRegistroSMS}" />
+						<p:commandButton value="Desconectar"
+							actionListener="#{beanOperacionSockets.doAccionDesconectarConSMS}"
+							update="contenido_sms" />
+						<p:commandButton value="Conectar"
+							actionListener="#{beanOperacionSockets.doAccionConectarConSMS}" />
+					</h:panelGrid>
+				</p:panel>
+
+			</div>
+			<div class="forma_mitad">
+				<p:panel header="Servidor de Unidades TCP" styleClass="panelesV">
+					<h:panelGrid id="contenido_servidor_tcp" columns="2"
+						columnClasses="cuarto,tres_cuartos" styleClass="tabla_captura">
+
+						<p:outputLabel for="tcp_estatus" value="Estatus" />
+						<h:outputText id="tcp_estatus"
+							value="#{beanOperacionSockets.estatusServidorTCP}" />
+
+						<p:commandButton value="Desconectar"
+							actionListener="#{beanOperacionSockets.doAccionDetenerServidorTCP}"
+							update="contenido_servidor_tcp" />
+						<p:commandButton value="Conectar" update="contenido_servidor_tcp"
+							actionListener="#{beanOperacionSockets.doAccionEncenderServidorTCP}" />
+					</h:panelGrid>
+				</p:panel>
+
+			</div>
+
+			<div class="forma_mitad">
+				<p:panel header="Servidor de Unidades UDP" styleClass="panelesV">
+					<h:panelGrid id="contenido_servidor_udp" columns="2"
+						columnClasses="cuarto,tres_cuartos" styleClass="tabla_captura">
+
+						<p:outputLabel for="udp_estatus" value="Estatus" />
+						<h:outputText id="udp_estatus"
+							value="#{beanOperacionSockets.estatusServidorUDP}" />
+
+						<p:commandButton value="Desconectar"
+							actionListener="#{beanOperacionSockets.doAccionDetenerServidorUDP}"
+							update="contenido_servidor_udp" />
+						<p:commandButton value="Conectar" update="contenido_servidor_udp"
+							actionListener="#{beanOperacionSockets.doAccionEncenderServidorUDP}" />
+					</h:panelGrid>
+				</p:panel>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

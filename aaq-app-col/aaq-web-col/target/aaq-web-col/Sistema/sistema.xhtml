@@ -1,0 +1,107 @@
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanAplicacionFirma}" />
+
+	<ui:define name="tituloPagina">
+		<h:outputText value="Menú Principal" />
+		<ui:param name="clase_pagina" value="sistema" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><h:outputText value="Menú Principal" /></li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+
+		<p:outputPanel
+			rendered="#{beanAplicacionFirma.permisoSIICAAplicaciones}">
+			<h5>
+				<h:outputText value="Módulos de Aplicación Principal:" />
+			</h5>
+			<ul>
+				<ui:repeat var="modulo"
+					value="#{beanAplicacionFirma.listaDeModulosDeAplicaciones}">
+					<li><h:outputLink value="..#{modulo.pagina}"
+							title="#{modulo.descripcion}">
+							<h:outputText value="#{modulo.nombrecorto}" />
+						</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+				</ui:repeat>
+			</ul>
+		</p:outputPanel>
+		<p:outputPanel rendered="#{beanAplicacionFirma.permisoSIICACatalogo}">
+			<h5>
+				<h:outputText value="Módulos de Administración de Catálogos:" />
+			</h5>
+			<ul>
+				<ui:repeat var="modulo"
+					value="#{beanAplicacionFirma.listaDeModulosDeCatalogos}">
+					<li><h:outputLink value="..#{modulo.pagina}"
+							title="#{modulo.descripcion}">
+							<h:outputText value="#{modulo.nombrecorto}" />
+						</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+				</ui:repeat>
+			</ul>
+		</p:outputPanel>
+		<p:outputPanel rendered="#{beanAplicacionFirma.permisoSIICASISEOR}">
+			<h5>
+				<h:outputText value="Módulos de SISE OR:" />
+			</h5>
+			<ul>
+				<ui:repeat var="modulo"
+					value="#{beanAplicacionFirma.listaDeModulosDeReporte}">
+					<li><h:outputLink value="..#{modulo.pagina}"
+							title="#{modulo.descripcion}">
+							<h:outputText value="#{modulo.nombrecorto}" />
+						</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+				</ui:repeat>
+			</ul>
+		</p:outputPanel>
+		<p:outputPanel rendered="#{beanAplicacionFirma.permisoSIICAReportes}">
+			<h5>
+				<h:outputText value="Módulos AQ Reportes:" />
+			</h5>
+			<ul>
+				<ui:repeat var="modulo"
+					value="#{beanAplicacionFirma.listaDeModulosDeReporte}">
+					<li><h:outputLink value="..#{modulo.pagina}"
+							title="#{modulo.descripcion}">
+							<h:outputText value="#{modulo.nombrecorto}" />
+						</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+				</ui:repeat>
+
+			</ul>
+		</p:outputPanel>
+		<h5>
+			<h:outputText value="Módulos AQ Operaciones:" />
+		</h5>
+		<ul>
+			<ui:repeat var="modulo"
+				value="#{beanAplicacionFirma.listaDeModulosDeOperacion}">
+				<li><h:outputLink value="..#{modulo.pagina}"
+						title="#{modulo.descripcion}">
+						<h:outputText value="#{modulo.nombrecorto}" />
+					</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+			</ui:repeat>
+		</ul>
+		
+		<p:outputPanel rendered="#{beanAplicacionFirma.permisoSIICACatalogacion}">
+			<h5>
+				<h:outputText value="Módulos de Catalogación:" />
+			</h5>
+			<ul>
+				<ui:repeat var="modulo"
+					value="#{beanAplicacionFirma.listaDeModulosDeCatalogosEdit}">
+					<li><h:outputLink value="..#{modulo.pagina}"
+							title="#{modulo.descripcion}">
+							<h:outputText value="#{modulo.nombrecorto}" />
+						</h:outputLink> :&#160; <h:outputText value="#{modulo.descripcion}" /></li>
+				</ui:repeat>
+			</ul>
+		</p:outputPanel>
+		
+	</ui:define>
+</ui:composition>

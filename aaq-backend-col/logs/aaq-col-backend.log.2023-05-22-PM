@@ -1,0 +1,239 @@
+[2023-05-22 14:12:30:539] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 14:12:30:576] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@47c62251, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3e6fa38a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@66a3ffec, org.springframework.test.context.transaction.TransactionalTestExecutionListener@77caeb3e, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1e88b3c]
+[2023-05-22 14:12:30:717] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 14:12:30:937] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 14:12:30:965] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 14:12:32:825] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@2038ae61: startup date [Mon May 22 14:12:32 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 14:12:34:077] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 14:12:34:455] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 14:12:34:461] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 14:12:36:330] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 14:12:39:321] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 14:12:41:814] ERROR  [database                 : 112] com.aaq.col.clases.database.repositorios.impl.TerminalDao, Metodo =>[ejecutarFuncionTerminalInsertarCoordenadas]
+javax.persistence.PersistenceException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.0.v20150309-bf26070): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLSyntaxErrorException: ORA-04098: el disparador 'AAQDEV.TERMINAL_FECHA_LAT_LON_TRG' no es válido y ha fallado al revalidar
+ORA-06512: en "AAQDEV.TERMINAL_INSERTAR_COORDENADAS1", línea 48
+ORA-06512: en línea 1
+
+Error Code: 4098
+Call: BEGIN terminal_insertar_coordenadas1(in_id=>?, in_ultimo_localizacion_fecha=>?, in_ultimo_localizacion_vel=>?, in_latitud=>?, in_longitud=>?, in_direccion=>?, respuesta=>?); END;
+	bind => [7 parameters bound]
+Query: ResultSetMappingQuery()
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getDetailedException(QueryImpl.java:382)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:260)
+	at org.eclipse.persistence.internal.jpa.StoredProcedureQueryImpl.execute(StoredProcedureQueryImpl.java:316)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$DeferredQueryInvocationHandler.invoke(SharedEntityManagerCreator.java:362)
+	at com.sun.proxy.$Proxy145.execute(Unknown Source)
+	at com.aaq.col.clases.database.repositorios.impl.TerminalDao.ejecutarFuncionTerminalInsertarCoordenadas(TerminalDao.java:883)
+	at com.aaq.col.database.dao.TerminalDaoTest.insertarCoordenadas(TerminalDaoTest.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:73)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:82)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:73)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:224)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.0.v20150309-bf26070): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLSyntaxErrorException: ORA-04098: el disparador 'AAQDEV.TERMINAL_FECHA_LAT_LON_TRG' no es válido y ha fallado al revalidar
+ORA-06512: en "AAQDEV.TERMINAL_INSERTAR_COORDENADAS1", línea 48
+ORA-06512: en línea 1
+
+Error Code: 4098
+Call: BEGIN terminal_insertar_coordenadas1(in_id=>?, in_ultimo_localizacion_fecha=>?, in_ultimo_localizacion_vel=>?, in_latitud=>?, in_longitud=>?, in_direccion=>?, respuesta=>?); END;
+	bind => [7 parameters bound]
+Query: ResultSetMappingQuery()
+	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:340)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:684)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeCall(DatabaseAccessor.java:560)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.basicExecuteCall(AbstractSession.java:2055)
+	at org.eclipse.persistence.sessions.server.ServerSession.executeCall(ServerSession.java:570)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:242)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.executeCall(DatasourceCallQueryMechanism.java:228)
+	at org.eclipse.persistence.internal.queries.DatasourceCallQueryMechanism.execute(DatasourceCallQueryMechanism.java:220)
+	at org.eclipse.persistence.queries.ResultSetMappingQuery.executeDatabaseQuery(ResultSetMappingQuery.java:312)
+	at org.eclipse.persistence.queries.DatabaseQuery.execute(DatabaseQuery.java:904)
+	at org.eclipse.persistence.queries.DatabaseQuery.executeInUnitOfWork(DatabaseQuery.java:803)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.internalExecuteQuery(UnitOfWorkImpl.java:2896)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1857)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1839)
+	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1804)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.executeReadQuery(QueryImpl.java:258)
+	... 38 more
+Caused by: java.sql.SQLSyntaxErrorException: ORA-04098: el disparador 'AAQDEV.TERMINAL_FECHA_LAT_LON_TRG' no es válido y ha fallado al revalidar
+ORA-06512: en "AAQDEV.TERMINAL_INSERTAR_COORDENADAS1", línea 48
+ORA-06512: en línea 1
+
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399)
+	at oracle.jdbc.driver.T4C8Oall.processError(T4C8Oall.java:1017)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:655)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:249)
+	at oracle.jdbc.driver.T4C8Oall.doOALL(T4C8Oall.java:566)
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:210)
+	at oracle.jdbc.driver.T4CCallableStatement.doOall8(T4CCallableStatement.java:53)
+	at oracle.jdbc.driver.T4CCallableStatement.executeForRows(T4CCallableStatement.java:938)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1075)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3820)
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3923)
+	at oracle.jdbc.driver.OracleCallableStatement.execute(OracleCallableStatement.java:5617)
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1385)
+	at com.zaxxer.hikari.proxy.PreparedStatementProxy.execute(PreparedStatementProxy.java:44)
+	at com.zaxxer.hikari.proxy.CallableStatementJavassistProxy.execute(CallableStatementJavassistProxy.java)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.execute(DatabaseAccessor.java:989)
+	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.basicExecuteCall(DatabaseAccessor.java:628)
+	... 52 more
+[2023-05-22 14:12:41:854] INFO   [TerminalDaoTest          :  68] RESPUESTA: {"exito":false,"mensaje":"ERROR en la operación: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.0.v20150309-bf26070): org.eclipse.persistence.exceptions.DatabaseException\r\nInternal Exception: java.sql.SQLSyntaxErrorException: ORA-04098: el disparador \u0027AAQDEV.TERMINAL_FECHA_LAT_LON_TRG\u0027 no es válido y ha fallado al revalidar\nORA-06512: en \"AAQDEV.TERMINAL_INSERTAR_COORDENADAS1\", línea 48\nORA-06512: en línea 1\n\r\nError Code: 4098\r\nCall: BEGIN terminal_insertar_coordenadas1(in_id\u003d\u003e?, in_ultimo_localizacion_fecha\u003d\u003e?, in_ultimo_localizacion_vel\u003d\u003e?, in_latitud\u003d\u003e?, in_longitud\u003d\u003e?, in_direccion\u003d\u003e?, respuesta\u003d\u003e?); END;\r\n\tbind \u003d\u003e [7 parameters bound]\r\nQuery: ResultSetMappingQuery()"}
+[2023-05-22 14:12:41:854] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@2038ae61: startup date [Mon May 22 14:12:32 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 14:12:41:886] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:20:33:028] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:20:33:050] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4501b7af, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@523884b2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5b275dab, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61832929, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@29774679]
+[2023-05-22 15:20:33:241] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:20:33:542] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:20:33:574] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:20:37:162] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:20:37 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:20:39:081] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:20:40:432] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:20:40:440] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:20:42:487] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:20:46:468] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:20:49:300] INFO   [ConfiguracionDaoTest     :  36] resultado: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:20:49:331] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:20:37 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:20:49:346] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:23:41:631] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:23:41:658] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4501b7af, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@523884b2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5b275dab, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61832929, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@29774679]
+[2023-05-22 15:23:41:785] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:23:42:101] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:23:42:133] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:23:43:925] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:23:43 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:23:45:269] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:23:45:651] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:23:45:651] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:23:47:617] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:23:50:633] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:23:53:738] INFO   [ConfiguracionDaoTest     :  36] resultado: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:23:53:744] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:23:43 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:23:53:759] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:25:33:119] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:25:33:144] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4501b7af, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@523884b2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5b275dab, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61832929, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@29774679]
+[2023-05-22 15:25:33:246] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:25:33:348] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:25:33:379] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:25:34:675] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:25:34 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:25:35:815] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:25:36:106] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:25:36:113] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:25:37:738] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:25:40:238] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:25:43:091] INFO   [ConfiguracionDaoTest     :  36] resultado: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:25:43:096] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:25:34 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:25:43:127] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:26:37:473] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:26:37:504] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4501b7af, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@523884b2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5b275dab, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61832929, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@29774679]
+[2023-05-22 15:26:37:613] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:26:37:742] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:26:37:763] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:26:39:301] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:26:39 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:26:41:025] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:26:41:311] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:26:41:325] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:26:43:063] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:26:45:926] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:26:48:613] INFO   [ConfiguracionDaoTest     :  36] resultado: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:26:48:617] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:26:39 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:26:48:633] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:27:33:250] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:27:33:266] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4501b7af, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@523884b2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5b275dab, org.springframework.test.context.transaction.TransactionalTestExecutionListener@61832929, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@29774679]
+[2023-05-22 15:27:33:363] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:27:33:488] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:27:33:507] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:27:34:795] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:27:34 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:27:35:962] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:27:36:241] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:27:36:257] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:27:37:962] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:27:40:681] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:27:43:473] INFO   [ConfiguracionDaoTest     :  36] resultado: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:27:43:489] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@49993335: startup date [Mon May 22 15:27:34 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:27:43:505] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:52:32:574] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:52:32:601] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@59f99ea, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@27efef64, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f7fd0e6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@47c62251, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e6fa38a]
+[2023-05-22 15:52:32:727] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:52:32:994] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:52:33:009] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:52:35:004] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:52:35 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:52:36:658] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:52:37:916] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:52:37:934] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:52:39:913] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:52:43:436] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:52:46:435] INFO   [ModuloDaoTest            :  60] RESPUESTA: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:52:46:446] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:52:35 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:52:46:478] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:53:54:169] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:53:54:185] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@59f99ea, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@27efef64, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f7fd0e6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@47c62251, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e6fa38a]
+[2023-05-22 15:53:54:281] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:53:54:391] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:53:54:414] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:53:55:720] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:53:55 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:53:56:979] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:53:57:291] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:53:57:291] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:53:58:994] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:54:01:783] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:54:04:465] INFO   [ModuloDaoTest            :  58] RESPUESTA: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:54:04:479] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:53:55 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:54:04:494] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:56:21:622] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:56:21:637] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@59f99ea, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@27efef64, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f7fd0e6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@47c62251, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e6fa38a]
+[2023-05-22 15:56:21:774] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:56:21:874] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:56:21:904] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:56:23:354] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:56:23 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:56:24:574] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:56:24:852] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:56:24:868] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:56:26:557] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:56:29:245] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:56:32:026] INFO   [ModuloDaoTest            :  59] RESPUESTA: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:56:32:030] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:56:23 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:56:32:046] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:58:04:214] INFO   [ltTestContextBootstrapper: 256] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[2023-05-22 15:58:04:245] INFO   [ltTestContextBootstrapper: 182] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@59f99ea, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@27efef64, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6f7fd0e6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@47c62251, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3e6fa38a]
+[2023-05-22 15:58:04:432] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-configuracion.xml]
+[2023-05-22 15:58:04:644] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-data-source.xml]
+[2023-05-22 15:58:04:664] INFO   [XmlBeanDefinitionReader  : 317] Loading XML bean definitions from class path resource [config/spring/spring-data-dao-service.xml]
+[2023-05-22 15:58:06:539] INFO   [GenericApplicationContext: 510] Refreshing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:58:06 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:58:08:089] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:58:08:445] INFO   [ertyPlaceholderConfigurer: 172] Loading properties file from class path resource [config/siica.properties]
+[2023-05-22 15:58:08:461] INFO   [notationBeanPostProcessor: 153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[2023-05-22 15:58:10:850] INFO   [rEntityManagerFactoryBean: 339] Building JPA container EntityManagerFactory for persistence unit 'AAQColServer'
+[2023-05-22 15:58:13:698] INFO   [PropertiesFactoryBean    : 172] Loading properties file from class path resource [config/parametros.properties]
+[2023-05-22 15:58:16:533] INFO   [ModuloDaoTest            :  59] RESPUESTA: {"exito":true,"mensaje":"Registro Insertado OK"}
+[2023-05-22 15:58:16:537] INFO   [GenericApplicationContext: 862] Closing org.springframework.context.support.GenericApplicationContext@617faa95: startup date [Mon May 22 15:58:06 GMT-06:00 2023]; root of context hierarchy
+[2023-05-22 15:58:16:545] INFO   [rEntityManagerFactoryBean: 462] Closing JPA EntityManagerFactory for persistence unit 'AAQColServer'

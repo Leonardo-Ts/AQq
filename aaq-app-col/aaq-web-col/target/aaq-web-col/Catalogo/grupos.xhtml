@@ -1,0 +1,378 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/Comun/plantilla.xhtml">
+	<ui:param name="componente" value="#{beanCatalogoGrupos}" />
+
+	<ui:define name="tituloPagina">AQ Catálogos - ABM Grupos
+			<ui:param name="clase_pagina" value="catalogo" />
+	</ui:define>
+	<ui:define name="navegacionDeFlechas">
+		<li><a href="inicio.siica">Catálogos</a></li>
+		<li>Grupos</li>
+	</ui:define>
+
+	<ui:define name="cuerpoPagina">
+		<ui:decorate template="/Comun/comunFiltroFrec.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoGrupos}" />
+			<ui:param name="listade" value="grupo" />
+			<ui:param name="mostrarFiltroComboEstado" value="true"/>
+			<ui:param name="mostrarBotonAgregarRegistro" value="true" />
+			<ui:param name="mostrarPanel" value="true" />
+		</ui:decorate>
+
+		<ui:decorate template="/Comun/comunCarga.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoGrupos}" />
+			<ui:param name="descripcion" value="Usuarios del Sistema" />
+			<ui:param name="mostrarTablaCarga" value="true"/>
+			<ui:define name="contenidoAdicional">
+				<p:panelGrid columns="4">
+				    <f:facet name="header">
+				         <h:outputText value="Ejemplo de orden de columnas:" />
+				    </f:facet>
+				     
+				    <h:outputText value="nombre_grupo" />
+				    <h:outputText value="fechaInicio" />
+				    <h:outputText value="fechaFin" />
+				    <h:outputText value="claveHorario" />
+				     
+				    <h:outputText value="CDMX 2" />
+				    <h:outputText value="dd/MM/yyyy" />
+				    <h:outputText value="dd/MM/yyyy" />
+				    <h:outputText value="CDMX 10" />
+				</p:panelGrid>
+			</ui:define>
+			
+		</ui:decorate>
+
+		<ui:decorate template="/Comun/comunTabla.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoGrupos}" />
+			<ui:param name="listaObjetos" value="#{componente.listado}" />
+			<ui:param name="listaColumnas" value="#{componente.columnas}" />
+			<ui:param name="listaDe" value="Grupo" />
+			<ui:param name="mostrarPanel" value="true" />
+			<ui:param name="mostrarBotonEditarRegistro" value="true" />
+			<ui:param name="mostrarBotonEliminarRegistro" value="true" />
+
+			<ui:define name="contenidoAdicional">
+				<p:column style="text-align: center" headerText="Agregar Terminal"
+					rendered="#{componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelAdicional').show()"
+						update=":formaAgregarBase:contenidoAgregarBase"
+						actionListener="#{componente.doAccionRegistroEditar}">
+						<f:param name="id" value="#{riv}" />
+						<h:graphicImage url="/diseno/imagenes/acciones/icono16Permiso.png" />
+					</p:commandLink>
+				</p:column>
+			</ui:define>
+
+			<ui:define name="contenidoAdicional2">
+				<p:column style="text-align: center" headerText="Agregar Horario"
+					rendered="#{componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelAdicional2').show()"
+						update=":formaAgregarHorario:contenidoAgregarHorario"
+						actionListener="#{componente.doAccionRegistroEditar}">
+						<f:param name="id" value="#{riv}" />
+						<h:graphicImage url="/diseno/imagenes/acciones/icono16Permiso.png" />
+					</p:commandLink>
+				</p:column>
+			</ui:define>
+			
+			<ui:define name="contenidoAdicional3">
+				<p:column style="text-align: center" headerText="Agregar Guardia"
+					rendered="#{componente.permisoABM}">
+					<p:commandLink oncomplete="PF('panelAdicional3').show()"
+						update=":formaAgregarGuardia:contenidoAgregarGuardia"
+						actionListener="#{componente.doAccionRegistroEditarGuardia}">
+						<f:param name="id" value="#{riv}" />
+						<h:graphicImage url="/diseno/imagenes/acciones/icono16Permiso.png" />
+					</p:commandLink>
+				</p:column>
+			</ui:define>
+			
+			<ui:define name="contenidoAdicional4">
+				<p:column style="text-align: center" headerText="Vigencia"
+					rendered="#{componente.permisoABM}">
+					<h:graphicImage value="#{beanCatalogoGrupos.getVigenciaGrupo(objeto) == 'ROJO'?'/diseno/imagenes/catalogo/brojo.png':
+                                     beanCatalogoGrupos.getVigenciaGrupo(objeto) == 'AMARILLO'?'/diseno/imagenes/catalogo/bamarillo.png':
+                                     beanCatalogoGrupos.getVigenciaGrupo(objeto) == 'VERDE'?'/diseno/imagenes/catalogo/bverde.png':''}" 
+                                     alt="bandera" width="20" height="20"/>
+				</p:column>
+			</ui:define>
+			
+		</ui:decorate>
+
+		<ui:decorate template="/Comun/comunPanelGrupo.xhtml">
+			<ui:param name="componente" value="#{beanCatalogoGrupos}" />
+			<ui:param name="mostrarFiltroComboEstado" value="true"/>
+			<ui:param name="listaDe" value="Grupo" />
+			<ui:param name="validador" value="Grupo" />
+			<ui:param name="mostrarBotonAceptar" value="true" />
+			<ui:param name="mostrarBotonCerrar" value="true" />
+
+			<ui:define name="contenidoAdicional">
+				<p:outputLabel for="nombre" value="Nombre" />
+				<p:inputText id="nombre"
+					value="#{beanCatalogoGrupos.objetoABM.nombre}" />
+
+			</ui:define>
+		</ui:decorate>
+
+		<p:dialog closeOnEscape="true" closable="true"
+			widgetVar="panelAdicional" header="Agregar Bases del Registro"
+			modal="true">
+
+			<h:form id="formaAgregarBase">
+				<p:outputPanel id="contenidoAgregarBase">
+					<p:panel>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="cuarto,tres_cuartos">
+							<p:outputLabel for="freq_estado" value="Departamento" />
+							<h:selectOneMenu id="freq_estado"
+								value="#{beanCatalogoGrupos.idEstadoDos}">
+								<f:selectItems value="#{beanCatalogoGrupos.listaDeEstados}"
+									var="estado" itemValue="#{estado.id}"
+									itemLabel="#{estado.nombre}" />
+								<p:ajax event="valueChange" update="freq_base, freq_terminal" />
+							</h:selectOneMenu>
+							<p:outputLabel for="freq_base" value="Base" />
+							<h:selectOneMenu id="freq_base"
+								value="#{beanCatalogoGrupos.idBaseSeleccionadoDos}">
+								<f:selectItem itemLabel="--Bases--" itemValue="0"
+									noSelectionOption="true" />
+								<f:selectItems value="#{beanCatalogoGrupos.listaDeBasesTodas}"
+									var="base" itemValue="#{base.id}"
+									itemLabel="#{base.descripcion}" />
+								<p:ajax event="valueChange" update="freq_terminal" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="freq_terminal" value="Terminal" />
+							<h:selectOneMenu id="freq_terminal"
+								value="#{beanCatalogoGrupos.idTerminalSeleccionadoDos}">
+								<f:selectItems
+									value="#{beanCatalogoGrupos.listaDeTerminalesParaSeleccion}"
+									var="terminal" itemValue="#{terminal.id}"
+									itemLabel="#{terminal.numeroproveedor} : #{terminal.nombre}" />
+							</h:selectOneMenu>
+							
+															
+							<p:outputLabel for="subGrupo" value="Sub Grupo: "/>
+							<h:selectOneMenu id="subGrupo" 
+								value="#{beanCatalogoGrupos.txtSubGrupo}">
+								<f:selectItem itemLabel="No aplica" itemValue="0"/>
+								<f:selectItem itemLabel="A" itemValue="A"/>	
+								<f:selectItem itemLabel="B" itemValue="B"/>	
+								<f:selectItem itemLabel="C" itemValue="C"/>	
+							</h:selectOneMenu>
+							
+							<p:outputLabel for="diaDescanso" value="Dia de descanso: "/>
+							<p:selectCheckboxMenu id="diaDescanso" value="#{beanCatalogoGrupos.txtDiaDescanso}"
+														label="Dia de Descanso" multiple="true"
+							                            filter="false" panelStyle="width:250px"
+														widgetVar="txtDiaDescanso">
+					            <f:selectItem itemLabel="No aplica" itemValue="0" itemDescription="No aplica"/>
+					            <f:selectItem itemLabel="Lunes" itemValue="1" itemDescription="Lunes"/>
+					            <f:selectItem itemLabel="Martes" itemValue="2" itemDescription="Martes"/>
+								<f:selectItem itemLabel="Miércoles" itemValue="3" itemDescription="Miércoles"/>
+								<f:selectItem itemLabel="Jueves" itemValue="4" itemDescription="Jueves"/>
+								<f:selectItem itemLabel="Viernes" itemValue="5" itemDescription="Viernes"/>
+								<f:selectItem itemLabel="Sábado" itemValue="6" itemDescription="Sábado"/>
+								<f:selectItem itemLabel="Domingo" itemValue="7" itemDescription="Domingo"/>
+							</p:selectCheckboxMenu>	
+
+							<p:commandButton value="Agregar"
+								actionListener="#{beanCatalogoGrupos.doAccionGrupoAgregarTerminal}"
+								update=":formaAgregarBase:tabla_agregar_base, :forma_tabla:tabla">
+							</p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:dataTable id="tabla_agregar_base" var="grupoTerminal"
+						value="#{beanCatalogoGrupos.listaDeGrupoTerminal}"
+						emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+						rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+						<f:facet name="header">Lista de Terminales</f:facet>
+
+						<p:column sortBy="#{grupoTerminal.terminal.nombre}"
+							headerText="Nombre">
+							<h:outputText
+								value="#{grupoTerminal.terminal.numeroproveedor} : #{grupoTerminal.terminal.nombre}" />
+						</p:column>
+						<p:column sortBy="#{grupoTerminal.terminal.subGrupo}"
+							headerText="Sub Grupo">
+							<h:outputText
+								value="#{grupoTerminal.terminal.nombreSubGrupo}"/>
+						</p:column>
+						<p:column sortBy="#{grupoTerminal.terminal.diaDescanso}"
+							headerText="Descanso">
+							<h:outputText
+								value="#{grupoTerminal.terminal.nombreDiaDescanso}" />
+						</p:column>
+						<p:column sortBy="#{grupoTerminal.terminal.guardia}"
+							headerText="Guardia">
+							<h:outputText
+								value="#{grupoTerminal.terminal.guardiaTexto}" />
+						</p:column>
+						
+						<p:column style="text-align:center" headerText="Eliminar">
+							<p:commandLink
+								actionListener="#{beanCatalogoGrupos.doAccionGrupoEliminarTerminal}"
+								update="tabla_agregar_base,:forma_tabla:tabla">
+								<h:graphicImage
+									url="/diseno/imagenes/acciones/icono16Eliminar.png" width="16"
+									height="16" />
+								<f:param name="id" value="#{grupoTerminal.id}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+
+		<p:dialog closeOnEscape="true" closable="true"
+			widgetVar="panelAdicional2" header="Agregar Horarios del Grupo"
+			modal="true">
+
+			<h:form id="formaAgregarHorario">
+				<p:outputPanel id="contenidoAgregarHorario">
+					<p:panel>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="cuarto,tres_cuartos">
+
+							<p:outputLabel for="horarios" value="horario" />
+							<h:selectOneMenu id="horarios"
+								value="#{beanCatalogoGrupos.claveHorarioSelecionado}">
+								<f:selectItems
+									value="#{beanCatalogoGrupos.listaDeHorariosParaSeleccion}"
+									var="horario" itemValue="#{horario}" itemLabel="#{horario}" />
+							</h:selectOneMenu>
+
+							<p:outputLabel for="finicio" value="Fecha Inicio:" />
+							<p:calendar id="finicio" locale="es" mode="popup" mindate="#{beanCatalogoGrupos.cadenaToday}"
+								 value="#{beanCatalogoGrupos.txtFechaInicio}" pattern="dd/MM/yyyy"/>
+							
+							<p:outputLabel for="ffin" value="Fecha Término:" />
+							<p:calendar id="ffin" value="#{beanCatalogoGrupos.txtFechaFin}" mindate="#{beanCatalogoGrupos.cadenaToday}"
+								mode="popup" locale="es" pattern="dd/MM/yyyy" />
+
+							<p:commandButton value="Agregar"
+								actionListener="#{beanCatalogoGrupos.doAccionGrupoAgregarHorario}"
+								update=":formaAgregarHorario:tabla_agregar_horario, :forma_tabla:tabla">
+							</p:commandButton>
+						</h:panelGrid>
+					</p:panel>
+
+					<p:dataTable id="tabla_agregar_horario" var="horarioGrupo"
+						value="#{beanCatalogoGrupos.listaDeHorarioGrupo}"
+						emptyMessage="Sin Datos"
+						currentPageReportTemplate="Registros {startRecord} - {endRecord} de {totalRecords}"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {RowsPerPageDropdown}"
+						paginator="true" rows="20" rowKey="rkv" rowIndexVar="riv"
+						rowsPerPageTemplate="10,20,30,40,50" lazy="true">
+
+						<f:facet name="header">Lista de Horarios</f:facet>
+
+						<p:column sortBy="#{horarioGrupo.claveHorario}"
+							headerText="Nombre de Horario">
+							<h:outputText value="#{horarioGrupo.claveHorario}" />
+						</p:column>
+						<p:column sortBy="#{horarioGrupo.fechaInicio}"
+							headerText="Fecha Inicio">
+							<h:outputText value="#{horarioGrupo.fechaInicio}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						<p:column sortBy="#{horarioGrupo.fechaFin}" headerText="Fecha Fin">
+							<h:outputText value="#{horarioGrupo.fechaFin}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						<p:column style="text-align:center" headerText="Eliminar">
+							<p:commandLink
+								actionListener="#{beanCatalogoGrupos.doAccionGrupoEliminarHorario}"
+								update="tabla_agregar_horario,:forma_tabla:tabla">
+								<h:graphicImage
+									url="/diseno/imagenes/acciones/icono16Eliminar.png" width="16"
+									height="16" />
+								<f:param name="id" value="#{horarioGrupo.id}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog closeOnEscape="true" closable="true"
+			widgetVar="panelAdicional3" header="Agregar Días de Guardia"
+			modal="true">
+
+			<h:form id="formaAgregarGuardia">
+				<p:outputPanel id="contenidoAgregarGuardia">
+					<p:panel>
+						<h:panelGrid columns="2" styleClass="tabla_captura"
+							columnClasses="tres_cuartos,cuarto">
+							
+							<p:outputLabel for="actGuardia" value="Activar guardia"/>
+	                    	<p:selectBooleanButton onLabel="Si" offLabel="No" id="actGuardia"
+	                                           value="#{beanCatalogoGrupos.activarGuardia}"/>
+							
+						</h:panelGrid>
+						<h:panelGrid columns="3" styleClass="tabla_captura"
+							columnClasses="tercio,tercio,tercio">
+							
+							<p:selectBooleanCheckbox id="actGuardia1"
+	                                           value="#{beanCatalogoGrupos.lunesGuardia}"/>
+							<p:outputLabel for="actGuardia1" value=":"/>
+							<p:outputLabel for="actGuardia1" value="Lunes"/>
+							
+	                    	<p:selectBooleanCheckbox  id="actGuardia2"
+	                                           value="#{beanCatalogoGrupos.martesGuardia}"/>
+							<p:outputLabel for="actGuardia2" value=":"/>
+                            <p:outputLabel for="actGuardia2" value="Martes"/>
+                            
+	                    	<p:selectBooleanCheckbox id="actGuardia3"
+	                                           value="#{beanCatalogoGrupos.miercolesGuardia}"/>
+							<p:outputLabel for="actGuardia3" value=":"/>
+	                        <p:outputLabel for="actGuardia3" value="Miércoles"/>
+	                        
+	                    	<p:selectBooleanCheckbox  id="actGuardia4"
+	                                           value="#{beanCatalogoGrupos.juevesGuardia}"/>
+							<p:outputLabel for="actGuardia4" value=":"/>
+							<p:outputLabel for="actGuardia4" value="Jueves"/>
+							
+	                    	<p:selectBooleanCheckbox  id="actGuardia5"
+	                                           value="#{beanCatalogoGrupos.viernesGuardia}"/>
+							<p:outputLabel for="actGuardia5" value=":"/>
+	                        <p:outputLabel for="actGuardia5" value="Viernes"/>
+	                        
+	                    	<p:selectBooleanCheckbox  id="actGuardia6"
+	                                           value="#{beanCatalogoGrupos.sabadoGuardia}"/>
+							<p:outputLabel for="actGuardia6" value=":"/>
+	                        <p:outputLabel for="actGuardia6" value="Sábado"/>
+	                        
+	                    	<p:selectBooleanCheckbox id="actGuardia7"
+	                                           value="#{beanCatalogoGrupos.domingoGuardia}"/>
+							<p:outputLabel for="actGuardia7" value=":"/>
+	                        <p:outputLabel for="actGuardia7" value="Domingo"/>
+	                                          
+	                        <p:commandButton value="Guardar"
+								actionListener="#{beanCatalogoGrupos.doAccionGrupoAgregaGuardia}"
+								update=":formaAgregarHorario:tabla_agregar_horario, :forma_tabla:tabla"
+								oncomplete="PF('panelAdicional3').hide();">
+							</p:commandButton>                  
+							
+						</h:panelGrid>
+					</p:panel>
+
+				</p:outputPanel>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
