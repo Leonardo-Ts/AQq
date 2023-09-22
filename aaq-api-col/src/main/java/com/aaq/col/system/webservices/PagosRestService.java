@@ -3,7 +3,9 @@ package com.aaq.col.system.webservices;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
@@ -39,7 +41,7 @@ import com.aaq.col.clases.util.JMUtileriaExcepcion;
 import com.aaq.col.clases.util.LinkDePago;
 import com.aaq.col.clases.util.avisos.CuerpoMail;
 import com.aaq.col.clases.webservices.formatos.FormatoOdaAuto;
-import com.aaq.col.clases.webservices.movil.GETMovilResultadoOperacion;
+//import com.aaq.col.clases.webservices.movil.GETMovilResultadoOperacion;
 import com.aaq.col.clases.webservices.movil.peticion.MovilResultadoOperacion;
 
 public class PagosRestService implements PagosRestServiceInterface {
@@ -491,6 +493,26 @@ public class PagosRestService implements PagosRestServiceInterface {
 	//public GETMovilResultadoOperacion InsertarFOAD(final FormatoOdaAuto formato) {
 	public String InsertarFOAD(final FormatoOdaAuto formato) {
 		System.out.println("Formato: InsertarFOAD");
-		return "formato::";
+		
+		FormatoOdaAuto f = new FormatoOdaAuto();
+		f.setAsegurado(formato.getAsegurado());
+		f.setTercero(formato.getTercero());
+		
+		String entrada = f.toString();
+		/*entrada = f.toString();
+		
+		Map<String, String> entry = new HashMap<String, String>();
+		entry.put("ASEGURADO", entrada.getAsegurado());
+		entry.put("TERCERO", entrada.getTercero());
+				
+		String result = null;*/
+		//	------
+		return "formato::" + entrada;
+		
+		
 	}
+	
+	
 }
+
+

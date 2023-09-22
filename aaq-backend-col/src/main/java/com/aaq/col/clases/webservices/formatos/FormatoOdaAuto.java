@@ -58,18 +58,14 @@ public class FormatoOdaAuto {
 	private String CEDULA_CIUDADANIAPERITO;
 	private String FECHA;*/
 	
-	public String getTercero() {
-		return tercero;
-	}
 
-	public void setTercero(String tercero) {
-		this.tercero = tercero;
-	}
 
 	public FormatoOdaAuto() {
 		super();
 	}
 
+
+	//	Asegurado
 	public String getAsegurado() {
 		return asegurado;
 	}
@@ -78,11 +74,23 @@ public class FormatoOdaAuto {
 		this.asegurado = asegurado;
 	}
 
+	
+	//	Tercero
+	public String getTercero() {
+		return tercero;
+	}
+
+	public void setTercero(String tercero) {
+		this.tercero = tercero;
+	}
+	
+	
 	@Override
 	public String toString() {
-		return "FormatoOdaAuto [asegurado=" + asegurado + ", tercero=" + tercero + ", getTercero()=" + getTercero()
+		/*return "FormatoOdaAuto [asegurado=" + asegurado + ", tercero=" + tercero + ", getTercero()=" + getTercero()
 				+ ", getAsegurado()=" + getAsegurado() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", toString()=" + super.toString() + "]";*/
+		return "FormatoOdaAuto [asegurado=" + getAsegurado() + ", tercero=" + getTercero() + "]";
 	}
 	
 	

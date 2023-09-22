@@ -174,7 +174,7 @@ public class FormatosRestWebServices implements FormatosRestWebServicesInterface
 	private FormatoReclamacionComprobantePeajeDao frcp;
 	
 	//@Autowired
-	//private FormatoOdaAuto foad;
+	//private FormatoOdaAutoDao foad;
 	
 	
 	private final JMUtileriaExcepcion utileriaExcepcion = new JMUtileriaExcepcion(
