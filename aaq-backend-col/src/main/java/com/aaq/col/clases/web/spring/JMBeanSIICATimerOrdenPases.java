@@ -3037,7 +3037,7 @@ public class JMBeanSIICATimerOrdenPases extends JMBeanSpringBasico {
 //
 //							String imgAdmisionAuto = JMProveedorApplicationContext.getApplicationContext()
 //									.getResource("/OrdenesPases/img/Auto.png").getFile().getPath();
-
+//<->
 							fileJrxmlAdmisionAuto = obtenerRutaJrxml(
 									"/OrdenesPases/jrxml/OrdenDeAdmisionAutomoviles.jrxml");
 							if (fileJrxmlAdmisionAuto == null) {
